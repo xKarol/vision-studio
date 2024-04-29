@@ -1,27 +1,35 @@
 import { Button } from "./ui/button";
 import { TextInput } from "./ui/text-input";
+import { useState } from "react";
+import { subscribeToNewsletter } from "~/lib/api/newsletter";
 
 export const Newsletter = () => {
+  const [error, setError] = useState<string | undefined>(undefined);
+  const [info, setInfo] = useState<string | undefined>(undefined);
+
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("/api/newsletter", {
-        method: "POST",
-        body: JSON.stringify({
-          email: "test@mail.com",
-        }),
-      });
-      const data = await res.json();
-      console.log(data);
+      // @ts-ignore
+      const emailValue = e.target.email.value;
+      const data = await subscribeToNewsletter(emailValue);
+      setInfo(data.message);
+      setError(undefined);
     } catch (error) {
-      console.log(error);
+      setError("Something went wrong...");
     }
   };
 
   return (
-    <form className="flex" onSubmit={handleSubmit}>
-      <TextInput type="text" placeholder="Enter your email" />
-      <Button>Submit</Button>
+    <form className="flex flex-col space-y-2" onSubmit={handleSubmit}>
+      <div className="flex">
+        <TextInput type="text" placeholder="Enter your email" name="email" />
+        <Button>Submit</Button>
+      </div>
+      {error !== undefined ? (
+        <span className="text-sm text-red-500">{error}</span>
+      ) : null}
+      {info !== undefined ? <span className="text-sm">{info}</span> : null}
     </form>
   );
 };
