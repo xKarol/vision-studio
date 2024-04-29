@@ -2,10 +2,17 @@ import { Button } from "./ui/button";
 import { TextInput } from "./ui/text-input";
 
 export const Newsletter = () => {
-  const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
+  const handleSubmit: React.FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
     try {
-      console.log("submitted");
+      const res = await fetch("/api/newsletter", {
+        method: "POST",
+        body: JSON.stringify({
+          email: "test@mail.com",
+        }),
+      });
+      const data = await res.json();
+      console.log(data);
     } catch (error) {
       console.log(error);
     }
