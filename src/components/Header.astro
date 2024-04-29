@@ -1,0 +1,82 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import { UserCircle2, Search, Menu } from "lucide-astro";
+import Logo from "./ui/Logo.astro";
+import { routes } from "~/config/routes";
+
+export interface HeaderProps extends HTMLAttributes<"header"> {}
+
+const { class: className, svgLogo = false, ...rest } = Astro.props;
+
+const navLinks = [
+  {
+    href: routes.HOME,
+    name: "Home",
+  },
+  {
+    href: routes.PORTFOLIO,
+    name: "Portfolio",
+  },
+  {
+    href: routes.ABOUT,
+    name: "About",
+  },
+  {
+    href: routes.CONTACT,
+    name: "Contact",
+  },
+  {
+    href: routes.FAQ,
+    name: "FAQ",
+  },
+];
+
+const logoHref = Astro.url.pathname === routes.HOME ? undefined : routes.HOME;
+---
+
+<!-- TODO add mobile menu -->
+
+<header
+  class="sticky left-0 top-0 z-50 h-20 border-b border-black bg-background py-4"
+  class:list={[className]}
+  {...rest}
+>
+  <div class="container flex h-full items-center justify-between">
+    <button
+      class="p-2 md:hidden"
+      aria-label="menu"
+      id="hamburger-btn"
+      aria-expanded="false"
+    >
+      <Menu size={20} stroke-width={1} />
+    </button>
+    <div class="flex flex-1 justify-center md:justify-normal">
+      <div>
+        <Logo href={logoHref} />
+      </div>
+    </div>
+    <nav class="hidden flex-1 items-center justify-center md:flex">
+      <ul
+        class="[&_a]:text-underline-transition flex space-x-6 text-xs uppercase leading-none"
+      >
+        {
+          navLinks.map((link) => (
+            <li>
+              <a href={link.href}>{link.name}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+    <div class="flex md:flex-1">
+      <ul class="ml-auto flex items-center space-x-10">
+        <li
+          class="hidden transition-colors hover:text-accent md:block"
+          aria-label="search"
+        >
+          <Search size={20} stroke-width={1} />
+        </li>
+      </ul>
+    </div>
+  </div>
+</header>
