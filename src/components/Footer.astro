@@ -1,16 +1,12 @@
 ---
 import { routes } from "~/config/routes";
-import { Button } from "~/components/ui/button";
-import { TextInput } from "~/components/ui/text-input";
+import { Newsletter } from "./newsletter";
 ---
 
 <footer class="container flex items-center justify-between">
   <div class="space-y-2">
     <h1 class="uppercase text-lg tracking-wides">Newsletter</h1>
-    <div class="flex">
-        <TextInput type="text" />
-        <Button>Submit</Button>
-    </div>
+    <Newsletter client:load/>
   </div>
 
   <div class="flex space-x-4 text-sm">
