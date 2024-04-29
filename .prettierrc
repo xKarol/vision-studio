@@ -1,0 +1,20 @@
+{
+  "printWidth": 80,
+  "trailingComma": "all",
+  "singleQuote": false,
+  "semi": true,
+  "importOrderSeparation": false,
+  "plugins": [
+    "prettier-plugin-astro",
+    "prettier-plugin-tailwindcss",
+    "@trivago/prettier-plugin-sort-imports"
+  ],
+  "overrides": [
+    {
+      "files": "*.astro",
+      "options": {
+        "parser": "astro"
+      }
+    }
+  ]
+}
