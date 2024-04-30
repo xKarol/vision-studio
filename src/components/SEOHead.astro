@@ -1,0 +1,50 @@
+---
+import { SEO as SEOComponent, type SEOProps as _SEOProps } from "astro-seo";
+import { defaultSEOConfig } from "~/config/seo-config";
+import { merge } from "ts-deepmerge";
+import type { PartialDeep } from "type-fest";
+
+export interface SEOProps extends PartialDeep<_SEOProps> {}
+
+interface Props {
+  SEO?: SEOProps;
+}
+
+const { SEO = {} } = Astro.props;
+
+const getTitle = () => {
+  if (SEO.title) {
+    return (
+      defaultSEOConfig.titleTemplate?.replace("%s", SEO.title) ||
+      defaultSEOConfig.titleDefault
+    );
+  }
+  return defaultSEOConfig.title;
+};
+
+const SEOConfig = merge(
+  merge(defaultSEOConfig, {
+    openGraph: {
+      basic: { title: getTitle() },
+      optional: {
+        ...(SEO.description && { description: SEO.description }),
+      },
+    },
+    twitter: {
+      title: getTitle(),
+      ...(SEO.description && { description: SEO.description }),
+    },
+  }),
+  SEO,
+);
+---
+
+<Fragment>
+  <!-- @ts-expect-error type is checked in ~/config/seo-config.ts file -->
+  <SEOComponent {...SEOConfig} />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta name="generator" content={Astro.generator} />
+  <link rel="sitemap" href="/sitemap-index.xml" />
+</Fragment>

@@ -3,23 +3,19 @@ import "../base.css";
 import "@fontsource/montserrat";
 import "@fontsource/montserrat";
 import "@fontsource/cormorant-garamond";
+import SEOHead, { type SEOProps } from "~/components/SEOHead.astro";
 
 interface Props {
-  title: string;
+  SEO?: SEOProps;
 }
 
-const { title } = Astro.props;
+const { SEO } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="description" content="Astro description" />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="generator" content={Astro.generator} />
-    <title>{title}</title>
+    <SEOHead SEO={SEO} />
   </head>
   <body>
     <slot />
