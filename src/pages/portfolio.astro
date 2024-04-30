@@ -1,0 +1,47 @@
+---
+import Footer from "~/components/Footer.astro";
+import Header from "~/components/Header.astro";
+import PortfolioCard from "~/components/PortfolioCard.astro";
+import Layout from "~/layouts/Layout.astro";
+import { routes } from "~/config/routes";
+import Container from "~/components/Container.astro";
+
+const portfolios = [
+  {
+    slug: "forest",
+    label: "Forest",
+    thumbnailUrl:
+      "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  },
+  {
+    slug: "forest",
+    label: "Forest",
+    thumbnailUrl:
+      "https://images.unsplash.com/photo-1473448912268-2022ce9509d8?q=80&w=2041&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  },
+];
+---
+
+<Layout SEO={{ title: "Portfolio" }}>
+  <Header />
+
+  <main>
+    <Container class="py-12">
+      <section class="grid grid-cols-1 gap-10 md:grid-cols-2">
+        {
+          portfolios.map((portfolio) => (
+            <a href={routes.portfolio.slug(portfolio.slug)}>
+              <PortfolioCard
+                class="h-[450px] w-full md:h-[250px] [&>img]:transition-transform [&>img]:duration-500 hover:[&>img]:scale-110"
+                label={portfolio.label}
+                imageUrl={portfolio.thumbnailUrl}
+              />
+            </a>
+          ))
+        }
+      </section>
+    </Container>
+  </main>
+
+  <Footer />
+</Layout>

@@ -10,4 +10,8 @@ export const routes = {
     FACEBOOK: "https://facebook.com",
     PINTEREST: "https://pinterest.com",
   },
+  portfolio: {
+    DEFAULT: "/portfolio",
+    slug: (slug: string) => `/portfolio/${slug}`,
+  },
 } as const;
