@@ -1,0 +1,25 @@
+---
+import type { Polymorphic } from "astro/types";
+
+type Props<Tag extends "h1" | "h2" | "h3" | "h4" | "h5" | "h6"> = Polymorphic<{
+  as: Tag;
+  size?: "custom" | "sm" | "md" | "lg";
+}>;
+
+const { as: Tag = "h1", size = "md", class: className, ...props } = Astro.props;
+
+const sizeClasses = {
+  sm: "text-lg md:text-xl lg:text-2xl",
+  md: "text-xl md:text-2xl lg:text-3xl",
+  lg: "text-4xl md:text-5xl lg:text-6xl",
+  custom: "",
+};
+---
+
+<Tag
+  class="font-serif uppercase"
+  class:list={[sizeClasses[size], className]}
+  {...props}
+>
+  <slot />
+</Tag>
