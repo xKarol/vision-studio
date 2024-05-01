@@ -1,11 +1,14 @@
 ---
 import Container from "~/components/Container.astro";
+import Footer from "~/components/Footer.astro";
+import Header from "~/components/Header.astro";
 import Layout from "~/layouts/Layout.astro";
 
 const els = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
 ---
 
 <Layout>
+  <Header />
   <Container as="section">
     <ul class="grid h-full min-h-screen grid-cols-[repeat(10,1fr)] gap-4">
       {
@@ -35,4 +38,5 @@ const els = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
       }
     </ul>
   </Container>
+  <Footer />
 </Layout>
