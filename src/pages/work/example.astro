@@ -4,7 +4,17 @@ import Footer from "~/components/Footer.astro";
 import Header from "~/components/Header.astro";
 import Layout from "~/layouts/Layout.astro";
 
-const els = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
+import { useStoryblokApi, type SbBlokData } from "@storyblok/astro";
+import { Image } from "astro:assets";
+
+const storyblokApi = useStoryblokApi();
+
+const { data } = await storyblokApi.get("cdn/stories/", {
+  version: import.meta.env.DEV ? "draft" : "published",
+  starts_with: "work/",
+});
+
+const images = data.stories[0].content.body;
 ---
 
 <Layout>
@@ -12,7 +22,7 @@ const els = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
   <Container as="section">
     <ul class="grid h-full min-h-screen grid-cols-[repeat(10,1fr)] gap-4">
       {
-        els.map((_, i) => {
+        images.map((image, i) => {
           const gridCol = {
             1: "1 / 7",
             2: "8 / 11",
@@ -31,7 +41,12 @@ const els = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
                 gridRow: "span 10 / span 4",
               }}
             >
-              {index}
+              <Image
+                src={image.image.filename}
+                class="h-full w-full object-cover"
+                alt=""
+                inferSize
+              />
             </li>
           );
         })
