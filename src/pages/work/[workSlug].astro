@@ -9,12 +9,13 @@ import { Image } from "astro:assets";
 
 const storyblokApi = useStoryblokApi();
 
-const { data } = await storyblokApi.get("cdn/stories/", {
+const { workSlug } = Astro.params;
+
+const { data } = await storyblokApi.get(`cdn/stories/work/${workSlug}`, {
   version: import.meta.env.DEV ? "draft" : "published",
-  starts_with: "work/",
 });
 
-const images = data.stories[0].content.body;
+const images = data.story.content.body;
 ---
 
 <Layout>
