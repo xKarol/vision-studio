@@ -1,0 +1,48 @@
+---
+import { parseHTML } from "linkedom";
+
+const html = await Astro.slots.render("default");
+const { document } = parseHTML(html);
+
+const images = [...document.children].map((children) => {
+  if (children.nodeName !== "IMG") {
+    console.warn(
+      "WorkImagesGrid: Expected IMG element as a children, received: ",
+      children.nodeName,
+    );
+  }
+  return children;
+});
+
+const gridCol = {
+  1: "1 / 7",
+  2: "8 / 11",
+  3: "7 / 10",
+  4: "2 / 7",
+  5: "7 / 9",
+};
+---
+
+<ul class="grid h-full min-h-screen grid-cols-[repeat(10,1fr)] gap-4">
+  {
+    images.map((image, i) => {
+      const index = (i % 5) + 1;
+
+      return (
+        <li
+          class="bg-green-200"
+          TODO
+          remove
+          later
+          style={{
+            // @ts-expect-error TODO FIX
+            gridColumn: gridCol[index],
+            gridRow: "span 10 / span 4",
+          }}
+        >
+          <Fragment set:html={image} />
+        </li>
+      );
+    })
+  }
+</ul>

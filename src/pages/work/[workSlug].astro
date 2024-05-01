@@ -4,8 +4,9 @@ import Footer from "~/components/Footer.astro";
 import Header from "~/components/Header.astro";
 import Layout from "~/layouts/Layout.astro";
 
-import { useStoryblokApi, type SbBlokData } from "@storyblok/astro";
+import { useStoryblokApi } from "@storyblok/astro";
 import { Image } from "astro:assets";
+import WorkImagesGrid from "~/components/WorkImagesGrid.astro";
 
 const storyblokApi = useStoryblokApi();
 
@@ -21,38 +22,18 @@ const images = data.story.content.body;
 <Layout>
   <Header />
   <Container as="section">
-    <ul class="grid h-full min-h-screen grid-cols-[repeat(10,1fr)] gap-4">
+    <WorkImagesGrid>
       {
-        images.map((image, i) => {
-          const gridCol = {
-            1: "1 / 7",
-            2: "8 / 11",
-            3: "7 / 10",
-            4: "2 / 7",
-            5: "7 / 9",
-          };
-
-          const index = (i % 5) + 1;
-
-          return (
-            <li
-              class="bg-green-200"
-              style={{
-                gridColumn: gridCol[index],
-                gridRow: "span 10 / span 4",
-              }}
-            >
-              <Image
-                src={image.image.filename}
-                class="h-full w-full object-cover"
-                alt=""
-                inferSize
-              />
-            </li>
-          );
-        })
+        images.map((image) => (
+          <Image
+            src={image.image.filename}
+            class="h-full w-full object-cover"
+            alt=""
+            inferSize
+          />
+        ))
       }
-    </ul>
+    </WorkImagesGrid>
   </Container>
   <Footer />
 </Layout>
