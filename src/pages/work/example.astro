@@ -1,0 +1,38 @@
+---
+import Container from "~/components/Container.astro";
+import Layout from "~/layouts/Layout.astro";
+
+const els = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
+---
+
+<Layout>
+  <Container as="section">
+    <ul class="grid h-full min-h-screen grid-cols-[repeat(10,1fr)] gap-4">
+      {
+        els.map((_, i) => {
+          const gridCol = {
+            1: "1 / 7",
+            2: "8 / 11",
+            3: "7 / 10",
+            4: "2 / 7",
+            5: "7 / 9",
+          };
+
+          const index = (i % 5) + 1;
+
+          return (
+            <li
+              class="bg-green-200"
+              style={{
+                gridColumn: gridCol[index],
+                gridRow: "span 10 / span 4",
+              }}
+            >
+              {index}
+            </li>
+          );
+        })
+      }
+    </ul>
+  </Container>
+</Layout>
