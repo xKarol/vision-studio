@@ -1,13 +1,13 @@
 ---
 import Footer from "~/components/Footer.astro";
 import Header from "~/components/Header.astro";
-import PortfolioCard from "~/components/PortfolioCard.astro";
+import WorkCard from "~/components/WorkCard.astro";
 import Layout from "~/layouts/Layout.astro";
 import { routes } from "~/config/routes";
 import Container from "~/components/Container.astro";
 import Heading from "~/components/ui/Heading.astro";
 
-const portfolios = [
+const works = [
   {
     slug: "forest",
     label: "Forest",
@@ -23,20 +23,20 @@ const portfolios = [
 ];
 ---
 
-<Layout SEO={{ title: "Portfolio" }}>
+<Layout SEO={{ title: "Work" }}>
   <Header />
 
   <main>
     <Container class="py-12">
-      <Heading as="h1" size="md" class="mb-4">Portfolio</Heading>
+      <Heading as="h1" size="md" class="mb-4">Works</Heading>
       <section class="grid grid-cols-1 gap-10 md:grid-cols-2">
         {
-          portfolios.map((portfolio) => (
-            <a href={routes.portfolio.slug(portfolio.slug)}>
-              <PortfolioCard
+          works.map((work) => (
+            <a href={routes.work.slug(work.slug)}>
+              <WorkCard
                 class="h-[450px] w-full md:h-[250px] [&>img]:transition-transform [&>img]:duration-500 hover:[&>img]:scale-110"
-                label={portfolio.label}
-                imageUrl={portfolio.thumbnailUrl}
+                label={work.label}
+                imageUrl={work.thumbnailUrl}
               />
             </a>
           ))
