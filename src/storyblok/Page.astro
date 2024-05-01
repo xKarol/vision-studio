@@ -1,5 +1,5 @@
 ---
-import { storyblokEditable } from "@storyblok/astro";
+import { storyblokEditable, type SbBlokData } from "@storyblok/astro";
 import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
 
 const { blok } = Astro.props;
@@ -7,7 +7,7 @@ const { blok } = Astro.props;
 
 <main {...storyblokEditable(blok)}>
   {
-    blok.body?.map((blok: unknown) => {
+    blok.body?.map((blok: SbBlokData) => {
       return <StoryblokComponent blok={blok} />;
     })
   }
