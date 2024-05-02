@@ -36,7 +36,7 @@ const logoHref = Astro.url.pathname === routes.HOME ? undefined : routes.HOME;
 
 <!-- TODO add mobile menu -->
 <header
-  class="sticky left-0 top-0 z-50 h-20 border-b border-black bg-background py-4"
+  class="sticky left-0 top-0 z-50 h-16 bg-background py-4"
   class:list={[className]}
   {...rest}
 >
@@ -49,33 +49,24 @@ const logoHref = Astro.url.pathname === routes.HOME ? undefined : routes.HOME;
     >
       <Menu size={20} stroke-width={1} />
     </button>
-    <div class="flex flex-1 justify-center md:justify-normal">
+    <div class="flex justify-center md:justify-normal">
       <div>
         <Logo href={logoHref} />
       </div>
     </div>
-    <nav class="hidden flex-1 items-center justify-center md:flex">
+    <nav class="hidden items-center justify-center md:flex">
       <ul
-        class="[&_a]:text-underline-transition flex space-x-6 text-xs uppercase leading-none"
+        class="[&_a]:text-underline-transition flex space-x-6 uppercase leading-none"
       >
         {
           navLinks.map((link) => (
             <li>
-              <a href={link.href}>{link.name}</a>
+              <a href={link.href} class="text-xs">{link.name}</a>
             </li>
           ))
         }
       </ul>
     </nav>
-    <div class="flex md:flex-1">
-      <ul class="ml-auto flex items-center space-x-10">
-        <li
-          class="hidden transition-colors hover:text-accent md:block"
-          aria-label="search"
-        >
-          <Search size={20} stroke-width={1} />
-        </li>
-      </ul>
-    </div>
+    <div ></div>
   </div>
 </header>
