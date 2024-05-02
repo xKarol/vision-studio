@@ -21,23 +21,34 @@ const gridCol = {
   4: "2 / 7",
   5: "7 / 9",
 };
+
+const gridRows = (i: number, index: number) => {
+  const rows = {
+    1: `1 / span 6`,
+    2: `1 / span 3`,
+    3: `6 / span 3`,
+    4: `9 / span 4`,
+    5: `12 / span 2`, //TODO calc dynamic
+  };
+  // @ts-ignore
+  return rows[index];
+};
 ---
 
-<ul class="grid h-full min-h-screen grid-cols-[repeat(10,1fr)] gap-4">
+<ul
+  class="grid h-full min-h-screen grid-cols-[repeat(10,1fr)] gap-4"
+  style={{ gridAutoRows: "12vw" }}
+>
   {
     images.map((image, i) => {
       const index = (i % 5) + 1;
 
       return (
         <li
-          class="bg-green-200"
-          TODO
-          remove
-          later
           style={{
             // @ts-expect-error TODO FIX
             gridColumn: gridCol[index],
-            gridRow: "span 10 / span 4",
+            gridRow: gridRows(i, index),
           }}
         >
           <Fragment set:html={image} />
