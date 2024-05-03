@@ -1,0 +1,29 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import Swiper from "./ui/Swiper.astro";
+import { ChevronLeft, ChevronRight } from "lucide-astro";
+import { routes } from "~/config/routes";
+import { Image } from "astro:assets";
+
+interface Props extends HTMLAttributes<"div"> {
+  works: { slug: string; imageUrl: string }[];
+}
+const { works, class: className, ...rest } = Astro.props;
+---
+
+<div class="flex w-full items-center" class:list={[className]} {...rest}>
+  <Swiper class="w-full">
+    {
+      works.map((work) => (
+        <a href={routes.work.slug(work.slug)}>
+          <Image
+            class="h-48 min-w-32 max-w-32 object-cover"
+            src={work.imageUrl}
+            alt=""
+            inferSize
+          />
+        </a>
+      ))
+    }
+  </Swiper>
+</div>

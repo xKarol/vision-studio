@@ -29,6 +29,7 @@
     "astro-seo": "^0.8.3",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "embla-carousel": "^8.0.2",
     "ky": "^1.2.4",
     "linkedom": "^0.16.11",
     "lucide-astro": "^0.376.0",

@@ -1,13 +1,10 @@
 ---
-import Footer from "~/components/Footer.astro";
 import Header from "~/components/Header.astro";
-import WorkCard from "~/components/WorkCard.astro";
 import Layout from "~/layouts/Layout.astro";
-import { routes } from "~/config/routes";
 import Container from "~/components/Container.astro";
-import Heading from "~/components/ui/Heading.astro";
 
 import { useStoryblokApi } from "@storyblok/astro";
+import WorkSwiper from "~/components/WorkSwiper.astro";
 
 const storyblokApi = useStoryblokApi();
 
@@ -18,7 +15,7 @@ const { data } = await storyblokApi.get("cdn/stories/", {
 
 const works = data.stories.map((story) => ({
   slug: story.slug,
-  thumbnailUrl: story.content.thumbnail.filename,
+  imageUrl: story.content.thumbnail.filename,
   label: story.content.workName,
 }));
 ---
@@ -27,23 +24,11 @@ const works = data.stories.map((story) => ({
   <Header />
 
   <main>
-    <Container class="py-12">
-      <Heading as="h1" size="md" class="mb-4">Works</Heading>
-      <section class="grid grid-cols-1 gap-10 md:grid-cols-2">
-        {
-          works.map((work) => (
-            <a href={routes.work.slug(work.slug)}>
-              <WorkCard
-                class="h-[450px] w-full md:h-[250px] [&>img]:transition-transform [&>img]:duration-500 hover:[&>img]:scale-110"
-                label={work.label}
-                imageUrl={work.thumbnailUrl}
-              />
-            </a>
-          ))
-        }
-      </section>
+    <Container
+      as="section"
+      class="flex h-[calc(100vh-var(--header-height))] items-center"
+    >
+      <WorkSwiper works={works} />
     </Container>
   </main>
-
-  <Footer />
 </Layout>

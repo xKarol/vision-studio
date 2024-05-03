@@ -1,0 +1,89 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"div"> {}
+
+const { class: className, ...rest } = Astro.props;
+---
+
+<div class="embla flex overflow-hidden" class:list={[className]} {...rest}>
+  <slot class:list="embla__prev" name="left-arrow" />
+  <div class="embla__viewport overflow-hidden">
+    <div class="embla__container [&>*]:ml-4">
+      <Fragment set:html={Astro.slots.render("default")} />
+    </div>
+  </div>
+  <slot class:list="embla__next" name="right-arrow" />
+</div>
+<style>
+  /* .embla__viewport {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+  } */
+  .embla__container {
+    display: flex;
+  }
+  .embla__slide {
+    flex: 0 0 100%;
+    min-width: 0;
+  }
+  /* TODO use some styles of this class */
+  /* .embla__button {
+    -webkit-tap-highlight-color: rgba(var(--text-high-contrast-rgb-value), 0.5);
+    appearance: none;
+    background-color: transparent;
+    touch-action: manipulation;
+    display: inline-flex;
+    text-decoration: none;
+    cursor: pointer;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    box-shadow: inset 0 0 0 0.2rem var(--detail-medium-contrast);
+    width: 3.6rem;
+    height: 3.6rem;
+    z-index: 1;
+    border-radius: 50%;
+    color: var(--text-body);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  } */
+</style>
+<script>
+  import EmblaCarousel from "embla-carousel";
+
+  const rootNode = document.querySelector(".embla")!;
+  const viewportNode = rootNode.querySelector<HTMLElement>(".embla__viewport")!;
+  const prevButtonNode =
+    rootNode.querySelector<HTMLButtonElement>(".embla__prev")!;
+  const nextButtonNode =
+    rootNode.querySelector<HTMLButtonElement>(".embla__next")!;
+
+  const embla = EmblaCarousel(viewportNode, {
+    align: "center",
+    loop: true,
+    dragFree: true,
+  });
+
+  prevButtonNode.addEventListener("click", () => embla.scrollPrev(), false);
+  nextButtonNode.addEventListener("click", () => embla.scrollNext(), false);
+
+  const togglePrevNextBtnsState = (): void => {
+    if (embla.canScrollPrev()) prevButtonNode.removeAttribute("disabled");
+    else prevButtonNode.setAttribute("disabled", "disabled");
+
+    if (embla.canScrollNext()) nextButtonNode.removeAttribute("disabled");
+    else nextButtonNode.setAttribute("disabled", "disabled");
+  };
+
+  embla
+    .on("select", togglePrevNextBtnsState)
+    .on("init", togglePrevNextBtnsState)
+    .on("reInit", togglePrevNextBtnsState);
+
+  embla.on("destroy", () => {
+    prevButtonNode.removeAttribute("disabled");
+    nextButtonNode.removeAttribute("disabled");
+  });
+</script>
