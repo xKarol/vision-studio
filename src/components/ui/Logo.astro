@@ -2,19 +2,14 @@
 import type { HTMLAttributes } from "astro/types";
 
 export interface Props extends HTMLAttributes<"h1"> {
-  size?: "normal" | "small";
   href?: string;
 }
 
-const { href, size = "normal", class: className, ...rest } = Astro.props;
+const { href, class: className, ...rest } = Astro.props;
 
 const defaultProps: Props = {
-  class: "uppercase font-serif text-3xl tracking-widest select-none",
-  "class:list": [
-    size === "normal" && "text-3xl",
-    size === "small" && "text-2xl",
-    className,
-  ],
+  class: "uppercase text-sm font-medium tracking-widest select-none",
+  "class:list": [className],
   ...(href && { href }),
   ...rest,
 };
@@ -23,4 +18,4 @@ const Tag = href === undefined ? "h1" : "a";
 ---
 
 <!-- @ts-expect-error -->
-<Tag {...defaultProps}> Logo </Tag>
+<Tag {...defaultProps}> VISION<span class="font-light">STUDIO</span></Tag>
