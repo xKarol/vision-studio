@@ -1,9 +1,10 @@
 ---
 import { routes } from "~/config/routes";
 import { Newsletter } from "./newsletter";
+import Container from "./Container.astro";
 ---
 
-<footer class="container flex items-end justify-between py-12">
+<Container as="footer" class="flex items-end justify-between py-12">
   <div>
     <h1 class="tracking-wides mb-2 text-sm uppercase">Newsletter</h1>
     <Newsletter client:load />
@@ -14,4 +15,4 @@ import { Newsletter } from "./newsletter";
     <a href={routes.socials.PINTEREST}>PINTEREST</a>
     <a href={routes.socials.FACEBOOK}>FACEBOOK</a>
   </div>
-</footer>
+</Container>
