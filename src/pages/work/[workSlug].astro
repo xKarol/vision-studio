@@ -19,7 +19,7 @@ const { data } = await storyblokApi.get(`cdn/stories/work/${workSlug}`, {
 const images = data.story.content.body;
 ---
 
-<Layout>
+<Layout SEO={{ title: data.story.content.workName }}>
   <Header />
   <Container as="section">
     <WorkImagesGrid>
