@@ -36,6 +36,8 @@
     --ring: 240 5.9% 10%;
 
     --radius: 0.5rem;
+
+    --header-height: 4rem;
   }
 
   .text-outline {
