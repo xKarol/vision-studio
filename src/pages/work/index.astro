@@ -26,7 +26,7 @@ const works = data.stories.map((story) => ({
   <main>
     <Container
       as="section"
-      class="flex h-[calc(100vh-var(--header-height))] items-center"
+      class="flex h-[calc(100vh-(var(--header-height)*2))] items-center"
     >
       <WorkSwiper works={works} />
     </Container>
