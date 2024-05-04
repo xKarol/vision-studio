@@ -2,7 +2,7 @@ export const routes = {
   NOT_FOUND: "/404",
   HOME: "/",
   ABOUT: "/about", //TODO not exist
-  CONTACT: "/contact", // not exist
+  CONTACT: "/contact",
   socials: {
     INSTAGRAM: "https://instagram.com",
     FACEBOOK: "https://facebook.com",

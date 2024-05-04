@@ -4,13 +4,54 @@ import Footer from "~/components/Footer.astro";
 import Header from "~/components/Header.astro";
 import Layout from "~/layouts/Layout.astro";
 import LocationMap from "~/components/LocationMap.astro";
-
+import { ArrowUpRight } from "lucide-astro";
 ---
 
 <Layout SEO={{ title: "Contact" }}>
   <Header />
-  <Container as="section">
-    <LocationMap />
+  <Container as="section" class="flex flex-col py-16">
+    <div class="flex">
+      <div class="w-full">
+        <h1 class="max-w-40 text-5xl">We would love to hear from you.</h1>
+      </div>
+      <div class="flex w-full flex-col">
+        <div
+          class="flex w-full justify-between border-0 border-t border-black py-8"
+        >
+          <p class="text-sm">
+            1234 Market St
+            <br />
+            San Francisco
+            <br />
+            CA 94102
+          </p>
+          <a
+            href="#map"
+            href="mailto:contact@example.com"
+            class="flex text-xs font-bold uppercase"
+            ><span>See on Map</span><ArrowUpRight size={16} /></a
+          >
+        </div>
+        <div
+          class="flex w-full justify-between border-0 border-t border-black py-8"
+        >
+          <p class="text-sm text-neutral-700">
+            Phone: (415) 555-1234
+            <br />
+            Mon - Fri 9:00 AM - 6:00PM
+            <br />
+            Sat - Sun - Closed
+            <br />
+          </p>
+          <a
+            href="mailto:contact@example.com"
+            class="flex text-xs font-bold uppercase"
+            ><span>contact@example.com</span><ArrowUpRight size={16} /></a
+          >
+        </div>
+      </div>
+    </div>
+    <LocationMap class="mt-8" />
   </Container>
   <Footer />
 </Layout>
