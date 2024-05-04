@@ -1,0 +1,35 @@
+---
+import "leaflet/dist/leaflet.css";
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"div"> {}
+
+const { class: className, ...rest } = Astro.props;
+---
+
+<div id="#map" class="h-96 w-full" class:list={[className]} {...rest}></div>
+
+<script>
+  import L from "leaflet";
+
+  const map = L.map("#map", { attributionControl: false }).setView(
+    [34.227444, -118.381073],
+    15,
+  );
+
+  L.circleMarker([34.227444, -118.381073], {
+    color: "#000000",
+    fillOpacity: 1,
+    radius: 5,
+  }).addTo(map);
+
+  L.tileLayer(
+    "https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.{ext}",
+    {
+      minZoom: 0,
+      maxZoom: 20,
+      // @ts-ignore
+      ext: "png",
+    },
+  ).addTo(map);
+</script>
