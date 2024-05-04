@@ -5,13 +5,15 @@ import Header from "~/components/Header.astro";
 import Layout from "~/layouts/Layout.astro";
 import LocationMap from "~/components/LocationMap.astro";
 import { ArrowUpRight } from "lucide-astro";
+import RuleLine from "~/components/ui/RuleLine.astro";
 ---
 
 <Layout SEO={{ title: "Contact" }}>
   <Header />
   <Container as="section" class="flex flex-col py-16">
     <div class="flex">
-      <div class="w-full">
+      <div class="flex w-full items-center space-x-4">
+        <RuleLine maxPoints={35} selectedPoint={1} />
         <h1 class="max-w-40 text-5xl">We would love to hear from you.</h1>
       </div>
       <div class="flex w-full flex-col">

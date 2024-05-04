@@ -1,0 +1,58 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+export interface Props extends HTMLAttributes<"div"> {
+  maxPoints: number;
+  selectedPoint?: number | undefined;
+  gap?: number;
+}
+
+const {
+  maxPoints = 10,
+  selectedPoint = undefined,
+  class: className,
+  gap = 2,
+  ...rest
+} = Astro.props;
+if (selectedPoint !== undefined && selectedPoint < 0)
+  throw new Error(
+    "RuleLine component: selectedPoint must be greater or equal 1",
+  );
+
+---
+
+<div
+  style={{ "--gap": `${gap / 4}rem` }}
+  class="relative flex"
+  class:list={[className]}
+  {...rest}
+>
+  {
+    selectedPoint !== undefined ? (
+      <div
+        style={{
+          top: `calc(${(gap / 4) * (selectedPoint - 1) + selectedPoint / 16}rem)`,
+        }}
+        class="absolute right-3 top-0 select-none leading-[0]"
+      >
+        ▸
+      </div>
+    ) : null
+  }
+  <div class="flex flex-col space-y-[--gap]">
+    {
+      Array.from({ length: maxPoints }).map((_, i) => {
+        return (
+          <div
+            class="h-[1px] w-1 bg-black"
+            class:list={[
+              i === 0 && "w-2",
+              i % 2 === 0 && i === (maxPoints - 3) / 2 && "w-2",
+              i === maxPoints - 1 && "w-2",
+            ]}
+          />
+        );
+      })
+    }
+  </div>
+</div>
