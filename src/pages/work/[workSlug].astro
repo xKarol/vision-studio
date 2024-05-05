@@ -21,9 +21,10 @@ const images = data.story.content.body;
 
 <Layout SEO={{ title: data.story.content.workName }}>
   <Header />
-  <Container as="section">
+  <Container as="section" class="flex space-x-16 py-8">
     <WorkImagesGrid>
       {
+        // TODO fix grid when more than 5 elements
         images.slice(0, 5).map((image, index) => (
           <div class="flex h-full w-full flex-col space-y-1">
             <Image
@@ -39,6 +40,18 @@ const images = data.story.content.body;
         ))
       }
     </WorkImagesGrid>
+    <aside
+      class="sticky right-0 top-0 w-full max-w-[200px] space-y-4 text-xs uppercase"
+    >
+      <h1 class="font-semibold">Lorem Ipsum</h1>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt non
+        facilis atque sequi similique. Debitis cupiditate culpa aperiam, amet
+        enim minus corporis laborum consequatur asperiores accusantium
+        perferendis rerum reprehenderit, voluptatem nihil, aspernatur vel
+        temporibus est recusandae repudiandae? Facilis voluptatem laborum
+      </p>
+    </aside>
   </Container>
   <Footer />
 </Layout>
