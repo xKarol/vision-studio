@@ -24,12 +24,16 @@ export const Newsletter = () => {
     <form className="flex flex-col space-y-2" onSubmit={handleSubmit}>
       <div className="flex">
         <TextInput type="text" placeholder="Enter your email" name="email" />
-        <Button>Submit</Button>
+        <Button variant="outline" size="sm">
+          Subscribe
+        </Button>
       </div>
       {error !== undefined ? (
-        <span className="text-sm text-red-500">{error}</span>
+        <span className="text-xs text-red-500 uppercase">{error}</span>
       ) : null}
-      {info !== undefined ? <span className="text-sm">{info}</span> : null}
+      {info !== undefined ? (
+        <span className="text-xs uppercase">{info}</span>
+      ) : null}
     </form>
   );
 };
