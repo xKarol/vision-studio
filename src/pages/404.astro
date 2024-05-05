@@ -1,0 +1,36 @@
+---
+import Layout from "~/layouts/Layout.astro";
+import Container from "~/components/ui/Container.astro";
+import CameraLens from "~/components/ui/CameraLens.astro";
+import Logo from "~/components/ui/Logo.astro";
+import { routes } from "~/config/routes";
+---
+
+<Layout SEO={{ title: "404 Not Found" }}>
+  <main>
+    <Logo
+      href={routes.HOME}
+      class="fixed left-1/2 top-8 z-50 -translate-x-1/2"
+    />
+    <Container
+      as="section"
+      class="relative flex min-h-screen items-center justify-center"
+    >
+      <CameraLens class="absolute bottom-0 left-0 right-0 top-0 p-8" />
+      <div class="flex max-w-md flex-col items-center">
+        <div class="flex flex-col items-center space-y-2">
+          <span class="text-6xl uppercase">404</span>
+          <h1 class="text-xs font-semibold uppercase">
+            Oops... Nothing to see here
+          </h1>
+        </div>
+        <!-- TODO create global link component -->
+        <a
+          href={routes.HOME}
+          class="mt-4 bg-black px-4 py-2 text-xs uppercase text-white"
+          >Go Home</a
+        >
+      </div>
+    </Container>
+  </main>
+</Layout>
