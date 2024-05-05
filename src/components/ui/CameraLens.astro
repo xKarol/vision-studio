@@ -1,0 +1,24 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+export interface Props extends HTMLAttributes<"div"> {}
+
+const { class: className, ...rest } = Astro.props;
+---
+
+<div class="pointer-events-none z-50" class:list={[className]} {...rest}>
+  <div class="relative size-full">
+    <div class="absolute left-0 top-0 size-16 border-l border-t border-black">
+    </div>
+    <div
+      class="absolute bottom-0 left-0 size-16 border-b border-l border-black"
+    >
+    </div>
+    <div
+      class="absolute bottom-0 right-0 size-16 border-b border-r border-black"
+    >
+    </div>
+    <div class="absolute right-0 top-0 size-16 border-r border-t border-black">
+    </div>
+  </div>
+</div>
