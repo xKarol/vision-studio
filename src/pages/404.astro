@@ -3,6 +3,7 @@ import Layout from "~/layouts/Layout.astro";
 import Container from "~/components/ui/Container.astro";
 import CameraLens from "~/components/ui/CameraLens.astro";
 import Logo from "~/components/ui/Logo.astro";
+import { Link } from "~/components/ui/link";
 import { routes } from "~/config/routes";
 ---
 
@@ -24,11 +25,8 @@ import { routes } from "~/config/routes";
             Oops... Nothing to see here
           </h1>
         </div>
-        <!-- TODO create global link component -->
-        <a
-          href={routes.HOME}
-          class="mt-4 bg-black px-4 py-2 text-xs uppercase text-white"
-          >Go Home</a
+        <Link className="mt-4" size="sm" variant="fill" href={routes.HOME}
+          >Go Home</Link
         >
       </div>
     </Container>
