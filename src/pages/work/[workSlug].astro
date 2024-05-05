@@ -24,13 +24,18 @@ const images = data.story.content.body;
   <Container as="section">
     <WorkImagesGrid>
       {
-        images.map((image) => (
-          <Image
-            src={image.image.filename}
-            class="h-full w-full object-cover"
-            alt=""
-            inferSize
-          />
+        images.slice(0, 5).map((image, index) => (
+          <div class="flex h-full w-full flex-col space-y-1">
+            <Image
+              src={image.image.filename}
+              class="h-full w-full object-cover"
+              alt=""
+              inferSize
+            />
+            <p class="text-[0.625rem] font-semibold uppercase text-neutral-700">
+              /{String(index + 1).padStart(2, "0")}
+            </p>
+          </div>
         ))
       }
     </WorkImagesGrid>
