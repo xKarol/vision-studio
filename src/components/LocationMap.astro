@@ -7,7 +7,7 @@ interface Props extends HTMLAttributes<"div"> {}
 const { class: className, ...rest } = Astro.props;
 ---
 
-<div id="map" class="h-96 w-full" class:list={[className]} {...rest}></div>
+<div id="map" class="z-0 h-96 w-full" class:list={[className]} {...rest}></div>
 
 <script>
   import L from "leaflet";
