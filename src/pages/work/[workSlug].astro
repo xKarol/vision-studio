@@ -4,7 +4,7 @@ import Footer from "~/components/Footer.astro";
 import Header from "~/components/Header.astro";
 import Layout from "~/layouts/Layout.astro";
 
-import { useStoryblokApi } from "@storyblok/astro";
+import { renderRichText, useStoryblokApi } from "@storyblok/astro";
 import { Image } from "astro:assets";
 import WorkImagesGrid from "~/components/WorkImagesGrid.astro";
 
@@ -16,10 +16,11 @@ const { data } = await storyblokApi.get(`cdn/stories/work/${workSlug}`, {
   version: import.meta.env.DEV ? "draft" : "published",
 });
 
-const images = data.story.content.body;
+const { workName, images, info } = data.story.content;
+const renderedRichText = renderRichText(info);
 ---
 
-<Layout SEO={{ title: data.story.content.workName }}>
+<Layout SEO={{ title: workName }}>
   <Header />
   <Container as="section" class="flex space-x-16 py-8">
     <WorkImagesGrid>
@@ -28,7 +29,7 @@ const images = data.story.content.body;
         images.slice(0, 5).map((image, index) => (
           <div class="flex h-full w-full flex-col space-y-1">
             <Image
-              src={image.image.filename}
+              src={image.filename}
               class="h-full w-full object-cover"
               alt=""
               inferSize
@@ -43,14 +44,7 @@ const images = data.story.content.body;
     <aside
       class="sticky right-0 top-0 w-full max-w-[200px] space-y-4 text-xs uppercase"
     >
-      <h1 class="font-semibold">Lorem Ipsum</h1>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt non
-        facilis atque sequi similique. Debitis cupiditate culpa aperiam, amet
-        enim minus corporis laborum consequatur asperiores accusantium
-        perferendis rerum reprehenderit, voluptatem nihil, aspernatur vel
-        temporibus est recusandae repudiandae? Facilis voluptatem laborum
-      </p>
+      <Fragment set:html={renderedRichText} />
     </aside>
   </Container>
   <Footer />
