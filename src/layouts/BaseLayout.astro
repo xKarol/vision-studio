@@ -1,0 +1,14 @@
+---
+import Header from "~/components/Header.astro";
+import Layout from "./Layout.astro";
+import Footer from "~/components/Footer.astro";
+import type { ComponentProps } from "astro/types";
+
+interface Props extends ComponentProps<typeof Layout> {}
+---
+
+<Layout {...Astro.props}>
+  <Header slot="header" />
+  <slot />
+  <Footer slot="footer" />
+</Layout>

@@ -8,27 +8,22 @@ import { routes } from "~/config/routes";
 ---
 
 <Layout SEO={{ title: "404 Not Found" }}>
-  <main>
-    <Logo
-      href={routes.HOME}
-      class="fixed left-1/2 top-8 z-50 -translate-x-1/2"
-    />
-    <Container
-      as="section"
-      class="relative flex min-h-screen items-center justify-center"
-    >
-      <CameraLens class="absolute bottom-0 left-0 right-0 top-0 p-8" />
-      <div class="flex max-w-md flex-col items-center">
-        <div class="flex flex-col items-center space-y-2">
-          <span class="text-6xl uppercase">404</span>
-          <h1 class="text-xs font-semibold uppercase">
-            Oops... Nothing to see here
-          </h1>
-        </div>
-        <Link className="mt-4" size="sm" variant="fill" href={routes.HOME}
-          >Go Home</Link
-        >
+  <Logo href={routes.HOME} class="fixed left-1/2 top-8 z-50 -translate-x-1/2" />
+  <Container
+    as="section"
+    class="relative flex min-h-screen items-center justify-center"
+  >
+    <CameraLens class="absolute bottom-0 left-0 right-0 top-0 p-8" />
+    <div class="flex max-w-md flex-col items-center">
+      <div class="flex flex-col items-center space-y-2">
+        <span class="text-6xl uppercase">404</span>
+        <h1 class="text-xs font-semibold uppercase">
+          Oops... Nothing to see here
+        </h1>
       </div>
-    </Container>
-  </main>
+      <Link className="mt-4" size="sm" variant="fill" href={routes.HOME}
+        >Go Home</Link
+      >
+    </div>
+  </Container>
 </Layout>

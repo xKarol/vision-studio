@@ -18,6 +18,10 @@ const { SEO } = Astro.props;
     <SEOHead SEO={SEO} />
   </head>
   <body>
-    <slot />
+    <slot name="header" />
+    <main>
+      <slot />
+    </main>
+    <slot name="footer" />
   </body>
 </html>
