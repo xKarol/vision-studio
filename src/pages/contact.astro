@@ -6,6 +6,18 @@ import Layout from "~/layouts/Layout.astro";
 import LocationMap from "~/components/LocationMap.astro";
 import { ArrowUpRight } from "lucide-astro";
 import RuleLine from "~/components/ui/RuleLine.astro";
+import { renderRichText, useStoryblokApi } from "@storyblok/astro";
+
+const storyblokApi = useStoryblokApi();
+
+const { data } = await storyblokApi.get(`cdn/stories/contact`, {
+  version: import.meta.env.DEV ? "draft" : "published",
+});
+
+const { heading, email, locationText, contactText, mapZoom, mapLat, mapLong } =
+  data.story.content;
+const locationRichText = renderRichText(locationText);
+const contactRichText = renderRichText(contactText);
 ---
 
 <Layout SEO={{ title: "Contact" }}>
@@ -14,46 +26,30 @@ import RuleLine from "~/components/ui/RuleLine.astro";
     <div class="flex">
       <div class="flex w-full items-center space-x-4">
         <RuleLine maxPoints={35} selectedPoint={1} />
-        <h1 class="max-w-40 text-5xl">We would love to hear from you.</h1>
+        <h1 class="max-w-40 text-5xl">{heading}</h1>
       </div>
       <div class="flex w-full flex-col">
         <div
-          class="flex w-full justify-between border-0 border-t border-black py-8"
+          class="flex w-full justify-between border-0 border-t border-black py-8 text-sm text-neutral-700"
         >
-          <p class="text-sm">
-            1234 Market St
-            <br />
-            San Francisco
-            <br />
-            CA 94102
-          </p>
-          <a
-            href="#map"
-            href="mailto:contact@example.com"
-            class="flex text-xs font-bold uppercase"
+          <Fragment set:html={locationRichText} />
+          <a href="#map" class="flex text-xs font-bold uppercase text-black"
             ><span>See on Map</span><ArrowUpRight size={16} /></a
           >
         </div>
         <div
-          class="flex w-full justify-between border-0 border-t border-black py-8"
+          class="flex w-full justify-between border-0 border-t border-black py-8 text-sm text-neutral-700"
         >
-          <p class="text-sm text-neutral-700">
-            Phone: (415) 555-1234
-            <br />
-            Mon - Fri 9:00 AM - 6:00PM
-            <br />
-            Sat - Sun - Closed
-            <br />
-          </p>
+          <Fragment set:html={contactRichText} />
           <a
-            href="mailto:contact@example.com"
-            class="flex text-xs font-bold uppercase"
-            ><span>contact@example.com</span><ArrowUpRight size={16} /></a
+            href={`mailto:${email}`}
+            class="flex text-xs font-bold uppercase text-neutral-700"
+            ><span>{email}</span><ArrowUpRight size={16} /></a
           >
         </div>
       </div>
     </div>
-    <LocationMap class="mt-8" />
+    <LocationMap mapZoom={mapZoom} latLng={[mapLat, mapLong]} class="mt-8" />
   </Container>
   <Footer />
 </Layout>
