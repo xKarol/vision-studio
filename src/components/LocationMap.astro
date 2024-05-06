@@ -2,22 +2,37 @@
 import "leaflet/dist/leaflet.css";
 import type { HTMLAttributes } from "astro/types";
 
-interface Props extends HTMLAttributes<"div"> {}
+interface Props extends HTMLAttributes<"div"> {
+  latLng: [number, number];
+  mapZoom?: number;
+}
 
-const { class: className, ...rest } = Astro.props;
+const { class: className, mapZoom = 10, latLng, ...rest } = Astro.props;
 ---
 
-<div id="map" class="z-0 h-96 w-full" class:list={[className]} {...rest}></div>
+<div
+  id="map"
+  data-location={[latLng]}
+  data-zoom={mapZoom}
+  class="z-0 h-96 w-full"
+  class:list={[className]}
+  {...rest}
+>
+</div>
 
 <script>
   import L from "leaflet";
 
-  const map = L.map("map", { attributionControl: false }).setView(
-    [34.227444, -118.381073],
-    15,
-  );
+  const mapEl = document.querySelector!<HTMLDivElement>("#map")!;
+  const latLng = mapEl.dataset.location?.split(",").map((val) => +val) as [
+    number,
+    number,
+  ];
+  const zoom = +mapEl.dataset.zoom!;
 
-  L.circleMarker([34.227444, -118.381073], {
+  const map = L.map("map", { attributionControl: false }).setView(latLng, zoom);
+
+  L.circleMarker(latLng, {
     color: "#000000",
     fillOpacity: 1,
     radius: 5,
