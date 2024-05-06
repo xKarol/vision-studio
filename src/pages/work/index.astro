@@ -20,10 +20,10 @@ const works = data.stories.map((story) => ({
 ---
 
 <WorkLayout SEO={{ title: "Work" }}>
+  <CameraLens class="absolute bottom-0 left-0 right-0 top-0 p-8 py-16" />
   <section
     class="relative flex h-[calc(100vh-(var(--header-height)*2))] items-center"
   >
-    <CameraLens class="absolute bottom-0 left-0 right-0 top-0 px-8" />
     <WorkSwiper works={works} />
   </section>
 </WorkLayout>
