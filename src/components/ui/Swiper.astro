@@ -4,51 +4,53 @@ import type { HTMLAttributes } from "astro/types";
 interface Props extends HTMLAttributes<"div"> {}
 
 const { class: className, ...rest } = Astro.props;
+import { parseHTML } from "linkedom";
+
+const html = await Astro.slots.render("default");
+const { document } = parseHTML(html);
+
+const slides = [...document.children].map((el) => {
+  el.classList.add("embla__slide");
+  return el;
+});
 ---
 
-<div class="embla flex overflow-hidden" class:list={[className]} {...rest}>
-  <slot class:list="embla__prev" name="left-arrow" />
-  <div class="embla__viewport overflow-hidden">
-    <div class="embla__container [&>*]:ml-4">
-      <Fragment set:html={Astro.slots.render("default")} />
+<section class="embla" class:list={[className]} {...rest}>
+  <div class="embla__viewport">
+    <div class="embla__container">
+      {
+        slides.map((slide) => (
+          <div class="embla__slide">
+            <Fragment set:html={slide} />
+          </div>
+        ))
+      }
     </div>
   </div>
-  <slot class:list="embla__next" name="right-arrow" />
-</div>
+</section>
+
 <style>
-  /* .embla__viewport {
-    margin-left: 0.5rem;
-    margin-right: 0.5rem;
-  } */
+  .embla {
+    width: 100%;
+    margin: auto;
+    --slide-height: 19rem;
+    --slide-spacing: 1rem;
+    --slide-size: calc(100% / 10);
+  }
+  .embla__viewport {
+    overflow: hidden;
+  }
   .embla__container {
+    backface-visibility: hidden;
     display: flex;
+    touch-action: pan-y pinch-zoom;
+    margin-left: calc(var(--slide-spacing) * -1);
   }
   .embla__slide {
-    flex: 0 0 100%;
+    flex: 0 0 var(--slide-size);
     min-width: 0;
+    padding-left: var(--slide-spacing);
   }
-  /* TODO use some styles of this class */
-  /* .embla__button {
-    -webkit-tap-highlight-color: rgba(var(--text-high-contrast-rgb-value), 0.5);
-    appearance: none;
-    background-color: transparent;
-    touch-action: manipulation;
-    display: inline-flex;
-    text-decoration: none;
-    cursor: pointer;
-    border: 0;
-    padding: 0;
-    margin: 0;
-    box-shadow: inset 0 0 0 0.2rem var(--detail-medium-contrast);
-    width: 3.6rem;
-    height: 3.6rem;
-    z-index: 1;
-    border-radius: 50%;
-    color: var(--text-body);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  } */
 </style>
 <script>
   import EmblaCarousel from "embla-carousel";
