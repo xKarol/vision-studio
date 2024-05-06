@@ -1,12 +1,10 @@
 ---
 import Container from "~/components/ui/Container.astro";
-import Footer from "~/components/Footer.astro";
-import Header from "~/components/Header.astro";
-import Layout from "~/layouts/Layout.astro";
 
 import { renderRichText, useStoryblokApi } from "@storyblok/astro";
 import { Image } from "astro:assets";
 import WorkImagesGrid from "~/components/WorkImagesGrid.astro";
+import BaseLayout from "~/layouts/BaseLayout.astro";
 
 const storyblokApi = useStoryblokApi();
 
@@ -20,8 +18,7 @@ const { workName, images, info } = data.story.content;
 const renderedRichText = renderRichText(info);
 ---
 
-<Layout SEO={{ title: workName }}>
-  <Header />
+<BaseLayout SEO={{ title: workName }}>
   <Container as="section" class="flex space-x-16 py-8">
     <WorkImagesGrid>
       {
@@ -47,5 +44,4 @@ const renderedRichText = renderRichText(info);
       <Fragment set:html={renderedRichText} />
     </aside>
   </Container>
-  <Footer />
-</Layout>
+</BaseLayout>
