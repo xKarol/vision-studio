@@ -4,11 +4,12 @@ import { getSiteUrl } from "~/lib/get-site-url";
 const siteUrl = getSiteUrl();
 const ogUrl = new URL("/og.png", siteUrl).toString();
 
-const description = "Lorem ipsum";
-const title = "Photo";
+const description =
+  "Explore moments captured in time through my lens. Experience life's beauty in every frame.";
+const title = "Vision Studio";
 
 export const defaultSEOConfig: SEOProps = {
-  titleTemplate: "%s — Photo",
+  titleTemplate: "%s — Vision Studio",
   title: title,
   titleDefault: title,
   description: description,
