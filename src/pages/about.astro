@@ -1,9 +1,6 @@
 ---
 import { renderRichText, useStoryblokApi } from "@storyblok/astro";
-import Footer from "~/components/Footer.astro";
-import Header from "~/components/Header.astro";
 import BaseLayout from "~/layouts/BaseLayout.astro";
-import Layout from "~/layouts/Layout.astro";
 
 const storyblokApi = useStoryblokApi();
 
@@ -18,7 +15,6 @@ const [mainImage, ...restImages] = images;
 ---
 
 <BaseLayout SEO={{ title: "Contact" }}>
-  <Header />
   <section class="flex space-x-16 pl-[15vw]">
     <div class="w-full max-w-2xl pt-[12.5vw]">
       <h1 class="mb-16 text-7xl">About</h1>
@@ -30,5 +26,4 @@ const [mainImage, ...restImages] = images;
       <img src={mainImage.filename} alt="" class="aspect-[9/12]" />
     </div>
   </section>
-  <Footer />
 </BaseLayout>

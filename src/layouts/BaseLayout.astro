@@ -9,9 +9,9 @@ interface Props extends ComponentProps<typeof Layout> {}
 ---
 
 <Layout {...Astro.props}>
+  <Header slot="header" />
   <LocomotiveScroll>
-    <Header slot="header" />
     <slot />
-    <Footer slot="footer" />
   </LocomotiveScroll>
+  <Footer slot="footer" />
 </Layout>
