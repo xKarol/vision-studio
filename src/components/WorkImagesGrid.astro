@@ -15,15 +15,35 @@ const gridCol = {
 };
 
 const gridRows = (i: number, index: number) => {
-  const rows = {
-    1: `1 / span 6`,
-    2: `1 / span 3`,
-    3: `6 / span 3`,
-    4: `9 / span 4`,
-    5: `12 / span 2`, //TODO calc dynamic
+  const rowsHeightStart = {
+    1: 1,
+    2: 1,
+    3: 6,
+    4: 9,
+    5: 12,
+  };
+  const rowsHeightEnd = {
+    1: 6,
+    2: 3,
+    3: 3,
+    4: 4,
+    5: 2,
   };
   // @ts-ignore
-  return rows[index];
+  if (i <= 4) return `${rowsHeightStart[index]} / span ${rowsHeightEnd[index]}`;
+  const round = Math.floor(i / 5);
+  const rowHeightArray = Object.values(rowsHeightStart);
+  const allRowsHeight = rowHeightArray[rowHeightArray.length - 1];
+
+  let elementRow = 1; //1 row gap
+  for (let i = 0; i < round; i++) {
+    // @ts-ignore
+    elementRow += allRowsHeight + rowsHeightStart[index];
+  }
+  console.log(index, elementRow);
+
+  // @ts-ignore
+  return `${elementRow} / span ${rowsHeightEnd[index]}`;
 };
 ---
 

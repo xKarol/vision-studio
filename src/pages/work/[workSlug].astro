@@ -20,8 +20,7 @@ const renderedRichText = renderRichText(info);
   <section class="flex space-x-16 py-8">
     <WorkImagesGrid>
       {
-        // TODO fix grid when more than 5 elements
-        images.slice(0, 5).map((image, index) => (
+        images.map((image, index) => (
           <div class="flex h-full w-full flex-col space-y-1">
             <Image
               src={image.filename}
