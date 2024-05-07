@@ -1,9 +1,11 @@
 ---
-import "../base.css";
+import "../styles/base.css";
+import "../styles/lenis.css";
 import "@fontsource/montserrat";
 import "@fontsource/montserrat/200.css";
 import "@fontsource/cormorant-garamond";
 import SEOHead, { type SEOProps } from "~/components/SEOHead.astro";
+import LocomotiveScroll from "~/components/LocomotiveScroll.astro";
 
 interface Props {
   SEO?: SEOProps;
@@ -18,10 +20,12 @@ const { SEO } = Astro.props;
     <SEOHead SEO={SEO} />
   </head>
   <body>
-    <slot name="header" />
-    <main>
-      <slot />
-    </main>
-    <slot name="footer" />
+    <LocomotiveScroll>
+      <slot name="header" />
+      <main>
+        <slot />
+      </main>
+      <slot name="footer" />
+    </LocomotiveScroll>
   </body>
 </html>

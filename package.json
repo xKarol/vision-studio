@@ -32,6 +32,7 @@
     "embla-carousel": "^8.0.2",
     "ky": "^1.2.4",
     "leaflet": "^1.9.4",
+    "lenis": "^1.0.45",
     "linkedom": "^0.16.11",
     "lucide-astro": "^0.376.0",
     "lucide-react": "^0.376.0",
