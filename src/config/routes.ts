@@ -1,7 +1,7 @@
 export const routes = {
   NOT_FOUND: "/404",
   HOME: "/",
-  ABOUT: "/about", //TODO not exist
+  ABOUT: "/about",
   CONTACT: "/contact",
   socials: {
     INSTAGRAM: "https://instagram.com",
