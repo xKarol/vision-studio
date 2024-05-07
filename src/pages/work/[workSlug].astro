@@ -1,6 +1,4 @@
 ---
-import Container from "~/components/ui/Container.astro";
-
 import { renderRichText, useStoryblokApi } from "@storyblok/astro";
 import { Image } from "astro:assets";
 import WorkImagesGrid from "~/components/WorkImagesGrid.astro";
@@ -19,7 +17,7 @@ const renderedRichText = renderRichText(info);
 ---
 
 <BaseLayout SEO={{ title: workName }}>
-  <Container as="section" class="flex space-x-16 py-8">
+  <section class="flex space-x-16 py-8">
     <WorkImagesGrid>
       {
         // TODO fix grid when more than 5 elements
@@ -43,5 +41,5 @@ const renderedRichText = renderRichText(info);
     >
       <Fragment set:html={renderedRichText} />
     </aside>
-  </Container>
+  </section>
 </BaseLayout>
