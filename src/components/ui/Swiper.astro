@@ -65,7 +65,7 @@ const slides = [...document.children].map((el) => {
   const embla = EmblaCarousel(viewportNode, {
     align: "center",
     loop: true,
-    dragFree: true,
+    skipSnaps: true,
   });
 
   prevButtonNode.addEventListener("click", () => embla.scrollPrev(), false);
