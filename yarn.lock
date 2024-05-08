@@ -1909,6 +1909,13 @@ electron-to-chromium@^1.4.668:
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.750.tgz#d278a619af727ed069de1317115187282b1131ee"
   integrity sha512-9ItEpeu15hW5m8jKdriL+BQrgwDTXEL9pn4SkillWFu73ZNNNQ2BKKLS+ZHv2vC9UkNhosAeyfxOf/5OSeTCPA==
 
+embla-carousel-wheel-gestures@^8.0.0-rc05:
+  version "8.0.0-rc05"
+  resolved "https://registry.yarnpkg.com/embla-carousel-wheel-gestures/-/embla-carousel-wheel-gestures-8.0.0-rc05.tgz#5802cc41a7a89d32987563407eba7b53abb9adb8"
+  integrity sha512-KfPlGuOvMterlg01FDd+Iws5wefInkyks4ai3p4n4B5WAiyel+DHs4AFu09UmshcnHpIH5cLJQ6VJCbp/kyy1A==
+  dependencies:
+    wheel-gestures "^2.2.5"
+
 embla-carousel@^8.0.2:
   version "8.0.2"
   resolved "https://registry.yarnpkg.com/embla-carousel/-/embla-carousel-8.0.2.tgz#31546bcdff7971d44d29cf6bb824ebe923317233"
@@ -4624,6 +4631,11 @@ whatwg-url@^5.0.0:
   dependencies:
     tr46 "~0.0.3"
     webidl-conversions "^3.0.0"
+
+wheel-gestures@^2.2.5:
+  version "2.2.5"
+  resolved "https://registry.yarnpkg.com/wheel-gestures/-/wheel-gestures-2.2.5.tgz#d4a7cdcd402500de26f65aabc8553b657515fb7d"
+  integrity sha512-01BlXRjBVt5Gy0VH2rRqMeccHruTGq2Gd1fx0UqCPN8KDeDCmlTXsRGc/hXJk6W+wnO9CNJp2xfntMNRArBxKQ==
 
 which-pm-runs@^1.1.0:
   version "1.1.0"

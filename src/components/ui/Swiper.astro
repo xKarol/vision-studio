@@ -54,38 +54,23 @@ const slides = [...document.children].map((el) => {
 </style>
 <script>
   import EmblaCarousel from "embla-carousel";
+  import { WheelGesturesPlugin } from "embla-carousel-wheel-gestures";
 
   const rootNode = document.querySelector(".embla")!;
   const viewportNode = rootNode.querySelector<HTMLElement>(".embla__viewport")!;
-  const prevButtonNode =
-    rootNode.querySelector<HTMLButtonElement>(".embla__prev")!;
-  const nextButtonNode =
-    rootNode.querySelector<HTMLButtonElement>(".embla__next")!;
 
-  const embla = EmblaCarousel(viewportNode, {
-    align: "center",
-    loop: true,
-    skipSnaps: true,
-  });
-
-  prevButtonNode.addEventListener("click", () => embla.scrollPrev(), false);
-  nextButtonNode.addEventListener("click", () => embla.scrollNext(), false);
-
-  const togglePrevNextBtnsState = (): void => {
-    if (embla.canScrollPrev()) prevButtonNode.removeAttribute("disabled");
-    else prevButtonNode.setAttribute("disabled", "disabled");
-
-    if (embla.canScrollNext()) nextButtonNode.removeAttribute("disabled");
-    else nextButtonNode.setAttribute("disabled", "disabled");
-  };
-
-  embla
-    .on("select", togglePrevNextBtnsState)
-    .on("init", togglePrevNextBtnsState)
-    .on("reInit", togglePrevNextBtnsState);
-
-  embla.on("destroy", () => {
-    prevButtonNode.removeAttribute("disabled");
-    nextButtonNode.removeAttribute("disabled");
-  });
+  EmblaCarousel(
+    viewportNode,
+    {
+      align: "center",
+      loop: true,
+      skipSnaps: true,
+    },
+    [
+      WheelGesturesPlugin({
+        target: document.body,
+        forceWheelAxis: "y",
+      }),
+    ],
+  );
 </script>
