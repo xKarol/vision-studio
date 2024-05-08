@@ -12,7 +12,7 @@ const { data } = await storyblokApi.get("cdn/stories/", {
   starts_with: "work/",
 });
 
-const works = data.stories.map((story) => ({
+const works = data.stories.map((story: any) => ({
   slug: story.slug,
   imageUrl: story.content.thumbnail.filename,
   label: story.content.workName,

@@ -17,5 +17,5 @@ const defaultProps: Props = {
 const Tag = href === undefined ? "h1" : "a";
 ---
 
-<!-- @ts-expect-error -->
+{/* @ts-ignore */}
 <Tag {...defaultProps}> VISION<span class="font-light">STUDIO</span></Tag>

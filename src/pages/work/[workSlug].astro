@@ -20,7 +20,7 @@ const renderedRichText = renderRichText(info);
   <section class="flex space-x-16 py-8">
     <WorkImagesGrid>
       {
-        images.map((image, index) => (
+        images.map((image: any, index: number) => (
           <div class="flex h-full w-full flex-col space-y-1">
             <Image
               src={image.filename}
