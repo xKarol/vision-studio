@@ -1,7 +1,7 @@
 ---
 import { renderRichText, useStoryblokApi } from "@storyblok/astro";
 import { Image } from "astro:assets";
-import WorkImagesGrid from "~/components/WorkImagesGrid.astro";
+import Grid from "~/components/Grid.astro";
 import BaseLayout from "~/layouts/BaseLayout.astro";
 
 const storyblokApi = useStoryblokApi();
@@ -18,7 +18,7 @@ const renderedRichText = renderRichText(info);
 
 <BaseLayout SEO={{ title: workName }}>
   <section class="flex space-x-16 py-8">
-    <WorkImagesGrid>
+    <Grid>
       {
         images.map((image: any, index: number) => (
           <div class="flex h-full w-full flex-col space-y-1">
@@ -34,7 +34,7 @@ const renderedRichText = renderRichText(info);
           </div>
         ))
       }
-    </WorkImagesGrid>
+    </Grid>
     <aside
       class="sticky right-0 top-[--header-height] h-96 w-full max-w-[200px] space-y-4 text-xs uppercase"
     >
