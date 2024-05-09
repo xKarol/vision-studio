@@ -4,7 +4,10 @@ import { Newsletter } from "./newsletter";
 import Container from "~/components/ui/Container.astro";
 ---
 
-<Container as="footer" class="flex items-end justify-between py-12">
+<Container
+  as="footer"
+  class="flex flex-wrap items-end justify-between gap-8 py-12 md:flex-row"
+>
   <div>
     <h1 class="tracking-wides mb-2 text-sm uppercase">Newsletter</h1>
     <Newsletter client:load />
