@@ -4,6 +4,7 @@ import { Image } from "astro:assets";
 import Container from "~/components/ui/Container.astro";
 import Grid from "~/components/Grid.astro";
 import BaseLayout from "~/layouts/BaseLayout.astro";
+import Parallax from "~/components/Parallax.astro";
 
 const storyblokApi = useStoryblokApi();
 
@@ -16,31 +17,33 @@ const { images } = data.story.content;
 
 <BaseLayout>
   <Container>
-    <Grid
-      spaceRows={3}
-      cols={[
-        { min: 2, max: 6 },
-        { min: 7, max: 11 },
-        { min: 1, max: 5 },
-        { min: 6, max: 10 },
-      ]}
-      rows={[
-        { min: 1, max: 3 },
-        { min: 2, max: 3 },
-        { min: 5, max: 3 },
-        { min: 6, max: 3 },
-      ]}
-    >
-      {
-        images.map((image: any) => (
-          <Image
-            class="aspect-[12/9] h-full w-full object-cover"
-            src={image.filename}
-            alt=""
-            inferSize
-          />
-        ))
-      }
-    </Grid>
+    <Parallax class="pt-96">
+      <Grid
+        spaceRows={1}
+        cols={[
+          { min: 2, max: 6 },
+          { min: 7, max: 11 },
+          { min: 1, max: 5 },
+          { min: 6, max: 10 },
+        ]}
+        rows={[
+          { min: 1, max: 3 },
+          { min: 2, max: 3 },
+          { min: 4, max: 3 },
+          { min: 5, max: 3 },
+        ]}
+      >
+        {
+          images.map((image: any) => (
+            <Image
+              class="aspect-[12/9] h-full w-full object-cover"
+              src={image.filename}
+              alt=""
+              inferSize
+            />
+          ))
+        }
+      </Grid>
+    </Parallax>
   </Container>
 </BaseLayout>

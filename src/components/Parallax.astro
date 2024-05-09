@@ -1,0 +1,33 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"div"> {}
+
+const { ...rest } = Astro.props;
+---
+
+<div id="parallax" {...rest}>
+  <Fragment set:html={Astro.slots.render("default")} />
+</div>
+
+<script>
+  import gsap from "gsap";
+  import ScrollTrigger from "gsap/ScrollTrigger";
+  gsap.registerPlugin(ScrollTrigger);
+
+  document.querySelectorAll("#parallax li").forEach((el) => {
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: el,
+        start: "top bottom",
+        scrub: true,
+      },
+    });
+
+    tl.to(el, {
+      y: () => {
+        return (1 - 1.2) * ScrollTrigger.maxScroll(window);
+      },
+    });
+  });
+</script>
