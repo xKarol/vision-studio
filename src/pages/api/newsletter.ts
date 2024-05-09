@@ -1,5 +1,6 @@
 import type { APIRoute } from "astro";
 import { parse, ValiError } from "valibot";
+import { subscribeToNewsletter } from "~/lib/sendgrid/newsletter";
 import { SubscribeToNewsletterSchema } from "~/validators/newsletter";
 
 export const POST: APIRoute = async ({ request }) => {
@@ -16,8 +17,8 @@ export const POST: APIRoute = async ({ request }) => {
   const body = await request.json();
 
   try {
-    parse(SubscribeToNewsletterSchema, body);
-    //   TODO add sendgrid implementation
+    const data = parse(SubscribeToNewsletterSchema, body);
+    await subscribeToNewsletter(data.email);
 
     return new Response(
       JSON.stringify({
