@@ -14,7 +14,10 @@ const { data } = await storyblokApi.get("cdn/stories/", {
 
 const works = data.stories.map((story: any) => ({
   slug: story.slug,
-  imageUrl: story.content.thumbnail.filename,
+  image: {
+    url: story.content.thumbnail.filename,
+    alt: story.content.thumbnail.alt,
+  },
   label: story.content.workName,
 }));
 ---

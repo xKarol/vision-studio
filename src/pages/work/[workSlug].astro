@@ -24,8 +24,8 @@ const renderedRichText = renderRichText(info);
           <div class="flex h-full w-full flex-col space-y-1">
             <Image
               src={image.filename}
+              alt={image.alt}
               class="h-full w-full object-cover"
-              alt=""
               inferSize
             />
             <p class="text-[0.625rem] font-semibold uppercase text-neutral-700">
