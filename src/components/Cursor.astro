@@ -1,0 +1,78 @@
+---
+
+---
+
+<div
+  class={"fixed top-0 left-0 h-screen w-full z-50 pointer-events-none overflow-hidden hidden md:block"}
+>
+  <div style={{ opacity: 0 }} id="cursor">
+    <div
+      class="duration-[600] absolute size-10 -translate-x-1/2 -translate-y-1/2 rounded-full border border-black opacity-40 transition-transform"
+    >
+    </div>
+  </div>
+</div>
+
+<script>
+  import gsap from "gsap";
+
+  const cursorElement = document.querySelector<HTMLDivElement>("#cursor")!;
+  // let isGrab = false;
+  // let isPointer = false;
+  let hasMoved = false;
+
+  const onMouseMove = ({ clientX, clientY }: MouseEvent) => {
+    gsap.to(cursorElement, {
+      x: clientX,
+      y: clientY,
+      duration: hasMoved ? 0.6 : 0,
+      ease: "expo.out",
+    });
+    hasMoved = true;
+    cursorElement.style.opacity = hasMoved ? "1" : "0";
+  };
+
+  window.addEventListener("mousemove", onMouseMove, false);
+
+  // document.documentElement.classList.add("has-custom-cursor");
+
+  // let pointerElements = [];
+
+  // const onPointerMouseEnter = () => {
+  //   isPointer = true;
+  // };
+  // const onPointerMouseLeave = () => {
+  //   isPointer = false;
+  // };
+
+  // pointerElements = [
+  //   ...document.querySelectorAll(
+  //     "button,a,input,label,[data-cursor='pointer']",
+  //   ),
+  // ];
+
+  // pointerElements.forEach((element) => {
+  //   element.addEventListener("mouseenter", onPointerMouseEnter, false);
+  //   element.addEventListener("mouseleave", onPointerMouseLeave, false);
+  // });
+
+  // let grabElements = [];
+
+  // grabElements = [
+  //   ...document.querySelectorAll(
+  //     "button,a,input,label,[data-cursor='pointer']",
+  //   ),
+  // ];
+
+  // const onGrabMouseEnter = () => {
+  //   isGrab = true;
+  // };
+  // const onGrabMouseLeave = () => {
+  //   isGrab = false;
+  // };
+
+  // grabElements.forEach((element) => {
+  //   element.addEventListener("mouseenter", onGrabMouseEnter, false);
+  //   element.addEventListener("mouseleave", onGrabMouseLeave, false);
+  // });
+</script>

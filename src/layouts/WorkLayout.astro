@@ -2,11 +2,13 @@
 import Header from "~/components/Header.astro";
 import Layout from "./Layout.astro";
 import type { ComponentProps } from "astro/types";
+import Cursor from "~/components/Cursor.astro";
 
 interface Props extends ComponentProps<typeof Layout> {}
 ---
 
 <Layout {...Astro.props}>
+  <Cursor />
   <Header slot="header" />
   <slot />
 </Layout>
