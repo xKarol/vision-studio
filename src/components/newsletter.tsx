@@ -1,5 +1,6 @@
 import { Button } from "./ui/button";
 import { TextInput } from "./ui/text-input";
+import { HTTPError } from "ky";
 import { useState } from "react";
 import { subscribeToNewsletter } from "~/lib/api/newsletter";
 
@@ -16,7 +17,12 @@ export const Newsletter = () => {
       setInfo(data.message);
       setError(undefined);
     } catch (error) {
-      setError("Something went wrong...");
+      let message = "Something went wrong...";
+      if (error instanceof HTTPError) {
+        const res = await error.response.json();
+        message = res.message;
+      }
+      setError(message);
     }
   };
 
