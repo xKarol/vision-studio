@@ -7,41 +7,41 @@ import type { PartialDeep } from "type-fest";
 export interface SEOProps extends PartialDeep<_SEOProps> {}
 
 interface Props {
-  SEO?: SEOProps;
+  seo?: SEOProps;
 }
 
-const { SEO = {} } = Astro.props;
+const { seo = {} } = Astro.props;
 
 const getTitle = () => {
-  if (SEO.title) {
+  if (seo.title) {
     return (
-      defaultSEOConfig.titleTemplate?.replace("%s", SEO.title) ||
+      defaultSEOConfig.titleTemplate?.replace("%s", seo.title) ||
       defaultSEOConfig.titleDefault
     );
   }
   return defaultSEOConfig.title;
 };
 
-const SEOConfig = merge(
+const seoConfig = merge(
   merge(defaultSEOConfig, {
     openGraph: {
       basic: { title: getTitle() },
       optional: {
-        ...(SEO.description && { description: SEO.description }),
+        ...(seo.description && { description: seo.description }),
       },
     },
     twitter: {
       title: getTitle(),
-      ...(SEO.description && { description: SEO.description }),
+      ...(seo.description && { description: seo.description }),
     },
   }),
-  SEO,
+  seo,
 );
 ---
 
 <Fragment>
   <!-- @ts-expect-error type is checked in ~/config/seo-config.ts file -->
-  <SEOComponent {...SEOConfig} />
+  <SEOComponent {...seoConfig} />
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />

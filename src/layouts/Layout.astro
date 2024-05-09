@@ -7,16 +7,16 @@ import "@fontsource/cormorant-garamond";
 import SEOHead, { type SEOProps } from "~/components/SEOHead.astro";
 
 interface Props {
-  SEO?: SEOProps;
+  seo?: SEOProps;
 }
 
-const { SEO } = Astro.props;
+const { seo } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
-    <SEOHead SEO={SEO} />
+    <SEOHead seo={seo} />
   </head>
   <body>
     <slot name="header" />
