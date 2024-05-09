@@ -8,6 +8,7 @@ const { document } = parseHTML(html);
 interface Props extends HTMLAttributes<"ul"> {
   cols?: { min: number; max: number }[];
   rows?: { min: number; max: number }[];
+  spaceRows?: number;
 }
 
 const {
@@ -25,6 +26,7 @@ const {
     { min: 9, max: 4 },
     { min: 12, max: 2 },
   ],
+  spaceRows = 1,
   ...rest
 } = Astro.props;
 
@@ -45,13 +47,9 @@ const calculateGridRow = (i: number, index: number) => {
   });
 
   if (i <= cols.length - 1) return gridRows[index];
-  const round = Math.floor(i / cols.length);
-  const allRowsHeight = rows[rows.length - 1].min;
-
-  let elementRow = 1; //1 row gap
-  for (let i = 0; i < round; i++) {
-    elementRow += allRowsHeight + rows[index - 1].min;
-  }
+  const rounds = Math.floor(i / cols.length);
+  const allRowsHeight = (rows[rows.length - 1].min + spaceRows) * rounds;
+  const elementRow = allRowsHeight + rows[index - 1].min;
   return `${elementRow} / span ${rows[index - 1].max}`;
 };
 ---
@@ -64,7 +62,6 @@ const calculateGridRow = (i: number, index: number) => {
   {
     elements.map((image, i) => {
       const index = (i % cols.length) + 1;
-
       return (
         <li
           style={{
