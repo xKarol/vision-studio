@@ -3,6 +3,7 @@ import type { HTMLAttributes } from "astro/types";
 import Swiper from "./ui/Swiper.astro";
 import { routes } from "~/config/routes";
 import { Image } from "astro:assets";
+import { transformStoryblokImage } from "~/lib/utils";
 
 interface Props extends HTMLAttributes<"div"> {
   works: { slug: string; image: { url: string; alt: string } }[];
@@ -17,7 +18,7 @@ const { works, class: className, ...rest } = Astro.props;
         <a href={routes.work.slug(work.slug)}>
           <Image
             class="aspect-[9/12] object-cover"
-            src={work.image.url}
+            src={transformStoryblokImage(work.image.url, 600, 0)}
             alt={work.image.alt}
             inferSize
           />
