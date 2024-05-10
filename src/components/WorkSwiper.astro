@@ -18,7 +18,10 @@ const { works, class: className, ...rest } = Astro.props;
         <a href={routes.work.slug(work.slug)}>
           <Image
             class="aspect-[9/12] object-cover"
-            src={transformStoryblokImage(work.image.url, 600, 0)}
+            src={transformStoryblokImage(work.image.url, {
+              width: 600,
+              quality: 60,
+            })}
             alt={work.image.alt}
             inferSize
           />

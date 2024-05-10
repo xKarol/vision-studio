@@ -7,8 +7,14 @@ export function cn(...inputs: ClassValue[]) {
 
 export function transformStoryblokImage(
   url: string,
-  width: number,
-  height: number,
+  options: {
+    width: number;
+    height?: number;
+    quality?: number;
+    format?: "jpg" | "avif" | "webp" | "png";
+  },
 ) {
-  return `${url}/m//fit-in/${width}x${height}/filters:quality(100)`;
+  const { width, height = 0, quality = 80, format = "avif" } = options;
+  return `${url}/m/${width}x${height}/filters:quality(${quality}):format(${format})
+  `;
 }
