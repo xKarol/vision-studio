@@ -2,6 +2,7 @@
 import { renderRichText, useStoryblokApi } from "@storyblok/astro";
 import { Image } from "astro:assets";
 import Grid from "~/components/Grid.astro";
+import Container from "~/components/ui/Container.astro";
 import BaseLayout from "~/layouts/BaseLayout.astro";
 
 const storyblokApi = useStoryblokApi();
@@ -17,7 +18,7 @@ const renderedRichText = renderRichText(info);
 ---
 
 <BaseLayout seo={{ title: workName }}>
-  <section class="flex space-x-16 py-8">
+  <section class="flex flex-col py-8 pb-16 lg:flex-row lg:space-x-8 lg:py-16">
     <Grid>
       {
         images.map((image: any, index: number) => (
@@ -35,10 +36,12 @@ const renderedRichText = renderRichText(info);
         ))
       }
     </Grid>
-    <aside
-      class="sticky right-0 top-[--header-height] h-96 w-full max-w-[200px] space-y-4 text-xs uppercase"
-    >
-      <Fragment set:html={renderedRichText} />
-    </aside>
+    <Container class="order-first lg:order-1 lg:max-w-[220px] lg:pl-0">
+      <aside
+        class="static right-0 top-[--header-height] w-full max-w-sm space-y-4 pb-16 text-xs uppercase lg:sticky lg:max-w-[200px]"
+      >
+        <Fragment set:html={renderedRichText} />
+      </aside>
+    </Container>
   </section>
 </BaseLayout>
