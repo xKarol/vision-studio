@@ -51,7 +51,9 @@ const logoHref = Astro.url.pathname === routes.HOME ? undefined : routes.HOME;
         <Logo class="xl:text-base" href={logoHref} />
       </div>
     </div>
-    <nav class="hidden items-center justify-center md:flex">
+    <nav
+      class="absolute left-1/2 hidden -translate-x-1/2 items-center justify-center md:flex"
+    >
       <ul
         class="[&_a]:text-underline-transition flex space-x-6 uppercase leading-none"
       >
