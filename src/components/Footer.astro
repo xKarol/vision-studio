@@ -6,14 +6,14 @@ import Container from "~/components/ui/Container.astro";
 
 <Container
   as="footer"
-  class="flex flex-wrap items-end justify-between gap-8 py-12 md:flex-row"
+  class="flex flex-col items-end justify-between space-y-12 pb-4 pt-12 sm:flex-row sm:space-y-0 sm:pb-12"
 >
-  <div>
+  <div class="w-full sm:max-w-sm">
     <h1 class="tracking-wides mb-2 text-sm uppercase">Newsletter</h1>
     <Newsletter client:load />
   </div>
 
-  <div class="flex space-x-4 text-xs">
+  <div class="flex w-full justify-center space-x-4 text-xs sm:justify-end">
     <a href={routes.socials.INSTAGRAM}>INSTAGRAM</a>
     <a href={routes.socials.PINTEREST}>PINTEREST</a>
     <a href={routes.socials.FACEBOOK}>FACEBOOK</a>
