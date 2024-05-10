@@ -16,7 +16,7 @@ const { data } = await storyblokApi.get(`cdn/stories/home`, {
 const { images } = data.story.content;
 ---
 
-<BaseLayout>
+<BaseLayout seo={{ title: undefined }}>
   <Container>
     <Parallax class="pt-96">
       <Grid
