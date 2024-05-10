@@ -1,5 +1,6 @@
 ---
 import { renderRichText, useStoryblokApi } from "@storyblok/astro";
+import Image from "astro/components/Image.astro";
 import BaseLayout from "~/layouts/BaseLayout.astro";
 
 const storyblokApi = useStoryblokApi();
@@ -23,7 +24,12 @@ const [mainImage, ...restImages] = images;
       </div>
     </div>
     <div class="w-full">
-      <img src={mainImage.filename} alt={mainImage.alt} class="aspect-[9/12]" />
+      <Image
+        src={mainImage.filename}
+        alt={mainImage.alt}
+        class="aspect-[9/12]"
+        inferSize
+      />
     </div>
   </section>
 </BaseLayout>
