@@ -16,14 +16,24 @@ const [mainImage, ...restImages] = images;
 ---
 
 <BaseLayout seo={{ title: "About" }}>
-  <section class="flex space-x-16 pl-[15vw]">
-    <div class="w-full max-w-2xl pt-[12.5vw]">
-      <h1 class="mb-16 text-7xl">About</h1>
-      <div class="text-xl uppercase leading-10 text-neutral-700">
+  <section
+    class="flex flex-col space-x-16 space-y-8 py-8 pl-8 lg:flex-row lg:space-y-0 lg:pl-[15vw]"
+  >
+    <div
+      class="relative order-1 w-full max-w-2xl pt-[12.5vw] sm:max-w-sm lg:order-none xl:max-w-2xl"
+    >
+      <h1
+        class="absolute -top-16 left-0 mb-8 text-4xl sm:text-5xl lg:static lg:mb-16 lg:text-7xl"
+      >
+        About
+      </h1>
+      <div
+        class="text-base uppercase leading-6 text-neutral-700 lg:text-xl lg:leading-10"
+      >
         <Fragment set:html={aboutRichText} />
       </div>
     </div>
-    <div class="w-full">
+    <div class="flex-1">
       <Image
         src={mainImage.filename}
         alt={mainImage.alt}
