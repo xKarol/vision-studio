@@ -2,6 +2,8 @@
 import { routes } from "~/config/routes";
 import { Newsletter } from "./newsletter";
 import Container from "~/components/ui/Container.astro";
+import { Button } from "./ui/button";
+import { TextInput } from "./ui/text-input";
 ---
 
 <Container
@@ -10,7 +12,10 @@ import Container from "~/components/ui/Container.astro";
 >
   <div class="w-full sm:max-w-sm">
     <h1 class="tracking-wides mb-2 text-sm uppercase">Newsletter</h1>
-    <Newsletter client:visible />
+    <Newsletter client:visible>
+      <TextInput type="text" placeholder="Enter your email" name="email" />
+      <Button variant="outline" size="sm"> Subscribe </Button>
+    </Newsletter>
   </div>
 
   <div class="flex w-full justify-center space-x-4 text-xs sm:justify-end">

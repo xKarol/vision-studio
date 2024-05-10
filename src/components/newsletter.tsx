@@ -1,10 +1,8 @@
-import { Button } from "./ui/button";
-import { TextInput } from "./ui/text-input";
 import { HTTPError } from "ky";
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { subscribeToNewsletter } from "~/lib/api/newsletter";
 
-export const Newsletter = () => {
+export const Newsletter = ({ children }: { children: ReactNode }) => {
   const [error, setError] = useState<string | undefined>(undefined);
   const [info, setInfo] = useState<string | undefined>(undefined);
 
@@ -28,12 +26,7 @@ export const Newsletter = () => {
 
   return (
     <form className="flex flex-col space-y-2" onSubmit={handleSubmit}>
-      <div className="flex">
-        <TextInput type="text" placeholder="Enter your email" name="email" />
-        <Button variant="outline" size="sm">
-          Subscribe
-        </Button>
-      </div>
+      <div className="flex">{children}</div>
       {error !== undefined ? (
         <span className="text-xs text-red-500 uppercase">{error}</span>
       ) : null}
