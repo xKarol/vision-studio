@@ -19,8 +19,8 @@ const contactRichText = renderRichText(contactText);
 ---
 
 <BaseLayout seo={{ title: "Contact" }}>
-  <Container as="section" class="flex flex-col py-16">
-    <div class="flex">
+  <Container as="section" class="flex flex-col py-8 md:py-16">
+    <div class="lg-space-y-0 flex flex-col space-y-16 md:flex-row">
       <div class="flex w-full items-center space-x-4">
         <RuleLine maxPoints={35} selectedPoint={1} />
         <h1 class="max-w-40 text-5xl">{heading}</h1>
@@ -35,7 +35,7 @@ const contactRichText = renderRichText(contactText);
           >
         </div>
         <div
-          class="flex w-full justify-between border-0 border-t border-black py-8 text-sm text-neutral-700"
+          class="flex w-full justify-between space-x-2 border-0 border-t border-black py-8 text-sm text-neutral-700"
         >
           <Fragment set:html={contactRichText} />
           <a
@@ -46,6 +46,10 @@ const contactRichText = renderRichText(contactText);
         </div>
       </div>
     </div>
-    <LocationMap mapZoom={mapZoom} latLng={[mapLat, mapLong]} class="mt-8" />
+    <LocationMap
+      mapZoom={mapZoom}
+      latLng={[mapLat, mapLong]}
+      class="mt-8 h-64 md:h-96"
+    />
   </Container>
 </BaseLayout>
