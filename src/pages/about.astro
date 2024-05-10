@@ -2,6 +2,7 @@
 import { renderRichText, useStoryblokApi } from "@storyblok/astro";
 import Image from "astro/components/Image.astro";
 import BaseLayout from "~/layouts/BaseLayout.astro";
+import { transformStoryblokImage } from "~/lib/utils";
 
 const storyblokApi = useStoryblokApi();
 
@@ -35,7 +36,7 @@ const [mainImage, ...restImages] = images;
     </div>
     <div class="flex-1">
       <Image
-        src={mainImage.filename}
+        src={transformStoryblokImage(mainImage.filename, { width: 1400 })}
         alt={mainImage.alt}
         class="aspect-[9/12]"
         inferSize

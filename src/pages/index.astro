@@ -5,6 +5,7 @@ import Container from "~/components/ui/Container.astro";
 import Grid from "~/components/Grid.astro";
 import BaseLayout from "~/layouts/BaseLayout.astro";
 import Parallax from "~/components/Parallax.astro";
+import { transformStoryblokImage } from "~/lib/utils";
 
 const storyblokApi = useStoryblokApi();
 
@@ -37,7 +38,7 @@ const { images } = data.story.content;
           images.map((image: any) => (
             <Image
               class="aspect-[12/9] h-full w-full object-cover"
-              src={image.filename}
+              src={transformStoryblokImage(image.filename, { width: 1400 })}
               alt={image.alt}
               inferSize
             />
