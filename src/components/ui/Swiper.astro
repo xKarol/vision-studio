@@ -35,8 +35,12 @@ const slides = [...document.children].map((el) => {
     margin: auto;
     --slide-height: 19rem;
     --slide-spacing: 1rem;
-    --slide-size: calc(100% / 5);
+    --slide-size: calc(100% / 2.5);
+    --slide-size-md: calc(100% / 3.5);
+    --slide-size-lg: calc(100% / 4.5);
+    --slide-size-xl: calc(100% / 5.5);
   }
+
   .embla__viewport {
     overflow: hidden;
   }
@@ -46,10 +50,32 @@ const slides = [...document.children].map((el) => {
     touch-action: pan-y pinch-zoom;
     margin-left: calc(var(--slide-spacing) * -1);
   }
+
   .embla__slide {
     flex: 0 0 var(--slide-size);
     min-width: 0;
     padding-left: var(--slide-spacing);
+  }
+
+  /* SM BREAKPOINT */
+  @media (min-width: 640px) {
+    .embla__slide {
+      flex: 0 0 var(--slide-size-md);
+    }
+  }
+
+  /* MD BREAKPOINT */
+
+  @media (min-width: 768px) {
+    .embla__slide {
+      flex: 0 0 var(--slide-size-lg);
+    }
+  }
+  /* LG BREAKPOINT */
+  @media (min-width: 1024px) {
+    .embla__slide {
+      flex: 0 0 var(--slide-size-xl);
+    }
   }
 </style>
 <script>
