@@ -38,8 +38,9 @@ const { class: className, mapZoom = 10, latLng, ...rest } = Astro.props;
     radius: 5,
   }).addTo(map);
 
+  const apiKey = import.meta.env.STADIA_API_KEY;
   L.tileLayer(
-    "https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.{ext}",
+    `https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.{ext}?api_key=${apiKey}`,
     {
       minZoom: 0,
       maxZoom: 20,
