@@ -8,11 +8,7 @@ interface Props extends HTMLAttributes<"div"> {}
 const { class: className, ...rest } = Astro.props;
 ---
 
-<div
-  class="flex w-full space-x-4 text-xs uppercase"
-  class:list={[className]}
-  {...rest}
->
+<div class="flex w-full space-x-4 uppercase" class:list={[className]} {...rest}>
   <DoodleText as="a" href={routes.socials.INSTAGRAM}>Instagram</DoodleText>
   <DoodleText as="a" href={routes.socials.PINTEREST}>Pinterest</DoodleText>
   <DoodleText as="a" href={routes.socials.FACEBOOK}>Facebook</DoodleText>
