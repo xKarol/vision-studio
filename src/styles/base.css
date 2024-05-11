@@ -39,32 +39,6 @@
 
     --header-height: 4rem;
   }
-
-  .text-outline {
-    -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: black;
-  }
-
-  .text-underline-transition {
-    position: relative;
-    display: block;
-  }
-
-  .text-underline-transition::before {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 1px;
-    background: black;
-    bottom: 0;
-    transform: scaleX(0);
-    left: 0;
-    transform-origin: bottom left;
-    transition: transform 0.25s ease-out;
-  }
-  .text-underline-transition:hover::before {
-    transform: scaleX(1);
-  }
 }
 
 @layer base {
