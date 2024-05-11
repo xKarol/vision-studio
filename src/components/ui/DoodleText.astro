@@ -1,0 +1,47 @@
+---
+import type { HTMLTag, Polymorphic } from "astro/types";
+
+type Props<Tag extends HTMLTag> = Polymorphic<{ as: Tag }>;
+
+const { class: className, as: Tag = "div", ...rest } = Astro.props;
+---
+
+<Tag class:list={["doodle relative", className]} {...rest}>
+  <svg
+    preserveAspectRatio="none"
+    xmlns="http://www.w3.org/2000/svg"
+    width="42"
+    height="12"
+    viewBox="0 0 42 12"
+    fill="none"
+  >
+    <path
+      pathLength="50"
+      d="M1 6.35565C2.07143 6.93622 29.5714 -0.0302807 29.5714 1.1308C29.5714 2.29188 7.07143 9.25836 6.71429 9.8389C6.35714 10.4194 34.2143 2.29191 34.2143 2.87243C34.2143 3.45294 18.5 11 18.5 11C18.5 11 40.2857 6.35568 41 5.19457"
+      stroke="black"></path>
+  </svg>
+  <slot />
+</Tag>
+
+<style>
+  .doodle svg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 140%;
+    height: 120%;
+    z-index: -1;
+  }
+  .doodle svg path {
+    fill: transparent;
+    stroke: cyan;
+    stroke-opacity: 0.5;
+    stroke-dasharray: 50;
+    stroke-dashoffset: 50;
+    transition: stroke-dashoffset 0.5s cubic-bezier(0.29, 0.68, 0.74, 1.02);
+  }
+  .doodle:hover svg path {
+    stroke-dashoffset: 0;
+  }
+</style>

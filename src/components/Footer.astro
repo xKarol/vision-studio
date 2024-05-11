@@ -4,6 +4,7 @@ import { Newsletter } from "./newsletter";
 import Container from "~/components/ui/Container.astro";
 import { Button } from "./ui/button";
 import { TextInput } from "./ui/text-input";
+import DoodleText from "./ui/DoodleText.astro";
 ---
 
 <Container
@@ -18,9 +19,11 @@ import { TextInput } from "./ui/text-input";
     </Newsletter>
   </div>
 
-  <div class="flex w-full justify-center space-x-4 text-xs sm:justify-end">
-    <a href={routes.socials.INSTAGRAM}>INSTAGRAM</a>
-    <a href={routes.socials.PINTEREST}>PINTEREST</a>
-    <a href={routes.socials.FACEBOOK}>FACEBOOK</a>
+  <div
+    class="flex w-full justify-center space-x-4 text-xs sm:justify-end [&_path]:!stroke-[red]"
+  >
+    <DoodleText as="a" href={routes.socials.INSTAGRAM}>INSTAGRAM</DoodleText>
+    <DoodleText as="a" href={routes.socials.PINTEREST}>PINTEREST</DoodleText>
+    <DoodleText as="a" href={routes.socials.FACEBOOK}>FACEBOOK</DoodleText>
   </div>
 </Container>
