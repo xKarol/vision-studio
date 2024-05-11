@@ -1,0 +1,19 @@
+---
+import { routes } from "~/config/routes";
+import DoodleText from "./ui/DoodleText.astro";
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"div"> {}
+
+const { class: className, ...rest } = Astro.props;
+---
+
+<div
+  class="flex w-full justify-center space-x-4 text-xs sm:justify-end [&_path]:!stroke-[red]"
+  class:list={[className]}
+  {...rest}
+>
+  <DoodleText as="a" href={routes.socials.INSTAGRAM}>INSTAGRAM</DoodleText>
+  <DoodleText as="a" href={routes.socials.PINTEREST}>PINTEREST</DoodleText>
+  <DoodleText as="a" href={routes.socials.FACEBOOK}>FACEBOOK</DoodleText>
+</div>

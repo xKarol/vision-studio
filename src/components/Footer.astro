@@ -1,10 +1,9 @@
 ---
-import { routes } from "~/config/routes";
 import { Newsletter } from "./newsletter";
 import Container from "~/components/ui/Container.astro";
 import { Button } from "./ui/button";
 import { TextInput } from "./ui/text-input";
-import DoodleText from "./ui/DoodleText.astro";
+import Socials from "./Socials.astro";
 ---
 
 <Container
@@ -19,11 +18,5 @@ import DoodleText from "./ui/DoodleText.astro";
     </Newsletter>
   </div>
 
-  <div
-    class="flex w-full justify-center space-x-4 text-xs sm:justify-end [&_path]:!stroke-[red]"
-  >
-    <DoodleText as="a" href={routes.socials.INSTAGRAM}>INSTAGRAM</DoodleText>
-    <DoodleText as="a" href={routes.socials.PINTEREST}>PINTEREST</DoodleText>
-    <DoodleText as="a" href={routes.socials.FACEBOOK}>FACEBOOK</DoodleText>
-  </div>
+  <Socials class="justify-center sm:justify-end" />
 </Container>
