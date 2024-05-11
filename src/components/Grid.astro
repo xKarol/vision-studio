@@ -55,8 +55,7 @@ const calculateGridRow = (i: number, index: number) => {
 ---
 
 <ul
-  class="grid h-full min-h-screen grid-cols-[repeat(10,1fr)] gap-4"
-  style={{ gridAutoRows: "11vw" }}
+  class="grid h-full min-h-screen auto-rows-max grid-cols-1 gap-4 lg:grid-cols-[repeat(10,1fr)]"
   {...rest}
 >
   {
@@ -65,9 +64,10 @@ const calculateGridRow = (i: number, index: number) => {
       return (
         <li
           style={{
-            gridColumn: gridCols[index],
-            gridRow: calculateGridRow(i, index),
+            "--col": gridCols[index],
+            "--row": calculateGridRow(i, index),
           }}
+          class="md:col-[--col] md:row-[--row] "
         >
           <Fragment set:html={image} />
         </li>
