@@ -7,7 +7,7 @@ import { routes } from "~/config/routes";
 
 export interface HeaderProps extends HTMLAttributes<"header"> {}
 
-const { class: className, svgLogo = false, ...rest } = Astro.props;
+const { class: className, ...rest } = Astro.props;
 
 const navLinks = [
   {
@@ -33,7 +33,7 @@ const logoHref = Astro.url.pathname === routes.HOME ? undefined : routes.HOME;
 
 <!-- TODO add mobile menu -->
 <header
-  class="sticky left-0 top-0 z-50 h-[--header-height] bg-background py-4"
+  class="sticky left-0 top-0 z-50 h-[--header-height] py-4 text-white mix-blend-difference"
   class:list={[className]}
   {...rest}
 >
@@ -48,19 +48,20 @@ const logoHref = Astro.url.pathname === routes.HOME ? undefined : routes.HOME;
     </button>
     <div class="flex justify-center md:justify-normal">
       <div>
-        <Logo class="xl:text-base" href={logoHref} />
+        <Logo class="blend-mode-fix xl:text-base" href={logoHref} />
       </div>
     </div>
     <nav
       class="absolute left-1/2 hidden -translate-x-1/2 items-center justify-center md:flex"
     >
-      <ul
-        class="[&_a]:text-underline-transition flex space-x-6 uppercase leading-none"
-      >
+      <ul class="flex space-x-6 uppercase leading-none">
         {
           navLinks.map((link) => (
             <li>
-              <a href={link.href} class="text-xs xl:text-sm">
+              <a
+                href={link.href}
+                class="text blend-mode-fix text-xs xl:text-sm"
+              >
                 {link.name}
               </a>
             </li>
@@ -71,3 +72,10 @@ const logoHref = Astro.url.pathname === routes.HOME ? undefined : routes.HOME;
     <div></div>
   </Container>
 </header>
+<style>
+  .blend-mode-fix {
+    background: white;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+</style>
