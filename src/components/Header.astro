@@ -49,7 +49,10 @@ const logoHref = Astro.url.pathname === routes.HOME ? undefined : routes.HOME;
     </button>
     <div class="flex justify-center md:justify-normal">
       <div>
-        <Logo class="blend-mode-fix xl:text-base" href={logoHref} />
+        <Logo
+          class="blend-mode-fix absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 md:static md:transform-none xl:text-base"
+          href={logoHref}
+        />
       </div>
     </div>
     <nav
