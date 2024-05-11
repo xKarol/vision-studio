@@ -5,6 +5,7 @@ import Container from "~/components/ui/Container.astro";
 import Logo from "~/components/ui/Logo.astro";
 import { routes } from "~/config/routes";
 import DoodleText from "./ui/DoodleText.astro";
+import HeaderMobileMenu from "./HeaderMobileMenu.astro";
 
 export interface HeaderProps extends HTMLAttributes<"header"> {}
 
@@ -32,15 +33,15 @@ const navLinks = [
 const logoHref = Astro.url.pathname === routes.HOME ? undefined : routes.HOME;
 ---
 
-<!-- TODO add mobile menu -->
+<HeaderMobileMenu id="header-menu" links={navLinks} />
 <header
   class="sticky left-0 top-0 z-50 h-[--header-height] py-4 text-white mix-blend-difference"
   class:list={[className]}
   {...rest}
 >
-  <Container class="flex h-full items-center justify-between">
+  <Container class="z-50 flex h-full items-center justify-between">
     <button
-      class="p-2 md:hidden"
+      class="z-50 p-2 md:hidden"
       aria-label="menu"
       id="hamburger-btn"
       aria-expanded="false"
@@ -65,7 +66,7 @@ const logoHref = Astro.url.pathname === routes.HOME ? undefined : routes.HOME;
               <DoodleText
                 as="a"
                 href={link.href}
-                class="text blend-mode-fix text-xs xl:text-sm"
+                class="blend-mode-fix text-xs xl:text-sm"
               >
                 {link.name}
               </DoodleText>
@@ -77,6 +78,7 @@ const logoHref = Astro.url.pathname === routes.HOME ? undefined : routes.HOME;
     <div></div>
   </Container>
 </header>
+
 <style>
   .blend-mode-fix {
     background: white;
@@ -84,3 +86,18 @@ const logoHref = Astro.url.pathname === routes.HOME ? undefined : routes.HOME;
     -webkit-text-fill-color: transparent;
   }
 </style>
+
+<script>
+  const hamburgerMenu =
+    document.querySelector<HTMLButtonElement>("#hamburger-btn")!;
+  const headerMenuElement =
+    document.querySelector<HTMLButtonElement>("#header-menu")!;
+  hamburgerMenu.onclick = () => {
+    hamburgerMenu.setAttribute(
+      "aria-expanded",
+      hamburgerMenu.getAttribute("aria-expanded") === "true" ? "false" : "true",
+    );
+    headerMenuElement.classList.toggle("is-active");
+    document.body.classList.toggle("no-scroll");
+  };
+</script>

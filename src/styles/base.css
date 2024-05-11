@@ -54,6 +54,9 @@
       "rlig" 1,
       "calt" 1;
   }
+  body.no-scroll {
+    overflow: hidden;
+  }
 }
 
 @media (max-width: 640px) {

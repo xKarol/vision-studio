@@ -1,0 +1,51 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import Container from "~/components/ui/Container.astro";
+import DoodleText from "~/components/ui/DoodleText.astro";
+import Socials from "~/components/Socials.astro";
+
+interface Props extends HTMLAttributes<"div"> {
+  links: { href: string; name: string }[];
+}
+
+const { links, class: className, ...rest } = Astro.props;
+---
+
+<div
+  class="header-transition fixed left-0 top-0 flex h-full w-full origin-top -scale-y-[0.1] bg-background"
+  class:list={[className]}
+  id="header-menu"
+  {...rest}
+>
+  <Container
+    id="menu-content"
+    class="flex flex-1 flex-col justify-between pb-8 pt-32 opacity-0 transition-opacity duration-200 ease-in [&_path]:!stroke-[red]"
+  >
+    <ul class="flex flex-col space-y-4">
+      {
+        links.map((link) => (
+          <li>
+            <DoodleText as="a" href={link.href} class="text-5xl">
+              {link.name}
+            </DoodleText>
+          </li>
+        ))
+      }
+    </ul>
+    <Socials class="justify-center text-sm" />
+  </Container>
+</div>
+<style>
+  #header-menu.is-active {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+  #header-menu.is-active #menu-content {
+    opacity: 1;
+  }
+</style>
+<style>
+  .header-transition {
+    transition: transform cubic-bezier(0.9, 0.07, 0.45, 0.94) 0.65s;
+  }
+</style>
