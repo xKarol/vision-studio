@@ -9,11 +9,11 @@ export const Newsletter = ({ children }: { children: ReactNode }) => {
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
     try {
+      setError(undefined);
       // @ts-ignore
       const emailValue = e.target.email.value;
       const data = await subscribeToNewsletter(emailValue);
       setInfo(data.message);
-      setError(undefined);
     } catch (error) {
       let message = "Something went wrong...";
       if (error instanceof HTTPError) {
