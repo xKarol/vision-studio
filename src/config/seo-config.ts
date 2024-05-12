@@ -33,7 +33,7 @@ export const defaultSEOConfig: SEOProps = {
     meta: [
       {
         name: "theme-color",
-        content: "#ffffff",
+        content: "#F6F5F2",
       },
     ],
   },
