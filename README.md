@@ -1,54 +1,77 @@
-# Astro Starter Kit: Basics
+# Vision Studio 📷
 
-```sh
-npm create astro@latest -- --template basics
-```
+![VisionStudio](./public/og.png)
+[![Demo](https://img.shields.io/website?url=https://vision-studio-chi.vercel.app&style=for-the-badge)](https://vision-studio-chi.vercel.app)
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+This is a photography portfolio website built using Astro and integrated with Storyblok CMS.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## 🔥 Features
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+- [x] Storyblok CMS integration
+- [x] SEO-friendly
+- [x] Responsive design
+- [x] Locomotive Scroll
+- [x] GSAP animations
+- [x] Google Analytics integration
+- [x] Leaflet Map integration
+- [x] Newsletter integration with SendGrid
+- [x] Static Site Generation (SSG)
 
-## 🚀 Project Structure
+## 💻 Built with
 
-Inside of your Astro project, you'll see the following folders and files:
+![AstroJS](https://img.shields.io/badge/Astro-0C1222?style=for-the-badge&logo=astro&logoColor=FDFDFE)
+![Typescript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![Storyblok](https://img.shields.io/badge/storyblok-00b3b0?style=for-the-badge&logo=storyblok&logoColor=white)
+![GSAP](https://img.shields.io/badge/GSAP-0ae448?style=for-the-badge&logo=GSAP&logoColor=white)
+![Lenis](https://img.shields.io/badge/Lenis-ff98a2?style=for-the-badge&logo=lenis&logoColor=white)
+![Leaflet](https://img.shields.io/badge/Leaflet-199900?style=for-the-badge&logo=Leaflet&logoColor=white)
+![Sendgrid](https://img.shields.io/badge/Sendgrid-51A9E3?style=for-the-badge&logo=Sendgrid&logoColor=white)
+![LucideIcons](https://img.shields.io/badge/Lucide_Icons-f67373?style=for-the-badge&logo=lucide&logoColor=white)
+![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
+![Tailwindcss](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── components/
-│   │   └── Card.astro
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+## 🚀 Demo
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+[![Demo](https://img.shields.io/website?url=https://vision-studio-chi.vercel.app&style=for-the-badge)](https://vision-studio-chi.vercel.app)
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+## 🔍 Prerequisites
 
-Any static assets, like images, can be placed in the `public/` directory.
+- NodeJS
+- Yarn
 
-## 🧞 Commands
+## 🛠️ Installation Steps
 
-All commands are run from the root of the project, from a terminal:
+1. Clone the repository
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+   ```bash
+   git clone https://github.com/xkarol/vision-studio.git
+   ```
 
-## 👀 Want to learn more?
+2. Change directory
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+   ```bash
+   cd vision-studio
+   ```
+
+3. Install dependencies
+
+   ```bash
+   yarn install
+   ```
+
+4. Create `.env` file based on `.env.example`
+
+   > You can get api keys here:
+   >
+   > [STORYBLOK_TOKEN](https://www.storyblok.com/faq/where-to-find-my-content-delivery-api-key)
+   >
+   > [SENDGRID_API_KEY, SENDGRID_MAILING_ID](https://docs.sendgrid.com/ui/account-and-settings/api-keys)
+   >
+   > [STADIA_API_KEY](https://docs.stadiamaps.com/authentication/)
+
+5. Run the app
+
+   ```bash
+   yarn dev
+   ```
