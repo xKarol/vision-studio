@@ -17,10 +17,7 @@ export default defineConfig({
   integrations: [
     storyblok({
       accessToken: env.STORYBLOK_TOKEN,
-      components: {
-        page: "storyblok/Page",
-        heading: "storyblok/Heading",
-      },
+      components: {},
     }),
     tailwind({
       applyBaseStyles: false,
