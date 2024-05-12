@@ -1,5 +1,6 @@
 import { getSiteUrl } from "./src/lib/get-site-url";
 import react from "@astrojs/react";
+import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
 import vercel from "@astrojs/vercel/serverless";
 import storyblok from "@storyblok/astro";
@@ -23,6 +24,7 @@ export default defineConfig({
       applyBaseStyles: false,
     }),
     react(),
+    sitemap(),
   ],
   vite: {
     plugins: [basicSsl()],
