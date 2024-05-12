@@ -2821,11 +2821,6 @@ lucide-astro@^0.376.0:
   resolved "https://registry.yarnpkg.com/lucide-astro/-/lucide-astro-0.376.0.tgz#03f18623ef8893cb984cdb713b1a6d53920e5137"
   integrity sha512-yKIAEMkztzLBAQT6nvH76PgOyYKI9aQSkcI0Am/dZfkZJCG8bsHIyblKRUYU4ShXtwg+OV/ig6Cik+zv80pxVg==
 
-lucide-react@^0.376.0:
-  version "0.376.0"
-  resolved "https://registry.yarnpkg.com/lucide-react/-/lucide-react-0.376.0.tgz#79768ff670f2ebabf03cd5a7dccee9915859781a"
-  integrity sha512-g91IX3ERD6yUR1TL2dsL4BkcGygpZz/EsqjAeL/kcRQV0EApIOr/9eBfKhYOVyQIcGGuotFGjF3xKLHMEz+b7g==
-
 magic-string@^0.30.10:
   version "0.30.10"
   resolved "https://registry.yarnpkg.com/magic-string/-/magic-string-0.30.10.tgz#123d9c41a0cb5640c892b041d4cfb3bd0aa4b39e"
