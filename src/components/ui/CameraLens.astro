@@ -6,7 +6,7 @@ export interface Props extends HTMLAttributes<"div"> {}
 const { class: className, ...rest } = Astro.props;
 ---
 
-<div class="pointer-events-none z-50" class:list={[className]} {...rest}>
+<div class="pointer-events-none" class:list={[className]} {...rest}>
   <div class="relative size-full">
     <div class="absolute left-0 top-0 size-16 border-l border-t border-black">
     </div>
