@@ -1,11 +1,11 @@
 ---
 import type { HTMLAttributes } from "astro/types";
-import { Menu } from "lucide-astro";
 import Container from "~/components/ui/Container.astro";
 import Logo from "~/components/ui/Logo.astro";
 import { routes } from "~/config/routes";
 import DoodleText from "./ui/DoodleText.astro";
 import HeaderMobileMenu from "./HeaderMobileMenu.astro";
+import HamburgerMenu from "./HamburgerMenu.astro";
 
 export interface HeaderProps extends HTMLAttributes<"header"> {}
 
@@ -40,14 +40,7 @@ const logoHref = Astro.url.pathname === routes.HOME ? undefined : routes.HOME;
   {...rest}
 >
   <Container class="z-50 flex h-full items-center justify-between">
-    <button
-      class="z-50 p-2 md:hidden"
-      aria-label="menu"
-      id="hamburger-btn"
-      aria-expanded="false"
-    >
-      <Menu size={20} stroke-width={1} />
-    </button>
+    <HamburgerMenu id="hamburger-btn" class="md:hidden" />
     <div class="flex justify-center md:justify-normal">
       <div>
         <Logo
