@@ -5,16 +5,33 @@ import Grid from "~/components/Grid.astro";
 import Container from "~/components/ui/Container.astro";
 import BaseLayout from "~/layouts/BaseLayout.astro";
 import { transformStoryblokImage } from "~/lib/utils";
+import type { GetStaticPaths } from "astro";
 
-const storyblokApi = useStoryblokApi();
+export const getStaticPaths = (async () => {
+  const storyblokApi = useStoryblokApi();
+  const { data } = await storyblokApi.get("cdn/stories/", {
+    version: import.meta.env.DEV ? "draft" : "published",
+    starts_with: "work/",
+  });
 
-const { workSlug } = Astro.params;
+  return data.stories.map((work: any) => {
+    const { workName, images, info } = work.content;
+    return {
+      params: {
+        workSlug: work.slug,
+      },
+      props: { images, workName, info },
+    };
+  });
+}) satisfies GetStaticPaths;
 
-const { data } = await storyblokApi.get(`cdn/stories/work/${workSlug}`, {
-  version: import.meta.env.DEV ? "draft" : "published",
-});
+interface Props {
+  workName: string;
+  images: { filename: string; alt: string }[];
+  info: any;
+}
 
-const { workName, images, info } = data.story.content;
+const { workName, images, info } = Astro.props;
 const renderedRichText = renderRichText(info);
 ---
 
@@ -22,7 +39,7 @@ const renderedRichText = renderRichText(info);
   <section class="flex flex-col py-8 pb-16 lg:flex-row lg:space-x-8 lg:py-16">
     <Grid>
       {
-        images.map((image: any, index: number) => (
+        images.map((image, index: number) => (
           <div class="flex h-full w-full flex-col space-y-1">
             <Image
               src={transformStoryblokImage(image.filename, { width: 1400 })}

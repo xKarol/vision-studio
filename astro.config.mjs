@@ -11,7 +11,7 @@ const env = loadEnv("", process.cwd(), "");
 
 // https://astro.build/config
 export default defineConfig({
-  output: "server",
+  output: "hybrid",
   adapter: vercel(),
   site: getSiteUrl(),
   integrations: [

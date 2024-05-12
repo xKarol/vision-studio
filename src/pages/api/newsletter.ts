@@ -3,6 +3,8 @@ import { parse, ValiError } from "valibot";
 import { subscribeToNewsletter } from "~/lib/sendgrid/newsletter";
 import { SubscribeToNewsletterSchema } from "~/validators/newsletter";
 
+export const prerender = false;
+
 export const POST: APIRoute = async ({ request }) => {
   if (request.headers.get("Content-Type") !== "application/json") {
     return new Response(
