@@ -1,0 +1,69 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import { parseHTML } from "linkedom";
+
+const html = await Astro.slots.render("default");
+const { document } = parseHTML(html);
+const elements = [...document.children];
+
+interface Props extends HTMLAttributes<"div"> {
+  gap: number;
+}
+
+const { class: className, gap = 128, ...rest } = Astro.props;
+---
+
+<div
+  id="container"
+  class="pointer-events-none overflow-hidden"
+  data-gap={gap}
+  style={{ "--gap": `${gap / 16}rem` }}
+  class:list={[className]}
+  {...rest}
+>
+  <div
+    id="wrapper"
+    class="flex h-full flex-row gap-[--gap]"
+    style={{ "--cols": Math.ceil(elements.length / 2) }}
+  >
+    <div
+      class="grid h-full max-h-[calc(100vh-var(--header-height))] grid-cols-[repeat(var(--cols),25vw)] grid-rows-[repeat(2,minmax(200px,400px))] gap-[--gap]"
+    >
+      <Fragment set:html={elements} />
+    </div>
+    <div
+      class="grid h-full max-h-[calc(100vh-var(--header-height))] grid-cols-[repeat(var(--cols),25vw)] grid-rows-[repeat(2,minmax(200px,400px))] gap-[--gap]"
+    >
+      <Fragment set:html={elements} />
+    </div>
+  </div>
+</div>
+<script>
+  import gsap from "gsap";
+  const containerElement =
+    document.querySelector<HTMLDivElement>("#container")!;
+  const wrapperElement = document.querySelector<HTMLDivElement>("#wrapper")!;
+  const contentWidth = wrapperElement.scrollWidth;
+  const viewportWidth = window.innerWidth;
+  const gap = +(containerElement.dataset.gap || 64) / 2;
+
+  // TODO recalc on window resize
+
+  const startPos = -contentWidth + viewportWidth;
+  const endPos = -(contentWidth / 2) + viewportWidth + gap;
+  //   @ts-ignore
+  wrapperElement.style.transform = `translateX(${startPos}px)`;
+
+  const totalElements = wrapperElement.children[0]!.children.length;
+
+  const speed = Math.ceil(totalElements / 2) * 3;
+
+  gsap.to("#wrapper", speed, {
+    ease: "none",
+    translateX: `${endPos}px`,
+    stagger: {
+      ease: "none",
+      repeat: -2,
+    },
+  });
+</script>

@@ -1,11 +1,11 @@
 ---
 import { useStoryblokApi } from "@storyblok/astro";
-import { Image } from "astro:assets";
-import Container from "~/components/ui/Container.astro";
-import Grid from "~/components/Grid.astro";
-import BaseLayout from "~/layouts/BaseLayout.astro";
-import Parallax from "~/components/Parallax.astro";
+import Layout from "~/layouts/Layout.astro";
 import { transformStoryblokImage } from "~/lib/utils";
+import Header from "~/components/Header.astro";
+import InfiniteScroller from "~/components/InfiniteScroller.astro";
+import Cursor from "~/components/Cursor.astro";
+import { Image } from "astro:assets";
 
 const storyblokApi = useStoryblokApi();
 
@@ -16,35 +16,31 @@ const { data } = await storyblokApi.get(`cdn/stories/home`, {
 const { images } = data.story.content;
 ---
 
-<BaseLayout seo={{ title: undefined }}>
-  <Container>
-    <Parallax class="pt-36 lg:pt-96">
-      <Grid
-        spaceRows={1}
-        cols={[
-          { min: 2, max: 6 },
-          { min: 7, max: 11 },
-          { min: 1, max: 5 },
-          { min: 6, max: 10 },
-        ]}
-        rows={[
-          { min: 1, max: 3 },
-          { min: 2, max: 3 },
-          { min: 4, max: 3 },
-          { min: 5, max: 3 },
-        ]}
-      >
-        {
-          images.map((image: any) => (
-            <Image
-              class="aspect-[12/9] h-full w-full object-cover"
-              src={transformStoryblokImage(image.filename, { width: 1400 })}
-              alt={image.alt}
-              inferSize
-            />
-          ))
-        }
-      </Grid>
-    </Parallax>
-  </Container>
-</BaseLayout>
+<Layout seo={{ title: undefined }}>
+  <Header slot="header" />
+  <Cursor />
+  <h1
+    class="fixed left-1/2 top-1/2 z-40 -translate-x-1/2 -translate-y-1/2 text-nowrap text-center text-8xl font-bold uppercase text-white mix-blend-difference"
+  >
+    Lorem Ipsum
+  </h1>
+  <InfiniteScroller gap={128} class="fixed left-0 top-0 h-screen w-full py-16">
+    {
+      images.map((image: any, index: number) => {
+        const isLast = index === images.length - 1;
+        const isCenter = index === Math.ceil(images.length / 2) - 1;
+        const x = isLast || isCenter ? -Math.random() * 30 : Math.random() * 70;
+        return (
+          <img
+            src={transformStoryblokImage(image.filename, { width: 800 })}
+            alt={image.alt}
+            class="h-full w-full object-cover"
+            style={{
+              transform: `translate(${x}%, ${Math.random() * 30}%)`,
+            }}
+          />
+        );
+      })
+    }
+  </InfiniteScroller>
+</Layout>
