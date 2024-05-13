@@ -5,7 +5,7 @@ import { transformStoryblokImage } from "~/lib/utils";
 import Header from "~/components/Header.astro";
 import InfiniteScroller from "~/components/InfiniteScroller.astro";
 import Cursor from "~/components/Cursor.astro";
-import { Image } from "astro:assets";
+import MouseMover from "~/components/MouseMover.astro";
 
 const storyblokApi = useStoryblokApi();
 
@@ -24,23 +24,29 @@ const { images } = data.story.content;
   >
     Lorem Ipsum
   </h1>
-  <InfiniteScroller gap={128} class="fixed left-0 top-0 h-screen w-full py-16">
-    {
-      images.map((image: any, index: number) => {
-        const isLast = index === images.length - 1;
-        const isCenter = index === Math.ceil(images.length / 2) - 1;
-        const x = isLast || isCenter ? -Math.random() * 30 : Math.random() * 70;
-        return (
-          <img
-            src={transformStoryblokImage(image.filename, { width: 800 })}
-            alt={image.alt}
-            class="h-full w-full object-cover"
-            style={{
-              transform: `translate(${x}%, ${Math.random() * 30}%)`,
-            }}
-          />
-        );
-      })
-    }
-  </InfiniteScroller>
+  <MouseMover>
+    <InfiniteScroller
+      gap={128}
+      class="fixed left-0 top-0 h-screen w-full py-16"
+    >
+      {
+        images.map((image: any, index: number) => {
+          const isLast = index === images.length - 1;
+          const isCenter = index === Math.ceil(images.length / 2) - 1;
+          const x =
+            isLast || isCenter ? -Math.random() * 30 : Math.random() * 70;
+          return (
+            <img
+              src={transformStoryblokImage(image.filename, { width: 800 })}
+              alt={image.alt}
+              class="h-full w-full object-cover"
+              style={{
+                transform: `translate(${x}%, ${Math.random() * 30}%)`,
+              }}
+            />
+          );
+        })
+      }
+    </InfiniteScroller>
+  </MouseMover>
 </Layout>

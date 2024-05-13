@@ -1,0 +1,70 @@
+---
+import { parseHTML } from "linkedom";
+
+const html = await Astro.slots.render("default");
+const { document } = parseHTML(html);
+const childrens = [...document.children];
+
+if (childrens.length !== 1) {
+  throw new Error(
+    "MouseMover: childrens need to be wrapped with some element.",
+  );
+}
+
+const wrapper = childrens[0];
+const moverElement = document.querySelector("[data-mover='true']");
+if (!moverElement) {
+  wrapper.setAttribute("data-mover", "true");
+}
+---
+
+<Fragment set:html={wrapper} />
+
+<script>
+  import gsap from "gsap";
+
+  window.addEventListener("mousemove", (e) => {
+    const centerX = window.innerWidth / 2;
+    const centerY = window.innerHeight / 2;
+    const cursorX = e.pageX;
+    const cursorY = e.pageY;
+    const angle = getAngleBetweenPoints(centerX, centerY, e.pageX, e.pageY);
+    const distance = Math.sqrt(
+      Math.pow(centerX - cursorX, 2) + Math.pow(centerY - cursorY, 2),
+    );
+    const nextPosition = getNextPosition(centerX, centerY, angle, -distance);
+    const x = (nextPosition.x - centerX) * 0.1;
+    const y = (nextPosition.y - centerY) * 0.1;
+    gsap.to("[data-mover='true']", { x, y });
+  });
+
+  function getAngleBetweenPoints(
+    x1: number,
+    y1: number,
+    x2: number,
+    y2: number,
+  ) {
+    const dx = x2 - x1;
+    const dy = y2 - y1;
+
+    const angleInRadians = Math.atan2(dy, dx);
+    const angleInDegrees = (angleInRadians * 180) / Math.PI;
+
+    if (angleInDegrees < 0) {
+      return angleInDegrees + 360;
+    }
+    return angleInDegrees;
+  }
+
+  function getNextPosition(
+    currentX: number,
+    currentY: number,
+    angleInDegrees: number,
+    distance: number,
+  ) {
+    const angleInRadians = (angleInDegrees * Math.PI) / 180;
+    const newX = currentX + distance * Math.cos(angleInRadians);
+    const newY = currentY + distance * Math.sin(angleInRadians);
+    return { x: newX, y: newY };
+  }
+</script>
