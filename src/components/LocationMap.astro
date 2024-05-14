@@ -32,10 +32,13 @@ const { class: className, mapZoom = 10, latLng, ...rest } = Astro.props;
 
   const map = L.map("map", { attributionControl: false }).setView(latLng, zoom);
 
-  L.circleMarker(latLng, {
-    color: "#000000",
-    fillOpacity: 1,
-    radius: 5,
+  const customMarker = new L.Icon({
+    iconUrl: "/map_marker.svg",
+    iconSize: [50, 50],
+  });
+
+  L.marker(latLng, {
+    icon: customMarker,
   }).addTo(map);
 
   const apiKey = import.meta.env.STADIA_API_KEY;
