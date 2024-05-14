@@ -23,9 +23,12 @@ if (!moverElement) {
 <script>
   import gsap from "gsap";
 
+  const moverElement = document.querySelector<HTMLDivElement>(
+    "[data-mover='true']",
+  )!;
   window.addEventListener("mousemove", (e) => {
-    const centerX = window.innerWidth / 2;
-    const centerY = window.innerHeight / 2;
+    const centerX = moverElement.clientWidth / 2;
+    const centerY = moverElement.clientHeight / 2;
     const cursorX = e.pageX;
     const cursorY = e.pageY;
     const angle = getAngleBetweenPoints(centerX, centerY, e.pageX, e.pageY);
