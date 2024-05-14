@@ -19,7 +19,6 @@
     "@astrojs/sitemap": "^3.1.4",
     "@astrojs/tailwind": "^5.1.0",
     "@astrojs/vercel": "^7.5.4",
-    "@fontsource/cormorant-garamond": "^5.0.13",
     "@fontsource/montserrat": "^5.0.18",
     "@radix-ui/react-accordion": "^1.1.2",
     "@radix-ui/react-slot": "^1.0.2",

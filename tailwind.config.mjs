@@ -56,7 +56,6 @@ module.exports = {
       },
       fontFamily: {
         sans: ["Montserrat", ...fontFamily.sans],
-        serif: ["Cormorant Garamond", ...fontFamily.serif],
       },
       keyframes: {
         "accordion-down": {
