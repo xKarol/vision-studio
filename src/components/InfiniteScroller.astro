@@ -27,12 +27,12 @@ const { class: className, gap = 128, ...rest } = Astro.props;
     style={{ "--cols": Math.ceil(elements.length / 2) }}
   >
     <div
-      class="grid h-full max-h-[calc(100vh-var(--header-height))] grid-cols-[repeat(var(--cols),25vw)] grid-rows-[repeat(2,minmax(200px,400px))] gap-[--gap]"
+      class="grid h-full max-h-[calc(100vh-var(--header-height))] grid-cols-[repeat(var(--cols),500px)] grid-rows-[repeat(2,minmax(200px,400px))] gap-[--gap]"
     >
       <Fragment set:html={elements} />
     </div>
     <div
-      class="grid h-full max-h-[calc(100vh-var(--header-height))] grid-cols-[repeat(var(--cols),25vw)] grid-rows-[repeat(2,minmax(200px,400px))] gap-[--gap]"
+      class="grid h-full max-h-[calc(100vh-var(--header-height))] grid-cols-[repeat(var(--cols),500px)] grid-rows-[repeat(2,minmax(200px,400px))] gap-[--gap]"
     >
       <Fragment set:html={elements} />
     </div>
