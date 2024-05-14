@@ -17,7 +17,7 @@ const { data } = await storyblokApi.get(`cdn/stories/home`, {
 const { images, headingText } = data.story.content;
 ---
 
-<Layout seo={{ title: undefined }}>
+<Layout class={"disable-swipe-up"} seo={{ title: undefined }}>
   <Header slot="header" />
   <Cursor />
   <h1

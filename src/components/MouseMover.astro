@@ -34,7 +34,6 @@ if (!moverElement) {
       let cursorX = 0;
       let cursorY = 0;
 
-      document.body.classList.add("disable-swipe-up");
       switch (eventName) {
         case "mousemove": {
           // @ts-expect-error
@@ -49,9 +48,6 @@ if (!moverElement) {
           cursorX = touch.clientX;
           cursorY = touch.clientY;
           break;
-        }
-        case "touchend": {
-          document.body.classList.remove("disable-swipe-up");
         }
       }
 

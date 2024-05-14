@@ -8,9 +8,10 @@ import SEOHead, { type SEOProps } from "~/components/SEOHead.astro";
 
 interface Props {
   seo?: SEOProps;
+  class?: string;
 }
 
-const { seo } = Astro.props;
+const { seo, class: className } = Astro.props;
 ---
 
 <!doctype html>
@@ -32,7 +33,7 @@ const { seo } = Astro.props;
       gtag("config", "G-KV43WJ10XR");
     </script>
   </head>
-  <body>
+  <body class={className}>
     <slot name="header" />
     <main>
       <slot />
