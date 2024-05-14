@@ -41,7 +41,7 @@ const { images, headingText } = data.story.content;
             <Image
               src={transformStoryblokImage(image.filename, { width: 800 })}
               alt={image.alt}
-              class="h-full w-full object-cover"
+              class="h-full max-h-[50vw] w-full object-cover"
               style={{
                 transform: `translate(${x}%, ${Math.random() * 30}%)`,
               }}
