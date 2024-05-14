@@ -6,6 +6,7 @@ import Header from "~/components/Header.astro";
 import InfiniteScroller from "~/components/InfiniteScroller.astro";
 import Cursor from "~/components/Cursor.astro";
 import MouseMover from "~/components/MouseMover.astro";
+import { Image } from "astro:assets";
 
 const storyblokApi = useStoryblokApi();
 
@@ -36,13 +37,14 @@ const { images, headingText } = data.story.content;
           const x =
             isLast || isCenter ? -Math.random() * 30 : Math.random() * 70;
           return (
-            <img
+            <Image
               src={transformStoryblokImage(image.filename, { width: 800 })}
               alt={image.alt}
               class="h-full w-full object-cover"
               style={{
                 transform: `translate(${x}%, ${Math.random() * 30}%)`,
               }}
+              inferSize
             />
           );
         })
