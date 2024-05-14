@@ -5,7 +5,7 @@ export const subscribeToNewsletter = (email: string) => {
     method: "PUT",
     url: "/v3/marketing/contacts",
     body: {
-      contacts: [{ email: email }],
+      contacts: [{ email }],
       list_ids: [import.meta.env.SENDGRID_MAILING_ID],
     },
   });

@@ -30,8 +30,9 @@ const {
   ...rest
 } = Astro.props;
 
-if (cols.length != rows.length)
+if (cols.length !== rows.length) {
   throw new Error("Cols and rows must have the same amount of elements.");
+}
 
 const elements = [...document.children];
 
@@ -42,8 +43,8 @@ cols.forEach((col, index) => {
 
 const calculateGridRow = (i: number, index: number) => {
   const gridRows: Record<number, string> = {};
-  rows.forEach((row, index) => {
-    gridRows[index + 1] = `${row.min} / span ${row.max}`;
+  rows.forEach((row, idx) => {
+    gridRows[idx + 1] = `${row.min} / span ${row.max}`;
   });
 
   if (i <= cols.length - 1) return gridRows[index];

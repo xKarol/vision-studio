@@ -10,23 +10,23 @@ const title = "Vision Studio";
 
 export const defaultSEOConfig: SEOProps = {
   titleTemplate: "%s — Vision Studio",
-  title: title,
+  title,
   titleDefault: title,
-  description: description,
+  description,
   openGraph: {
     optional: {
-      description: description,
+      description,
     },
     basic: {
-      title: title,
+      title,
       type: "website",
       image: ogUrl,
     },
   },
   twitter: {
     card: "summary_large_image",
-    title: title,
-    description: description,
+    title,
+    description,
     image: ogUrl,
   },
   extend: {

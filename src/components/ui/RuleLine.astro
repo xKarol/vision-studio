@@ -14,10 +14,12 @@ const {
   gap = 2,
   ...rest
 } = Astro.props;
-if (selectedPoint !== undefined && selectedPoint < 0)
+
+if (selectedPoint !== undefined && selectedPoint < 0) {
   throw new Error(
     "RuleLine component: selectedPoint must be greater or equal 1",
   );
+}
 ---
 
 <div

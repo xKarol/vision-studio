@@ -10,14 +10,14 @@ export const Newsletter = ({ children }: { children: ReactNode }) => {
     e.preventDefault();
     try {
       setError(undefined);
-      // @ts-ignore
+      // @ts-expect-error
       const emailValue = e.target.email.value;
       const data = await subscribeToNewsletter(emailValue);
       setInfo(data.message);
-    } catch (error) {
+    } catch (err) {
       let message = "Something went wrong...";
-      if (error instanceof HTTPError) {
-        const res = await error.response.json();
+      if (err instanceof HTTPError) {
+        const res = await err.response.json();
         message = res.message;
       }
       setError(message);

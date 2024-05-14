@@ -13,7 +13,7 @@ const { data } = await storyblokApi.get(`cdn/stories/about`, {
 const { aboutText, images } = data.story.content;
 const aboutRichText = renderRichText(aboutText);
 
-const [mainImage, ...restImages] = images;
+const [mainImage] = images;
 ---
 
 <BaseLayout seo={{ title: "About" }}>
