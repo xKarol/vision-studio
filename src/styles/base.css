@@ -57,6 +57,9 @@
   body.no-scroll {
     overflow: hidden;
   }
+  body.disable-swipe-up {
+    overscroll-behavior-y: contain;
+  }
 }
 
 @media (max-width: 640px) {

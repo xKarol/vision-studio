@@ -26,19 +26,44 @@ if (!moverElement) {
   const moverElement = document.querySelector<HTMLDivElement>(
     "[data-mover='true']",
   )!;
-  window.addEventListener("mousemove", (e) => {
-    const centerX = moverElement.clientWidth / 2;
-    const centerY = moverElement.clientHeight / 2;
-    const cursorX = e.pageX;
-    const cursorY = e.pageY;
-    const angle = getAngleBetweenPoints(centerX, centerY, e.pageX, e.pageY);
-    const distance = Math.sqrt(
-      Math.pow(centerX - cursorX, 2) + Math.pow(centerY - cursorY, 2),
-    );
-    const nextPosition = getNextPosition(centerX, centerY, angle, -distance);
-    const x = (nextPosition.x - centerX) * 0.1;
-    const y = (nextPosition.y - centerY) * 0.1;
-    gsap.to("[data-mover='true']", { x, y });
+  (["mousemove", "touchmove", "touchend"] as const).forEach((eventName) => {
+    window.addEventListener(eventName, (e) => {
+      const centerX = moverElement.clientWidth / 2;
+      const centerY = moverElement.clientHeight / 2;
+
+      let cursorX = 0;
+      let cursorY = 0;
+
+      document.body.classList.add("disable-swipe-up");
+      switch (eventName) {
+        case "mousemove": {
+          // @ts-expect-error
+          cursorX = e.pageX;
+          // @ts-expect-error
+          cursorY = e.pageY;
+          break;
+        }
+        case "touchmove": {
+          // @ts-expect-error
+          const touch = e.touches[0];
+          cursorX = touch.clientX;
+          cursorY = touch.clientY;
+          break;
+        }
+        case "touchend": {
+          document.body.classList.remove("disable-swipe-up");
+        }
+      }
+
+      const angle = getAngleBetweenPoints(centerX, centerY, cursorX, cursorY);
+      const distance = Math.sqrt(
+        Math.pow(centerX - cursorX, 2) + Math.pow(centerY - cursorY, 2),
+      );
+      const nextPosition = getNextPosition(centerX, centerY, angle, -distance);
+      const x = (nextPosition.x - centerX) * 0.1;
+      const y = (nextPosition.y - centerY) * 0.1;
+      gsap.to("[data-mover='true']", { x, y });
+    });
   });
 
   function getAngleBetweenPoints(
