@@ -32,19 +32,18 @@ const { class: className, gap = 128, ...rest } = Astro.props;
       >
         <Fragment set:html={elements} />
       </div>
-      <div
-        class="grid h-full max-h-[calc(100vh-var(--header-height))] grid-cols-[repeat(var(--cols),80vw)] grid-rows-[repeat(2,minmax(200px,400px))] gap-[--gap] md:grid-cols-[repeat(var(--cols),500px)]"
-      >
-        <Fragment set:html={elements} />
-      </div>
     </div>
   </div>
 </div>
 <script>
   import gsap from "gsap";
+
   const containerElement =
     document.querySelector<HTMLDivElement>("#container")!;
   const wrapperElement = document.querySelector<HTMLDivElement>("#wrapper")!;
+
+  wrapperElement.innerHTML += wrapperElement.innerHTML; // clone content in client side to reduce html size
+
   const contentWidth = wrapperElement.scrollWidth;
   const viewportWidth = window.innerWidth;
   const gap = +(containerElement.dataset.gap || 64) / 2;
