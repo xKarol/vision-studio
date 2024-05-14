@@ -21,14 +21,15 @@ const { images, headingText } = data.story.content;
   <Header slot="header" />
   <Cursor />
   <h1
-    class="fixed left-1/2 top-1/2 z-40 -translate-x-1/2 -translate-y-1/2 text-center text-8xl font-bold uppercase text-white mix-blend-difference"
+    class="fixed left-1/2 top-1/2 z-40 -translate-x-1/2 -translate-y-1/2 text-center text-8xl font-bold uppercase text-white opacity-0 mix-blend-difference"
   >
     {headingText}
   </h1>
   <MouseMover>
     <InfiniteScroller
       gap={128}
-      class="fixed left-0 top-0 h-screen w-full py-16"
+      data-scroller="true"
+      class="fixed left-0 top-0 h-screen w-full py-16 opacity-0"
     >
       {
         images.map((image: any, index: number) => {
@@ -52,3 +53,24 @@ const { images, headingText } = data.story.content;
     </InfiniteScroller>
   </MouseMover>
 </Layout>
+<script>
+  import gsap from "gsap";
+  gsap.fromTo(
+    "h1",
+    {
+      opacity: 0,
+    },
+    {
+      opacity: 1,
+    },
+  );
+  gsap.fromTo(
+    "[data-scroller='true']",
+    {
+      opacity: 0,
+    },
+    {
+      opacity: 1,
+    },
+  );
+</script>
