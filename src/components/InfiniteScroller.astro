@@ -21,20 +21,22 @@ const { class: className, gap = 128, ...rest } = Astro.props;
   class:list={[className]}
   {...rest}
 >
-  <div
-    id="wrapper"
-    class="flex h-full flex-row gap-[--gap]"
-    style={{ "--cols": Math.ceil(elements.length / 2) }}
-  >
+  <div data-mover="true" class="h-full">
     <div
-      class="grid h-full max-h-[calc(100vh-var(--header-height))] grid-cols-[repeat(var(--cols),500px)] grid-rows-[repeat(2,minmax(200px,400px))] gap-[--gap]"
+      id="wrapper"
+      class="flex h-full flex-row gap-[--gap]"
+      style={{ "--cols": Math.ceil(elements.length / 2) }}
     >
-      <Fragment set:html={elements} />
-    </div>
-    <div
-      class="grid h-full max-h-[calc(100vh-var(--header-height))] grid-cols-[repeat(var(--cols),500px)] grid-rows-[repeat(2,minmax(200px,400px))] gap-[--gap]"
-    >
-      <Fragment set:html={elements} />
+      <div
+        class="grid h-full max-h-[calc(100vh-var(--header-height))] grid-cols-[repeat(var(--cols),500px)] grid-rows-[repeat(2,minmax(200px,400px))] gap-[--gap]"
+      >
+        <Fragment set:html={elements} />
+      </div>
+      <div
+        class="grid h-full max-h-[calc(100vh-var(--header-height))] grid-cols-[repeat(var(--cols),500px)] grid-rows-[repeat(2,minmax(200px,400px))] gap-[--gap]"
+      >
+        <Fragment set:html={elements} />
+      </div>
     </div>
   </div>
 </div>
