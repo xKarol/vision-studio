@@ -3,76 +3,128 @@
 ---
 
 <div
-  class={"fixed top-0 left-0 h-screen w-full z-50 pointer-events-none overflow-hidden hidden md:block"}
+  id="cursor-container"
+  style={{ opacity: 0 }}
+  class={"fixed top-0 left-0 h-screen w-full z-50 pointer-events-none overflow-hidden hidden md:block mix-blend-difference"}
 >
-  <div style={{ opacity: 0 }} id="cursor">
+  <div id="cursor-wrapper">
     <div
-      class="absolute size-10 -translate-x-1/2 -translate-y-1/2 rounded-full border border-black opacity-40 transition-transform duration-500"
+      id="cursor"
+      class="absolute flex size-10 origin-top-left -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-white text-center text-[0.5rem] font-semibold uppercase opacity-40 transition-all duration-500"
     >
     </div>
   </div>
 </div>
+<style>
+  #cursor::before,
+  #cursor::after {
+    position: absolute;
+    top: 50%;
+    font-size: 1rem;
+    visibility: hidden;
+    transition: all 300ms;
+    opacity: 0;
+  }
+  #cursor::before {
+    content: "◂";
+    right: 100%;
+    transform: translate(0px, -50%);
+  }
+  #cursor::after {
+    content: "▸";
+    left: 100%;
+    transform: translate(0px, -50%);
+  }
+
+  #cursor-container[data-state="drag"] {
+    mix-blend-mode: normal !important;
+  }
+  #cursor-container[data-state="drag"] #cursor {
+    background-color: white;
+    color: black;
+    border-color: white;
+    opacity: 1;
+    transform: translate(-30px, -30px) scale(1.5);
+  }
+
+  #cursor-container[data-state="drag"] #cursor::before,
+  #cursor-container[data-state="drag"] #cursor::after {
+    visibility: visible;
+    opacity: 1;
+    color: white;
+    transform: translate(0, -50%);
+  }
+  #cursor-container[data-state="link"] #cursor {
+    background-color: white;
+    opacity: 1;
+    transform: translate(-5px, -5px) scale(0.25);
+  }
+</style>
 
 <script>
   import gsap from "gsap";
 
+  const cursorContainerElement =
+    document.querySelector<HTMLDivElement>("#cursor-container")!;
   const cursorElement = document.querySelector<HTMLDivElement>("#cursor")!;
-  // let isGrab = false;
-  // let isPointer = false;
+  let isGrab = false;
+  let isPointer = false;
   let hasMoved = false;
 
-  const onMouseMove = ({ clientX, clientY }: MouseEvent) => {
-    gsap.to(cursorElement, {
+  const onMouseMove = ({ clientX, clientY, target }: MouseEvent) => {
+    gsap.to("#cursor-wrapper", {
       x: clientX,
       y: clientY,
       duration: hasMoved ? 0.6 : 0,
       ease: "expo.out",
     });
     hasMoved = true;
-    cursorElement.style.opacity = hasMoved ? "1" : "0";
+    cursorContainerElement.style.opacity = hasMoved ? "1" : "0";
   };
 
   window.addEventListener("mousemove", onMouseMove, false);
 
-  // document.documentElement.classList.add("has-custom-cursor");
+  let pointerElements = [];
 
-  // let pointerElements = [];
+  const onPointerMouseEnter = (e: Event) => {
+    if (isGrab) return;
+    isPointer = true;
+    cursorContainerElement.setAttribute("data-state", "link");
+  };
+  const onPointerMouseLeave = () => {
+    if (isGrab) return;
+    isPointer = false;
+    cursorContainerElement.removeAttribute("data-state");
+  };
 
-  // const onPointerMouseEnter = () => {
-  //   isPointer = true;
-  // };
-  // const onPointerMouseLeave = () => {
-  //   isPointer = false;
-  // };
+  pointerElements = [
+    ...document.querySelectorAll(
+      "button,a,input,label,[data-cursor='pointer']",
+    ),
+  ];
 
-  // pointerElements = [
-  //   ...document.querySelectorAll(
-  //     "button,a,input,label,[data-cursor='pointer']",
-  //   ),
-  // ];
+  pointerElements.forEach((element) => {
+    element.addEventListener("mouseenter", onPointerMouseEnter, false);
+    element.addEventListener("mouseleave", onPointerMouseLeave, false);
+  });
 
-  // pointerElements.forEach((element) => {
-  //   element.addEventListener("mouseenter", onPointerMouseEnter, false);
-  //   element.addEventListener("mouseleave", onPointerMouseLeave, false);
-  // });
+  let grabElements = [];
 
-  // let grabElements = [];
+  grabElements = [...document.querySelectorAll(".embla")];
 
-  // grabElements = [
-  //   ...document.querySelectorAll(
-  //     "button,a,input,label,[data-cursor='pointer']",
-  //   ),
-  // ];
+  const onGrabMouseEnter = () => {
+    isGrab = true;
+    cursorElement.innerText = "Drag";
+    cursorContainerElement.setAttribute("data-state", "drag");
+  };
+  const onGrabMouseLeave = () => {
+    isGrab = false;
+    cursorElement.innerText = "";
+    cursorContainerElement.removeAttribute("data-state");
+  };
 
-  // const onGrabMouseEnter = () => {
-  //   isGrab = true;
-  // };
-  // const onGrabMouseLeave = () => {
-  //   isGrab = false;
-  // };
-
-  // grabElements.forEach((element) => {
-  //   element.addEventListener("mouseenter", onGrabMouseEnter, false);
-  //   element.addEventListener("mouseleave", onGrabMouseLeave, false);
-  // });
+  grabElements.forEach((element) => {
+    element.addEventListener("mouseenter", onGrabMouseEnter, false);
+    element.addEventListener("mouseleave", onGrabMouseLeave, false);
+  });
 </script>
