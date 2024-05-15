@@ -15,12 +15,12 @@ export const getStaticPaths = (async () => {
   });
 
   return data.stories.map((work: any) => {
-    const { workName, images, info } = work.content;
+    const { workName, thumbnail, images, info } = work.content;
     return {
       params: {
         workSlug: work.slug,
       },
-      props: { images, workName, info },
+      props: { images, workName, info, thumbnailUrl: thumbnail.filename },
     };
   });
 }) satisfies GetStaticPaths;
@@ -28,14 +28,27 @@ export const getStaticPaths = (async () => {
 interface Props {
   workName: string;
   images: { filename: string; alt: string }[];
+  thumbnailUrl: string;
   info: any;
 }
 
-const { workName, images, info } = Astro.props;
+const { workName, thumbnailUrl, images, info } = Astro.props;
 const renderedRichText = renderRichText(info);
 ---
 
-<BaseLayout seo={{ title: workName }}>
+<BaseLayout
+  seo={{
+    title: workName,
+    openGraph: {
+      basic: {
+        image: thumbnailUrl,
+      },
+    },
+    twitter: {
+      image: thumbnailUrl,
+    },
+  }}
+>
   <section class="flex flex-col py-8 pb-16 lg:flex-row lg:space-x-8 lg:py-16">
     <Grid>
       {
