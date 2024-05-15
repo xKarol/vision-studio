@@ -14,10 +14,11 @@ import Socials from "./Socials.astro";
     <h1 class="tracking-wides mb-2 text-sm uppercase">Newsletter</h1>
     <Newsletter client:visible>
       <TextInput
-        type="text"
+        type="email"
         placeholder="Enter your email"
         name="email"
         className="mr-2"
+        required
       />
       <Button variant="outline" size="sm"> Subscribe </Button>
     </Newsletter>
