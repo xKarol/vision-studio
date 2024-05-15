@@ -71,7 +71,7 @@
   let isPointer = false;
   let hasMoved = false;
 
-  const onMouseMove = ({ clientX, clientY, target }: MouseEvent) => {
+  const onMouseMove = ({ clientX, clientY }: MouseEvent) => {
     gsap.to("#cursor-wrapper", {
       x: clientX,
       y: clientY,
@@ -98,9 +98,7 @@
   };
 
   pointerElements = [
-    ...document.querySelectorAll(
-      "button,a,input,label,[data-cursor='pointer']",
-    ),
+    ...document.querySelectorAll("button,a,[data-cursor='pointer']"),
   ];
 
   pointerElements.forEach((element) => {
