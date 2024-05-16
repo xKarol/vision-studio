@@ -2,6 +2,7 @@
 import { renderRichText, useStoryblokApi } from "@storyblok/astro";
 import Image from "astro/components/Image.astro";
 import Accordion from "~/components/ui/Accordion.astro";
+import Container from "~/components/ui/Container.astro";
 import BaseLayout from "~/layouts/BaseLayout.astro";
 import { transformStoryblokImage } from "~/lib/utils";
 
@@ -18,7 +19,10 @@ const [mainImage] = images;
 ---
 
 <BaseLayout seo={{ title: "About" }}>
-  <section class="flex flex-col space-y-32 py-8 pl-8 lg:pl-[15vw]">
+  <Container
+    as="section"
+    class="flex max-w-none flex-col space-y-32 py-8 pr-0 lg:pl-[15vw]"
+  >
     <div class="flex flex-col space-x-16 space-y-8 lg:flex-row lg:space-y-0">
       <div
         class="relative order-1 w-full max-w-2xl pt-[12.5vw] sm:max-w-sm lg:order-none xl:max-w-2xl"
@@ -58,5 +62,5 @@ const [mainImage] = images;
         }
       </div>
     </div>
-  </section>
+  </Container>
 </BaseLayout>
