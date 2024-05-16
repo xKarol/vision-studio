@@ -1,0 +1,75 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"div"> {
+  heading: string;
+  content: string;
+}
+
+const { heading, content, class: className, ...rest } = Astro.props;
+---
+
+<div data-accordion="true" {...rest}>
+  <h2
+    class="arrow relative m-0 cursor-pointer border-t border-[#efefef] p-5 text-lg"
+  >
+    {heading}
+  </h2>
+  <div
+    class="content max-h-0 overflow-hidden transition-all duration-300 ease-in-out"
+  >
+    <p class="p-5">{content}</p>
+  </div>
+</div>
+
+<script>
+  const accordionElements = document.querySelectorAll(
+    "[data-accordion='true'] h2",
+  );
+
+  accordionElements.forEach((accordion) =>
+    accordion.addEventListener("click", toggleAccordion),
+  );
+
+  function toggleAccordion() {
+    const items = document.querySelectorAll("[data-accordion='true']");
+    // @ts-expect-error
+    const thisItem = this.parentNode as HTMLElement;
+
+    items.forEach((item) => {
+      if (thisItem == item) {
+        // thisItem.add.toggle("is-open");
+        const state = thisItem.dataset.state;
+        thisItem.setAttribute(
+          "data-state",
+          state === "open" ? "closed" : "open",
+        );
+        return;
+      }
+    });
+  }
+</script>
+
+<style>
+  .arrow::after {
+    content: "";
+    position: absolute;
+    right: 25px;
+    top: 50%;
+    transition: all 0.2s ease-in-out;
+    display: block;
+    width: 8px;
+    height: 8px;
+    border-top: solid 2px #999;
+    border-right: solid 2px #999;
+    transform: translateY(-50%) rotate(135deg);
+  }
+
+  [data-accordion="true"][data-state="open"] .content {
+    max-height: 200px;
+  }
+
+  [data-accordion="true"][data-state="open"] .arrow::after {
+    transform: translateY(-50%) rotate(315deg);
+  }
+</style>

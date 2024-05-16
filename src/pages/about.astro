@@ -1,6 +1,7 @@
 ---
 import { renderRichText, useStoryblokApi } from "@storyblok/astro";
 import Image from "astro/components/Image.astro";
+import Accordion from "~/components/ui/Accordion.astro";
 import BaseLayout from "~/layouts/BaseLayout.astro";
 import { transformStoryblokImage } from "~/lib/utils";
 
@@ -10,37 +11,52 @@ const { data } = await storyblokApi.get(`cdn/stories/about`, {
   version: import.meta.env.DEV ? "draft" : "published",
 });
 
-const { aboutText, images } = data.story.content;
+const { aboutText, images, faqs = [] } = data.story.content;
 const aboutRichText = renderRichText(aboutText);
 
 const [mainImage] = images;
 ---
 
 <BaseLayout seo={{ title: "About" }}>
-  <section
-    class="flex flex-col space-x-16 space-y-8 py-8 pl-8 lg:flex-row lg:space-y-0 lg:pl-[15vw]"
-  >
-    <div
-      class="relative order-1 w-full max-w-2xl pt-[12.5vw] sm:max-w-sm lg:order-none xl:max-w-2xl"
-    >
-      <h1
-        class="absolute -top-16 left-0 mb-8 text-4xl sm:text-5xl lg:static lg:mb-16 lg:text-7xl"
-      >
-        About
-      </h1>
+  <section class="flex flex-col space-y-32 py-8 pl-8 lg:pl-[15vw]">
+    <div class="flex flex-col space-x-16 space-y-8 lg:flex-row lg:space-y-0">
       <div
-        class="text-base uppercase leading-6 text-neutral-700 lg:text-xl lg:leading-10"
+        class="relative order-1 w-full max-w-2xl pt-[12.5vw] sm:max-w-sm lg:order-none xl:max-w-2xl"
       >
-        <Fragment set:html={aboutRichText} />
+        <h1
+          class="absolute -top-16 left-0 mb-8 text-4xl sm:text-5xl lg:static lg:mb-16"
+        >
+          About
+        </h1>
+        <div
+          class="text-base uppercase leading-6 text-neutral-700 lg:text-xl lg:leading-10"
+        >
+          <Fragment set:html={aboutRichText} />
+        </div>
+      </div>
+      <div class="flex-1">
+        <Image
+          src={transformStoryblokImage(mainImage.filename, { width: 1400 })}
+          alt={mainImage.alt}
+          class="aspect-[9/12]"
+          inferSize
+        />
       </div>
     </div>
-    <div class="flex-1">
-      <Image
-        src={transformStoryblokImage(mainImage.filename, { width: 1400 })}
-        alt={mainImage.alt}
-        class="aspect-[9/12]"
-        inferSize
-      />
+    <div
+      class="flex flex-col sm:flex-row sm:space-x-32"
+      class:list={[faqs.length === 0 && "hidden"]}
+    >
+      <h1 class="mb-8 max-w-[200px] text-4xl sm:text-5xl">
+        Frequently Asked Questions.
+      </h1>
+      <div class="flex w-full flex-col">
+        {
+          faqs.map((faq: any) => (
+            <Accordion heading={faq.heading} content={faq.content} />
+          ))
+        }
+      </div>
     </div>
   </section>
 </BaseLayout>
