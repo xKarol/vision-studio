@@ -9,14 +9,14 @@ interface Props extends HTMLAttributes<"div"> {
 const { heading, content, class: className, ...rest } = Astro.props;
 ---
 
-<div data-accordion="true" {...rest}>
+<div data-accordion="true" class:list={[className]} {...rest}>
   <h2
     class="arrow relative m-0 cursor-pointer border-t border-[#efefef] p-5 pr-10 text-lg"
   >
     {heading}
   </h2>
   <div
-    class="content max-h-0 overflow-hidden transition-all duration-300 ease-in-out"
+    class="content max-h-0 overflow-hidden transition-all duration-300 ease-in-out lg:duration-500"
   >
     <p class="p-5">{content}</p>
   </div>
@@ -66,7 +66,7 @@ const { heading, content, class: className, ...rest } = Astro.props;
   }
 
   [data-accordion="true"][data-state="open"] .content {
-    max-height: 200px;
+    max-height: 400px;
   }
 
   [data-accordion="true"][data-state="open"] .arrow::after {
