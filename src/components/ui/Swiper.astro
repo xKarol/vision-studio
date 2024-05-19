@@ -36,9 +36,9 @@ const slides = [...document.children].map((el) => {
     --slide-height: 19rem;
     --slide-spacing: 1rem;
     --slide-size: calc(100% / 2.5);
-    --slide-size-md: calc(100% / 3.5);
-    --slide-size-lg: calc(100% / 4.5);
-    --slide-size-xl: calc(100% / 5.5);
+    --slide-size-md: calc(100% / 2.5);
+    --slide-size-lg: calc(100% / 3.5);
+    --slide-size-2xl: calc(100% / 5.5);
   }
 
   .embla__viewport {
@@ -71,10 +71,11 @@ const slides = [...document.children].map((el) => {
       flex: 0 0 var(--slide-size-lg);
     }
   }
-  /* LG BREAKPOINT */
-  @media (min-width: 1024px) {
+
+  /* XL BREAKPOINT */
+  @media (min-width: 1280px) {
     .embla__slide {
-      flex: 0 0 var(--slide-size-xl);
+      flex: 0 0 var(--slide-size-2xl);
     }
   }
 </style>
