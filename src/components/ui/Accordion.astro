@@ -9,7 +9,12 @@ interface Props extends HTMLAttributes<"div"> {
 const { heading, content, class: className, ...rest } = Astro.props;
 ---
 
-<div data-accordion="true" class:list={[className]} {...rest}>
+<div
+  data-accordion="true"
+  data-cursor="pointer"
+  class:list={[className]}
+  {...rest}
+>
   <h2
     class="arrow relative m-0 cursor-pointer border-t border-[#efefef] p-5 pr-10 text-lg"
   >

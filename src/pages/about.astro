@@ -21,7 +21,7 @@ const [mainImage] = images;
 <BaseLayout seo={{ title: "About" }}>
   <Container
     as="section"
-    class="flex max-w-none flex-col space-y-32 py-8 pr-0 lg:pl-[15vw]"
+    class="mb-8 flex max-w-none flex-col space-y-32 py-8 pr-0 lg:mb-16 lg:pl-[15vw]"
   >
     <div class="flex flex-col space-x-16 space-y-8 lg:flex-row lg:space-y-0">
       <div
@@ -33,7 +33,7 @@ const [mainImage] = images;
           About
         </h1>
         <div
-          class="text-base uppercase leading-6 text-neutral-700 lg:text-xl lg:leading-10"
+          class="text-base leading-6 text-neutral-700 lg:text-xl lg:leading-10"
         >
           <Fragment set:html={aboutRichText} />
         </div>
@@ -48,13 +48,13 @@ const [mainImage] = images;
       </div>
     </div>
     <div
-      class="flex flex-col sm:flex-row sm:space-x-32"
+      class="flex flex-col justify-between sm:flex-row sm:space-x-32"
       class:list={[faqs.length === 0 && "hidden"]}
     >
       <h1 class="mb-8 max-w-[200px] text-4xl sm:text-5xl">
         Frequently Asked Questions.
       </h1>
-      <div class="flex w-full flex-col">
+      <div class="flex w-full max-w-5xl flex-col">
         {
           faqs.map((faq: any) => (
             <Accordion heading={faq.heading} content={faq.content} />
