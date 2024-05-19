@@ -166,6 +166,11 @@
     set-cookie-parser "^2.6.0"
     web-vitals "^3.5.2"
 
+"@astrolib/analytics@^0.5.0":
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/@astrolib/analytics/-/analytics-0.5.0.tgz#ed5e833b9cf6e5cd38d548f0a40adae8b78da1b1"
+  integrity sha512-NlTFTUtsjVEAb2ZzYXZ5XBvak7JH3ixaQTq5r+q5PZtealHajUSPzaY1UrcJOJDJrOFHf5pvxBnYmCEzE9fIjw==
+
 "@babel/code-frame@^7.22.13", "@babel/code-frame@^7.23.5", "@babel/code-frame@^7.24.2":
   version "7.24.2"
   resolved "https://registry.npmjs.org/@babel/code-frame/-/code-frame-7.24.2.tgz"

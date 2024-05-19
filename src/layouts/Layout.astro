@@ -4,6 +4,7 @@ import "../styles/lenis.css";
 import "@fontsource/montserrat";
 import "@fontsource/montserrat/200.css";
 import SEOHead, { type SEOProps } from "~/components/SEOHead.astro";
+import { GoogleAnalytics } from "@astrolib/analytics";
 
 interface Props {
   seo?: SEOProps;
@@ -17,20 +18,7 @@ const { seo, class: className } = Astro.props;
 <html lang="en">
   <head>
     <SEOHead seo={seo} />
-    <!-- Google tag (gtag.js) -->
-    <script
-      is:inline
-      type="text/partytown"
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-KV43WJ10XR"></script>
-    <script is:inline type="text/partytown">
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-      gtag("config", "G-KV43WJ10XR");
-    </script>
+    <GoogleAnalytics id="G-KV43WJ10XR" partytown />
   </head>
   <body class={className}>
     <slot name="header" />
