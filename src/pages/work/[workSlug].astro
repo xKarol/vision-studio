@@ -50,14 +50,14 @@ const renderedRichText = renderRichText(info);
   }}
 >
   <section class="flex flex-col py-8 pb-16 lg:flex-row lg:space-x-8 lg:py-16">
-    <Grid>
+    <Grid class="w-full">
       {
         images.map((image, index: number) => (
           <div class="flex h-full w-full flex-col space-y-1">
             <Image
               src={transformStoryblokImage(image.filename, { width: 1400 })}
               alt={image.alt}
-              class="h-full w-full object-cover"
+              class="aspect-[9/12] h-full w-full object-cover"
               inferSize
             />
             <p class="text-[0.625rem] font-semibold uppercase text-neutral-700">

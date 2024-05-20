@@ -27,6 +27,7 @@ const {
     { min: 12, max: 2 },
   ],
   spaceRows = 1,
+  class: className,
   ...rest
 } = Astro.props;
 
@@ -57,6 +58,7 @@ const calculateGridRow = (i: number, index: number) => {
 
 <ul
   class="grid h-full min-h-screen auto-rows-max grid-cols-1 gap-4 lg:grid-cols-[repeat(10,1fr)]"
+  class:list={[className]}
   {...rest}
 >
   {
@@ -68,7 +70,7 @@ const calculateGridRow = (i: number, index: number) => {
             "--col": gridCols[index],
             "--row": calculateGridRow(i, index),
           }}
-          class="md:col-[--col] md:row-[--row] "
+          class="md:col-[--col] md:row-[--row]"
         >
           <Fragment set:html={image} />
         </li>
