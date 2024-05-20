@@ -47,6 +47,7 @@
   }
   html {
     scroll-behavior: smooth;
+    scrollbar-width: thin;
   }
   body {
     @apply bg-background text-foreground;
