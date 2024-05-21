@@ -44,12 +44,17 @@ const defaultWidth = image.options.width || 0;
 const maxBreakpointsWidth = Math.max(...Object.values(breakpoints));
 const maxWidth =
   defaultWidth > maxBreakpointsWidth ? defaultWidth : maxBreakpointsWidth;
+
+const { width, height } = image.options;
 ---
 
 <img
+  src={src}
+  width={width}
+  height={height}
   srcset={srcset}
   sizes=`(max-width: ${maxWidth}px) 100vw, ${maxWidth}px`
-  {...image.options}
-  src={src}
+  decoding="async"
+  loading="lazy"
   {...rest}
 />
