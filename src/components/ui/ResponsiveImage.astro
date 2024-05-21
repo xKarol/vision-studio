@@ -1,0 +1,55 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import { getImage } from "astro:assets";
+import defaultTheme from "tailwindcss/defaultTheme";
+import { transformStoryblokImage } from "~/lib/utils";
+
+type Props = HTMLAttributes<"img"> & {
+  src: string;
+  alt: string;
+  breakpoints: {
+    /**0px - 640px*/
+    sm?: BreakpointOptions;
+    /**641px - 768px*/
+    md?: BreakpointOptions;
+    /**769px - 1024px*/
+    lg?: BreakpointOptions;
+    /**1025px - 1280px*/
+    xl?: BreakpointOptions;
+    /**1281px - 1536px*/
+    "2xl"?: BreakpointOptions;
+  };
+};
+type BreakpointOptions = number;
+
+const { src, breakpoints = {}, ...rest } = Astro.props;
+
+const image = await getImage({
+  src,
+  inferSize: true,
+});
+
+const srcset = Object.entries(defaultTheme.screens)
+  .map(([breakpointName, breakpointSize]) => {
+    // @ts-expect-error
+    const size = breakpoints[breakpointName];
+    if (size === undefined) return undefined;
+    return `${transformStoryblokImage(src, { width: size })} ${breakpointSize.replace("px", "")}w`;
+  })
+  .filter((val) => val !== undefined)
+  .concat(`${src} ${image.options.width}w`)
+  .join(", ");
+
+const defaultWidth = image.options.width || 0;
+const maxBreakpointsWidth = Math.max(...Object.values(breakpoints));
+const maxWidth =
+  defaultWidth > maxBreakpointsWidth ? defaultWidth : maxBreakpointsWidth;
+---
+
+<img
+  srcset={srcset}
+  sizes=`(max-width: ${maxWidth}px) 100vw, ${maxWidth}px`
+  {...image.options}
+  src={src}
+  {...rest}
+/>
