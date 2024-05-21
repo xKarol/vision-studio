@@ -39,7 +39,10 @@ const { images, headingText } = data.story.content;
             isLast || isCenter ? -Math.random() * 30 : Math.random() * 70;
           return (
             <Image
-              src={transformStoryblokImage(image.filename, { width: 800 })}
+              src={transformStoryblokImage(image.filename, {
+                width: 800,
+                quality: 60,
+              })}
               alt={image.alt}
               class="h-full max-h-[50vw] w-full object-cover"
               style={{

@@ -1,11 +1,11 @@
 ---
 import { renderRichText, useStoryblokApi } from "@storyblok/astro";
-import { Image } from "astro:assets";
 import Grid from "~/components/Grid.astro";
 import Container from "~/components/ui/Container.astro";
 import BaseLayout from "~/layouts/BaseLayout.astro";
 import { transformStoryblokImage } from "~/lib/utils";
 import type { GetStaticPaths } from "astro";
+import ResponsiveImage from "~/components/ui/ResponsiveImage.astro";
 
 export const getStaticPaths = (async () => {
   const storyblokApi = useStoryblokApi();
@@ -54,14 +54,17 @@ const renderedRichText = renderRichText(info);
       {
         images.map((image, index: number) => (
           <div class="flex h-full w-full flex-col space-y-1">
-            <Image
+            <ResponsiveImage
               src={transformStoryblokImage(image.filename, {
                 quality: 60,
                 width: 1400,
               })}
+              breakpoints={{
+                sm: 1000,
+                lg: 1000,
+              }}
               alt={image.alt}
               class="aspect-[9/12] h-full w-full object-cover"
-              inferSize
             />
             <p class="text-[0.625rem] font-semibold uppercase text-neutral-700">
               /{String(index + 1).padStart(2, "0")}
