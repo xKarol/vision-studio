@@ -5,14 +5,15 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
+export type TransformImageOptions = {
+  width: number;
+  height?: number;
+  quality?: number;
+  format?: "jpg" | "avif" | "webp" | "png";
+};
 export function transformStoryblokImage(
   url: string,
-  options: {
-    width: number;
-    height?: number;
-    quality?: number;
-    format?: "jpg" | "avif" | "webp" | "png";
-  },
+  options: TransformImageOptions,
 ) {
   const { width, height = 0, quality = 80, format = "avif" } = options;
   const rawUrl =

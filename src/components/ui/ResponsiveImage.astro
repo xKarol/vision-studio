@@ -2,7 +2,10 @@
 import type { HTMLAttributes } from "astro/types";
 import { getImage } from "astro:assets";
 import defaultTheme from "tailwindcss/defaultTheme";
-import { transformStoryblokImage } from "~/lib/utils";
+import {
+  transformStoryblokImage,
+  type TransformImageOptions,
+} from "~/lib/utils";
 
 type Props = HTMLAttributes<"img"> & {
   src: string;
@@ -20,7 +23,7 @@ type Props = HTMLAttributes<"img"> & {
     "2xl"?: BreakpointOptions;
   };
 };
-type BreakpointOptions = number;
+type BreakpointOptions = number | TransformImageOptions;
 
 const { src, breakpoints = {}, ...rest } = Astro.props;
 
@@ -29,19 +32,30 @@ const image = await getImage({
   inferSize: true,
 });
 
+const sizes = Object.values(breakpoints).map((sizeOrOptions) => {
+  return typeof sizeOrOptions === "object"
+    ? sizeOrOptions.width
+    : sizeOrOptions;
+});
+
 const srcset = Object.entries(defaultTheme.screens)
   .map(([breakpointName, breakpointSize]) => {
-    // @ts-expect-error
-    const size = breakpoints[breakpointName];
+    const breakpointIndex = Object.keys(breakpoints).indexOf(breakpointName);
+    // @ts-ignore
+    const optionsOrSize = breakpoints[breakpointName];
+    const size = sizes[breakpointIndex];
+    const optionalOptions = {
+      ...(typeof optionsOrSize === "object" && optionsOrSize),
+    };
     if (size === undefined) return undefined;
-    return `${transformStoryblokImage(src, { width: size })} ${breakpointSize.replace("px", "")}w`;
+    return `${transformStoryblokImage(src, { width: size, ...optionalOptions })} ${breakpointSize.replace("px", "")}w`;
   })
   .filter((val) => val !== undefined)
   .concat(`${src} ${image.options.width}w`)
   .join(", ");
 
 const defaultWidth = image.options.width || 0;
-const maxBreakpointsWidth = Math.max(...Object.values(breakpoints));
+const maxBreakpointsWidth = Math.max(...sizes);
 const maxWidth =
   defaultWidth > maxBreakpointsWidth ? defaultWidth : maxBreakpointsWidth;
 
