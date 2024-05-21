@@ -55,7 +55,10 @@ const renderedRichText = renderRichText(info);
         images.map((image, index: number) => (
           <div class="flex h-full w-full flex-col space-y-1">
             <Image
-              src={transformStoryblokImage(image.filename, { width: 1400 })}
+              src={transformStoryblokImage(image.filename, {
+                quality: 60,
+                width: 1400,
+              })}
               alt={image.alt}
               class="aspect-[9/12] h-full w-full object-cover"
               inferSize
