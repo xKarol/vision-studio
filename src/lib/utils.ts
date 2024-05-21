@@ -15,6 +15,9 @@ export function transformStoryblokImage(
   },
 ) {
   const { width, height = 0, quality = 80, format = "avif" } = options;
-  return `${url}/m/${width}x${height}/filters:quality(${quality}):format(${format})
-  `;
+  const rawUrl =
+    url.indexOf("/m/") === -1 ? url : url.slice(0, url.indexOf("/m/"));
+
+  const buildUrl = `${rawUrl}/m/${width}x${height}/filters:quality(${quality}):format(${format})`;
+  return buildUrl;
 }
