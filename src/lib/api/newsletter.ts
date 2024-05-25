@@ -1,10 +1,17 @@
-import ky from "ky";
-
 export const subscribeToNewsletter = async (email: string) => {
-  const data = await ky
-    .post("/api/newsletter", {
-      json: { email },
-    })
-    .json();
-  return data as { message: string };
+  const response = await fetch("/api/newsletter", {
+    method: "POST",
+    body: JSON.stringify({ email }),
+    headers: {
+      "content-type": "application/json",
+    },
+  });
+
+  const data = (await response.json()) as { message: string };
+
+  if (!response.ok) {
+    throw new Error(data.message);
+  }
+
+  return data;
 };

@@ -31,7 +31,6 @@
     "embla-carousel": "^8.0.2",
     "embla-carousel-wheel-gestures": "^8.0.0-rc05",
     "gsap": "^3.12.5",
-    "ky": "^1.2.4",
     "leaflet": "^1.9.4",
     "lenis": "^1.0.45",
     "linkedom": "^0.16.11",

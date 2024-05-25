@@ -1,4 +1,3 @@
-import { HTTPError } from "ky";
 import { createSignal, type ComponentProps } from "solid-js";
 import { subscribeToNewsletter } from "~/lib/api/newsletter";
 
@@ -20,9 +19,8 @@ export const Newsletter = ({ children }: NewsletterProps) => {
       setInfo(data.message);
     } catch (err) {
       let message = "Something went wrong...";
-      if (err instanceof HTTPError) {
-        const res = await err.response.json();
-        message = res.message;
+      if (err instanceof Error) {
+        message = err.message;
       }
       setError(message);
     }
