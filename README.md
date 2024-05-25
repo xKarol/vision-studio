@@ -21,7 +21,7 @@ This is a photography portfolio website built using Astro and integrated with St
 
 ![AstroJS](https://img.shields.io/badge/Astro-0C1222?style=for-the-badge&logo=astro&logoColor=FDFDFE)
 ![Typescript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
-![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![SolidJS](https://img.shields.io/badge/Solid%20JS-2C4F7C?style=for-the-badge&logo=solid&logoColor=white)
 ![Storyblok](https://img.shields.io/badge/storyblok-00b3b0?style=for-the-badge&logo=storyblok&logoColor=white)
 ![GSAP](https://img.shields.io/badge/GSAP-0ae448?style=for-the-badge&logo=GSAP&logoColor=white)
 ![Lenis](https://img.shields.io/badge/Lenis-ff98a2?style=for-the-badge&logo=lenis&logoColor=white)
