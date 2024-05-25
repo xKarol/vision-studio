@@ -1,7 +1,7 @@
 import { getSiteUrl } from "./src/lib/get-site-url";
 import partytown from "@astrojs/partytown";
-import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
+import solidJs from "@astrojs/solid-js";
 import tailwind from "@astrojs/tailwind";
 import vercel from "@astrojs/vercel/serverless";
 import storyblok from "@storyblok/astro";
@@ -24,7 +24,7 @@ export default defineConfig({
     tailwind({
       applyBaseStyles: false,
     }),
-    react(),
+    solidJs(),
     sitemap(),
     partytown({
       config: {

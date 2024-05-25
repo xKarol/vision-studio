@@ -5,7 +5,7 @@
     "paths": {
       "~/*": ["*"]
     },
-    "jsx": "react-jsx",
-    "jsxImportSource": "react"
+    "jsx": "preserve",
+    "jsxImportSource": "solid-js"
   }
 }

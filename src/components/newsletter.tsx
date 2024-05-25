@@ -1,17 +1,21 @@
 import { HTTPError } from "ky";
-import { useState, type ReactNode } from "react";
+import { createSignal, type ComponentProps } from "solid-js";
 import { subscribeToNewsletter } from "~/lib/api/newsletter";
 
-export const Newsletter = ({ children }: { children: ReactNode }) => {
-  const [error, setError] = useState<string | undefined>(undefined);
-  const [info, setInfo] = useState<string | undefined>(undefined);
+export interface NewsletterProps extends ComponentProps<"form"> {}
 
-  const handleSubmit: React.FormEventHandler<HTMLFormElement> = async (e) => {
+export const Newsletter = ({ children }: NewsletterProps) => {
+  const [error, setError] = createSignal<string | undefined>(undefined);
+  const [info, setInfo] = createSignal<string | undefined>(undefined);
+
+  const handleSubmit = async (e: Event) => {
     e.preventDefault();
     try {
       setError(undefined);
-      // @ts-expect-error
-      const emailValue = e.target.email.value;
+      const target = e.target as HTMLFormElement;
+      const emailValue = (
+        target.elements.namedItem("email") as HTMLInputElement
+      ).value;
       const data = await subscribeToNewsletter(emailValue);
       setInfo(data.message);
     } catch (err) {
@@ -25,13 +29,13 @@ export const Newsletter = ({ children }: { children: ReactNode }) => {
   };
 
   return (
-    <form className="flex flex-col space-y-2" onSubmit={handleSubmit}>
-      <div className="flex">{children}</div>
-      {error !== undefined ? (
-        <span className="text-xs text-red-500 uppercase">{error}</span>
+    <form class="flex flex-col space-y-2" onSubmit={handleSubmit}>
+      <div class="flex">{children}</div>
+      {error() !== undefined ? (
+        <span class="text-xs text-red-500 uppercase">{error()}</span>
       ) : null}
-      {info !== undefined ? (
-        <span className="text-xs uppercase">{info}</span>
+      {info() !== undefined ? (
+        <span class="text-xs uppercase">{info()}</span>
       ) : null}
     </form>
   );

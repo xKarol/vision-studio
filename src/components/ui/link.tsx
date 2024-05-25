@@ -1,27 +1,24 @@
 import { buttonVariants } from "./button";
-import { Slot } from "@radix-ui/react-slot";
-import { type VariantProps } from "class-variance-authority";
-import * as React from "react";
+import type { VariantProps } from "class-variance-authority";
+import type { Component, ComponentProps } from "solid-js";
+import { splitProps } from "solid-js";
 import { cn } from "~/lib/utils";
 
 export interface LinkProps
-  extends React.LinkHTMLAttributes<HTMLAnchorElement>,
-    VariantProps<typeof buttonVariants> {
-  asChild?: boolean;
-}
+  extends ComponentProps<"a">,
+    VariantProps<typeof buttonVariants> {}
 
-const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(
-  ({ className, variant, size, asChild = false, ...props }, ref) => {
-    const Comp = asChild ? Slot : "a";
-    return (
-      <Comp
-        className={cn(buttonVariants({ variant, size, className }))}
-        ref={ref}
-        {...props}
-      />
-    );
-  },
-);
-Link.displayName = "Link";
+const Link: Component<LinkProps> = (props) => {
+  const [, rest] = splitProps(props, ["variant", "size", "class"]);
+  return (
+    <a
+      class={cn(
+        buttonVariants({ variant: props.variant, size: props.size }),
+        props.class,
+      )}
+      {...rest}
+    />
+  );
+};
 
 export { Link };
