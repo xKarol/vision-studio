@@ -7,7 +7,7 @@ import { Link } from "~/components/ui/link";
 import { routes } from "~/config/routes";
 ---
 
-<Layout seo={{ title: "404 Not Found" }}>
+<Layout seo={{ title: "404 Not Found", nofollow: true, description: " " }}>
   <Logo href={routes.HOME} class="fixed left-1/2 top-8 z-50 -translate-x-1/2" />
   <CameraLens class="absolute inset-0 z-40 p-8" />
   <Container
