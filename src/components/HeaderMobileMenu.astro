@@ -19,7 +19,7 @@ const { links, class: className, ...rest } = Astro.props;
 >
   <Container
     id="menu-content"
-    class="flex flex-1 flex-col justify-between pb-8 pt-32 opacity-0 transition-opacity duration-200 ease-in [&_path]:!stroke-[red]"
+    class="flex flex-1 flex-col justify-between pb-4 pt-32 opacity-0 transition-opacity duration-200 ease-in [&_path]:!stroke-[red]"
   >
     <ul class="flex flex-col space-y-4">
       {
@@ -32,7 +32,14 @@ const { links, class: className, ...rest } = Astro.props;
         ))
       }
     </ul>
-    <Socials class="justify-center text-sm" />
+    <div class="flex flex-col justify-center space-y-4">
+      <Socials class="justify-center text-sm" />
+      <span class="text-center text-xs"
+        >&#169; Created by <a class="underline" href="https://github.com/xKarol"
+          >xKarol</a
+        ></span
+      >
+    </div>
   </Container>
 </div>
 <style>
