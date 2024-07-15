@@ -1,9 +1,5 @@
 ---
-import {
-  renderRichText,
-  useStoryblokApi,
-  type ISbRichtext,
-} from "@storyblok/astro";
+import { renderRichText, type ISbRichtext } from "@storyblok/astro";
 import Grid from "~/components/Grid.astro";
 import Container from "~/components/ui/Container.astro";
 import BaseLayout from "~/layouts/BaseLayout.astro";
@@ -13,19 +9,15 @@ import {
 } from "~/lib/utils";
 import type { GetStaticPaths } from "astro";
 import ResponsiveImage from "~/components/ui/ResponsiveImage.astro";
+import { getWorkItems } from "~/lib/api/storyblok";
 
 export const getStaticPaths = (async () => {
-  const storyblokApi = useStoryblokApi();
-  const { data } = await storyblokApi.get("cdn/stories/", {
-    version: import.meta.env.DEV ? "draft" : "published",
-    starts_with: "work/",
-  });
+  const { data } = await getWorkItems();
 
-  return data.stories.map((work: any) => {
-    const { workName, thumbnail, images, info } = work.content;
+  return data.map(({ slug, workName, images, info, thumbnail }) => {
     return {
       params: {
-        workSlug: work.slug,
+        workSlug: slug,
       },
       props: { images, workName, info, thumbnailUrl: thumbnail.filename },
     };

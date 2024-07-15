@@ -1,20 +1,15 @@
 ---
-import { renderRichText, useStoryblokApi } from "@storyblok/astro";
+import { renderRichText } from "@storyblok/astro";
 import Accordion from "~/components/ui/Accordion.astro";
 import Container from "~/components/ui/Container.astro";
 import ResponsiveImage from "~/components/ui/ResponsiveImage.astro";
 import BaseLayout from "~/layouts/BaseLayout.astro";
+import { getAboutPage } from "~/lib/api/storyblok";
 import { transformStoryblokImage } from "~/lib/utils";
 
-const storyblokApi = useStoryblokApi();
-
-const { data } = await storyblokApi.get(`cdn/stories/about`, {
-  version: import.meta.env.DEV ? "draft" : "published",
-});
-
-const { aboutText, images, faqs = [] } = data.story.content;
+const { data } = await getAboutPage();
+const { aboutText, images, faqs } = data;
 const aboutRichText = renderRichText(aboutText);
-
 const [mainImage] = images;
 ---
 
@@ -64,7 +59,7 @@ const [mainImage] = images;
       </h1>
       <div class="flex w-full max-w-5xl flex-col">
         {
-          faqs.map((faq: any) => (
+          faqs.map((faq) => (
             <Accordion heading={faq.heading} content={faq.content} />
           ))
         }

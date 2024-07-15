@@ -3,17 +3,13 @@ import Container from "~/components/ui/Container.astro";
 import LocationMap from "~/components/LocationMap.astro";
 import { ArrowUpRight } from "lucide-astro";
 import RuleLine from "~/components/ui/RuleLine.astro";
-import { renderRichText, useStoryblokApi } from "@storyblok/astro";
+import { renderRichText } from "@storyblok/astro";
 import BaseLayout from "~/layouts/BaseLayout.astro";
+import { getContactPage } from "~/lib/api/storyblok";
 
-const storyblokApi = useStoryblokApi();
-
-const { data } = await storyblokApi.get(`cdn/stories/contact`, {
-  version: import.meta.env.DEV ? "draft" : "published",
-});
-
+const { data } = await getContactPage();
 const { heading, email, locationText, contactText, mapZoom, mapLat, mapLong } =
-  data.story.content;
+  data;
 const locationRichText = renderRichText(locationText);
 const contactRichText = renderRichText(contactText);
 ---

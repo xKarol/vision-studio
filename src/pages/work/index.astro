@@ -1,24 +1,18 @@
 ---
 import WorkLayout from "~/layouts/WorkLayout.astro";
-
-import { useStoryblokApi } from "@storyblok/astro";
 import WorkSwiper from "~/components/WorkSwiper.astro";
 import CameraLens from "~/components/ui/CameraLens.astro";
+import { getWorkItems } from "~/lib/api/storyblok";
 
-const storyblokApi = useStoryblokApi();
+const { data } = await getWorkItems();
 
-const { data } = await storyblokApi.get("cdn/stories/", {
-  version: import.meta.env.DEV ? "draft" : "published",
-  starts_with: "work/",
-});
-
-const works = data.stories.map((story: any) => ({
-  slug: story.slug,
+const worksData = data.map(({ slug, thumbnail, workName }) => ({
+  slug,
   image: {
-    url: story.content.thumbnail.filename,
-    alt: story.content.thumbnail.alt,
+    url: thumbnail.filename,
+    alt: thumbnail.alt,
   },
-  label: story.content.workName,
+  name: workName,
 }));
 ---
 
@@ -27,6 +21,6 @@ const works = data.stories.map((story: any) => ({
   <section
     class="relative flex h-[calc(100vh-(var(--header-height)*2))] items-center"
   >
-    <WorkSwiper works={works} />
+    <WorkSwiper works={worksData} />
   </section>
 </WorkLayout>

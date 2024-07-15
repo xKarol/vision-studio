@@ -1,5 +1,4 @@
 ---
-import { useStoryblokApi } from "@storyblok/astro";
 import Layout from "~/layouts/Layout.astro";
 import { transformStoryblokImage } from "~/lib/utils";
 import Header from "~/components/Header.astro";
@@ -7,17 +6,13 @@ import InfiniteScroller from "~/components/InfiniteScroller.astro";
 import Cursor from "~/components/Cursor.astro";
 import MouseMover from "~/components/MouseMover.astro";
 import { Image } from "astro:assets";
+import { getHomePage } from "~/lib/api/storyblok";
 
-const storyblokApi = useStoryblokApi();
-
-const { data } = await storyblokApi.get(`cdn/stories/home`, {
-  version: import.meta.env.DEV ? "draft" : "published",
-});
-
-const { images, headingText } = data.story.content;
+const { data } = await getHomePage();
+const { images, headingText } = data;
 ---
 
-<Layout class={"disable-swipe-up"} seo={{ title: undefined }}>
+<Layout class="disable-swipe-up" seo={{ title: undefined }}>
   <Header slot="header" />
   <Cursor />
   <h1
@@ -32,7 +27,7 @@ const { images, headingText } = data.story.content;
       class="fixed left-0 top-0 h-screen w-full py-16 opacity-0"
     >
       {
-        images.map((image: any, index: number) => {
+        images.map((image, index) => {
           const isLast = index === images.length - 1;
           const isCenter = index === Math.ceil(images.length / 2) - 1;
           const x =
