@@ -17,7 +17,7 @@ const { works, class: className, ...rest } = Astro.props;
       works.map((work) => (
         <a href={routes.work.slug(work.slug)} aria-label={`${work.name}`}>
           <Image
-            class="aspect-[9/12] object-cover"
+            class="aspect-[9/12] select-none object-cover"
             src={transformStoryblokImage(work.image.url, {
               width: 600,
               quality: 60,
