@@ -1,4 +1,4 @@
-import { type ComponentProps } from "solid-js";
+import type { ComponentProps } from "solid-js";
 import { cn } from "~/lib/utils";
 
 export interface TextInputProps extends ComponentProps<"input"> {}

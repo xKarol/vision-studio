@@ -1,5 +1,9 @@
 ---
-import { renderRichText, useStoryblokApi } from "@storyblok/astro";
+import {
+  renderRichText,
+  useStoryblokApi,
+  type ISbRichtext,
+} from "@storyblok/astro";
 import Grid from "~/components/Grid.astro";
 import Container from "~/components/ui/Container.astro";
 import BaseLayout from "~/layouts/BaseLayout.astro";
@@ -32,7 +36,7 @@ interface Props {
   workName: string;
   images: { filename: string; alt: string }[];
   thumbnailUrl: string;
-  info: any;
+  info: ISbRichtext;
 }
 
 const { workName, thumbnailUrl, images, info } = Astro.props;
