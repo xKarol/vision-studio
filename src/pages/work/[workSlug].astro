@@ -3,7 +3,10 @@ import { renderRichText, useStoryblokApi } from "@storyblok/astro";
 import Grid from "~/components/Grid.astro";
 import Container from "~/components/ui/Container.astro";
 import BaseLayout from "~/layouts/BaseLayout.astro";
-import { transformStoryblokImage } from "~/lib/utils";
+import {
+  transformStoryblokImage,
+  type TransformImageOptions,
+} from "~/lib/utils";
 import type { GetStaticPaths } from "astro";
 import ResponsiveImage from "~/components/ui/ResponsiveImage.astro";
 
@@ -34,6 +37,35 @@ interface Props {
 
 const { workName, thumbnailUrl, images, info } = Astro.props;
 const renderedRichText = renderRichText(info);
+
+const calcGridImageQuality = (index: number): TransformImageOptions => {
+  switch (index) {
+    case 2: {
+      return {
+        quality: 60,
+        width: 1200,
+      };
+    }
+    case 3: {
+      return {
+        quality: 60,
+        width: 1000,
+      };
+    }
+    case 5: {
+      return {
+        quality: 60,
+        width: 600,
+      };
+    }
+    default: {
+      return {
+        quality: 60,
+        width: 1400,
+      };
+    }
+  }
+};
 ---
 
 <BaseLayout
@@ -52,25 +84,26 @@ const renderedRichText = renderRichText(info);
   <section class="flex flex-col py-8 pb-16 lg:flex-row lg:space-x-8 lg:py-16">
     <Grid class="w-full">
       {
-        images.map((image, index: number) => (
-          <div class="flex h-full w-full flex-col space-y-1">
-            <ResponsiveImage
-              src={transformStoryblokImage(image.filename, {
-                quality: 60,
-                width: 1400,
-              })}
-              breakpoints={{
-                sm: 1000,
-                lg: 1000,
-              }}
-              alt={image.alt}
-              class="aspect-[9/12] h-full w-full object-cover"
-            />
-            <p class="text-[0.625rem] font-semibold uppercase text-neutral-700">
-              /{String(index + 1).padStart(2, "0")}
-            </p>
-          </div>
-        ))
+        images.map((image, index: number) => {
+          return (
+            <div class="flex h-full w-full flex-col space-y-1">
+              <ResponsiveImage
+                src={transformStoryblokImage(
+                  image.filename,
+                  calcGridImageQuality((index % images.length) + 1),
+                )}
+                breakpoints={{
+                  sm: { width: 800, quality: 60 },
+                }}
+                alt={image.alt}
+                class="aspect-[9/12] h-full w-full object-cover"
+              />
+              <p class="text-[0.625rem] font-semibold uppercase text-neutral-700">
+                /{String(index + 1).padStart(2, "0")}
+              </p>
+            </div>
+          );
+        })
       }
     </Grid>
     <Container class="order-first lg:order-1 lg:max-w-[220px] lg:pl-0">
