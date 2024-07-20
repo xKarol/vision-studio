@@ -12,12 +12,13 @@ const { heading, content, class: className, ...rest } = Astro.props;
 <div
   data-accordion="true"
   data-cursor="pointer"
-  class:list={[className]}
+  class:list={[
+    "rounded-lg transition-colors data-[state=open]:bg-background-light",
+    className,
+  ]}
   {...rest}
 >
-  <h2
-    class="arrow relative m-0 cursor-pointer border-t border-[#efefef] p-5 pr-10 text-lg"
-  >
+  <h2 class="arrow relative m-0 cursor-pointer p-5 pr-10 text-lg">
     {heading}
   </h2>
   <div
@@ -42,15 +43,11 @@ const { heading, content, class: className, ...rest } = Astro.props;
     const thisItem = this.parentNode as HTMLElement;
 
     items.forEach((item) => {
-      if (thisItem == item) {
-        // thisItem.add.toggle("is-open");
-        const state = thisItem.dataset.state;
-        thisItem.setAttribute(
-          "data-state",
-          state === "open" ? "closed" : "open",
-        );
-        return;
-      }
+      const state = thisItem.dataset.state;
+      item.setAttribute(
+        "data-state",
+        thisItem == item ? (state === "open" ? "closed" : "open") : "closed",
+      );
     });
   }
 </script>
@@ -65,8 +62,8 @@ const { heading, content, class: className, ...rest } = Astro.props;
     display: block;
     width: 8px;
     height: 8px;
-    border-top: solid 2px #999;
-    border-right: solid 2px #999;
+    border-top: solid 1px #000;
+    border-right: solid 1px #000;
     transform: translateY(-50%) rotate(135deg);
   }
 
