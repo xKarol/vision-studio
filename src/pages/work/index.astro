@@ -1,6 +1,6 @@
 ---
 import WorkLayout from "~/layouts/WorkLayout.astro";
-import WorkSwiper from "~/components/WorkSwiper.astro";
+import WorkCarousel from "~/components/WorkCarousel.astro";
 import CameraLens from "~/components/ui/CameraLens.astro";
 import { getWorkItems } from "~/lib/api/storyblok";
 
@@ -21,6 +21,6 @@ const worksData = data.map(({ slug, thumbnail, workName }) => ({
   <section
     class="relative flex h-[calc(100vh-(var(--header-height)*2))] items-center"
   >
-    <WorkSwiper works={worksData} />
+    <WorkCarousel works={worksData} />
   </section>
 </WorkLayout>

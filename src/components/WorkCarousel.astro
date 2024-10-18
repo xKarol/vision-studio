@@ -1,6 +1,6 @@
 ---
 import type { HTMLAttributes } from "astro/types";
-import Swiper from "./ui/Swiper.astro";
+import Carousel from "./ui/Carousel.astro";
 import { routes } from "~/config/routes";
 import { Image } from "astro:assets";
 import { transformStoryblokImage } from "~/lib/utils";
@@ -12,7 +12,7 @@ const { works, class: className, ...rest } = Astro.props;
 ---
 
 <div class="flex h-full w-full items-center" class:list={[className]} {...rest}>
-  <Swiper class="w-full">
+  <Carousel class="w-full">
     {
       works.map((work) => (
         <a href={routes.work.slug(work.slug)} aria-label={`${work.name}`}>
@@ -28,5 +28,5 @@ const { works, class: className, ...rest } = Astro.props;
         </a>
       ))
     }
-  </Swiper>
+  </Carousel>
 </div>
