@@ -30,7 +30,11 @@ const { class: className, mapZoom = 10, latLng, ...rest } = Astro.props;
   ];
   const zoom = +mapEl.dataset.zoom!;
 
-  const map = L.map("map", { attributionControl: false }).setView(latLng, zoom);
+  const map = L.map("map", {
+    attributionControl: false,
+    scrollWheelZoom: false,
+    dragging: !L.Browser.mobile,
+  }).setView(latLng, zoom);
 
   const customMarker = new L.Icon({
     iconUrl: "/map_marker.svg",
