@@ -42,7 +42,7 @@ const { class: className, gap = 128, ...rest } = Astro.props;
     document.querySelector<HTMLDivElement>("#container")!;
   const wrapperElement = document.querySelector<HTMLDivElement>("#wrapper")!;
 
-  wrapperElement.innerHTML += wrapperElement.innerHTML; // clone content in client side to reduce html size
+  wrapperElement.innerHTML += wrapperElement.innerHTML; // clone content on the client side to reduce html size
 
   const contentWidth = wrapperElement.scrollWidth;
   const viewportWidth = window.innerWidth;
@@ -52,14 +52,14 @@ const { class: className, gap = 128, ...rest } = Astro.props;
 
   const startPos = -contentWidth + viewportWidth;
   const endPos = -(contentWidth / 2) + viewportWidth + gap;
-  //   @ts-ignore
   wrapperElement.style.transform = `translateX(${startPos}px)`;
 
   const totalElements = wrapperElement.children[0]!.children.length;
 
   const speed = Math.ceil(totalElements / 2) * 3;
 
-  gsap.to("#wrapper", speed, {
+  gsap.to("#wrapper", {
+    duration: speed,
     ease: "none",
     translateX: `${endPos}px`,
     stagger: {

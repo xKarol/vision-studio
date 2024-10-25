@@ -68,7 +68,7 @@
     document.querySelector<HTMLDivElement>("#cursor-container")!;
   const cursorElement = document.querySelector<HTMLDivElement>("#cursor")!;
   let isGrab = false;
-  let isPointer = false;
+  // let isPointer = false;
   let hasMoved = false;
 
   const onMouseMove = ({ clientX, clientY }: MouseEvent) => {
@@ -84,20 +84,18 @@
 
   window.addEventListener("mousemove", onMouseMove, false);
 
-  let pointerElements = [];
-
-  const onPointerMouseEnter = (e: Event) => {
+  const onPointerMouseEnter = () => {
     if (isGrab) return;
-    isPointer = true;
+    // isPointer = true;
     cursorContainerElement.setAttribute("data-state", "link");
   };
   const onPointerMouseLeave = () => {
     if (isGrab) return;
-    isPointer = false;
+    // isPointer = false;
     cursorContainerElement.removeAttribute("data-state");
   };
 
-  pointerElements = [
+  const pointerElements = [
     ...document.querySelectorAll("button,a,[data-cursor='pointer']"),
   ];
 
@@ -106,9 +104,7 @@
     element.addEventListener("mouseleave", onPointerMouseLeave, false);
   });
 
-  let grabElements = [];
-
-  grabElements = [...document.querySelectorAll(".embla__viewport")];
+  const grabElements = [...document.querySelectorAll(".embla__viewport")];
 
   const onGrabMouseEnter = () => {
     isGrab = true;
