@@ -15,12 +15,14 @@ const slides = [...document.children].map((el) => {
 });
 ---
 
-<section class="embla" class:list={[className]} {...rest}>
+<section class="embla m-auto w-full" class:list={[className]} {...rest}>
   <div class="embla__viewport">
-    <div class="embla__container">
+    <div
+      class="embla__container -ml-[--slide-spacing] flex touch-pan-y touch-pinch-zoom"
+    >
       {
         slides.map((slide) => (
-          <div class="embla__slide">
+          <div class="embla__slide select-none">
             <Fragment set:html={slide} />
           </div>
         ))
@@ -49,117 +51,83 @@ const slides = [...document.children].map((el) => {
         }
       </div>
     </div>
-
-    <style>
-      .embla-thumbs {
-        --thumbs-slide-spacing: 0.8rem;
-      }
-      .embla-thumbs__viewport {
-        overflow: hidden;
-      }
-
-      .embla {
-        width: 100%;
-        margin: auto;
-        --slide-height: 19rem;
-        --slide-spacing: 1rem;
-        --slide-size: calc(100% / 2.5);
-        --slide-size-md: calc(100% / 2.5);
-        --slide-size-lg: calc(100% / 3.5);
-        --slide-size-2xl: calc(100% / 5.5);
-      }
-
-      .embla__viewport {
-        overflow: hidden;
-      }
-      .embla__container {
-        backface-visibility: hidden;
-        display: flex;
-        touch-action: pan-y pinch-zoom;
-        margin-left: calc(var(--slide-spacing) * -1);
-      }
-
-      .embla__slide {
-        flex: 0 0 var(--slide-size);
-        min-width: 0;
-        padding-left: var(--slide-spacing);
-      }
-
-      /* SM BREAKPOINT */
-      @media (min-width: 640px) {
-        .embla__slide {
-          flex: 0 0 var(--slide-size-md);
-        }
-      }
-
-      /* MD BREAKPOINT */
-
-      @media (min-width: 768px) {
-        .embla__slide {
-          flex: 0 0 var(--slide-size-lg);
-        }
-      }
-
-      /* XL BREAKPOINT */
-      @media (min-width: 1280px) {
-        .embla__slide {
-          flex: 0 0 var(--slide-size-2xl);
-        }
-      }
-    </style>
-    <script>
-      import EmblaCarousel from "embla-carousel";
-      import { WheelGesturesPlugin } from "embla-carousel-wheel-gestures";
-
-      const rootNode = document.querySelector(".embla")!;
-      const viewportNode =
-        rootNode.querySelector<HTMLElement>(".embla__viewport")!;
-
-      const viewportNodeThumbCarousel = document.querySelector(
-        ".embla-thumbs__viewport",
-      ) as HTMLElement;
-
-      const emblaApiThumb = EmblaCarousel(viewportNodeThumbCarousel, {
-        containScroll: "keepSnaps",
-        dragFree: true,
-        loop: true,
-        watchDrag: false,
-      });
-
-      const emblaApiMain = EmblaCarousel(
-        viewportNode,
-        {
-          align: "center",
-          loop: true,
-          skipSnaps: true,
-        },
-        [
-          WheelGesturesPlugin({
-            target: document.body,
-            forceWheelAxis: "y",
-          }),
-        ],
-      );
-
-      //thumbs
-      const slidesThumbs = emblaApiThumb.slideNodes();
-      const scrollToIndex = slidesThumbs.map(
-        (_, index) => (): void => emblaApiMain.scrollTo(index),
-      );
-      slidesThumbs.forEach((slideNode, index) => {
-        slideNode.addEventListener("click", scrollToIndex[index], false);
-      });
-
-      const toggleThumbBtnsState = (): void => {
-        emblaApiThumb.scrollTo(emblaApiMain.selectedScrollSnap());
-        const previous = emblaApiMain.previousScrollSnap();
-        const selected = emblaApiMain.selectedScrollSnap();
-        slidesThumbs[previous].setAttribute("data-active", "false");
-        slidesThumbs[selected].setAttribute("data-active", "true");
-      };
-
-      emblaApiMain.on("select", toggleThumbBtnsState);
-      emblaApiThumb.on("init", toggleThumbBtnsState);
-    </script>
   </div>
 </section>
+
+<style is:global>
+  .embla-thumbs {
+    --thumbs-slide-spacing: 0.8rem;
+  }
+  .embla-thumbs__viewport {
+    overflow: hidden;
+  }
+
+  .embla {
+    --slide-spacing: 1rem;
+  }
+
+  .embla__viewport {
+    overflow: hidden;
+  }
+  .embla__container {
+    backface-visibility: hidden;
+  }
+
+  .embla__slide {
+    min-width: clamp(200px, 50vw, 400px);
+    padding-left: var(--slide-spacing);
+  }
+</style>
+<script>
+  import EmblaCarousel from "embla-carousel";
+  import { WheelGesturesPlugin } from "embla-carousel-wheel-gestures";
+
+  const rootNode = document.querySelector(".embla")!;
+  const viewportNode = rootNode.querySelector<HTMLElement>(".embla__viewport")!;
+
+  const viewportNodeThumbCarousel = document.querySelector(
+    ".embla-thumbs__viewport",
+  ) as HTMLElement;
+
+  const emblaApiThumb = EmblaCarousel(viewportNodeThumbCarousel, {
+    containScroll: "keepSnaps",
+    dragFree: true,
+    loop: true,
+    watchDrag: false,
+  });
+
+  const emblaApiMain = EmblaCarousel(
+    viewportNode,
+    {
+      align: "center",
+      loop: true,
+      skipSnaps: true,
+    },
+    [
+      WheelGesturesPlugin({
+        target: document.body,
+        forceWheelAxis: "y",
+      }),
+    ],
+  );
+
+  //thumbs
+  const slidesThumbs = emblaApiThumb.slideNodes();
+  const scrollToIndex = slidesThumbs.map(
+    (_, index) => (): void => emblaApiMain.scrollTo(index),
+  );
+  slidesThumbs.forEach((slideNode, index) => {
+    slideNode.addEventListener("click", scrollToIndex[index], false);
+  });
+
+  const toggleThumbBtnsState = (): void => {
+    emblaApiThumb.scrollTo(emblaApiMain.selectedScrollSnap());
+    const previous = emblaApiMain.previousScrollSnap();
+    const selected = emblaApiMain.selectedScrollSnap();
+    slidesThumbs[previous].setAttribute("data-active", "false");
+    slidesThumbs[selected].setAttribute("data-active", "true");
+  };
+
+  emblaApiMain.on("select", toggleThumbBtnsState);
+  emblaApiThumb.on("init", toggleThumbBtnsState);
+</script>
