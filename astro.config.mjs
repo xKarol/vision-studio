@@ -4,7 +4,7 @@ import sitemap from "@astrojs/sitemap";
 import solidJs from "@astrojs/solid-js";
 import tailwind from "@astrojs/tailwind";
 import vercel from "@astrojs/vercel";
-import storyblok from "@storyblok/astro";
+import { storyblok } from "@storyblok/astro";
 import basicSsl from "@vitejs/plugin-basic-ssl";
 import { defineConfig } from "astro/config";
 import { loadEnv } from "vite";

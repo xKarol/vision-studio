@@ -1144,24 +1144,23 @@
   resolved "https://registry.yarnpkg.com/@shikijs/vscode-textmate/-/vscode-textmate-10.0.2.tgz#a90ab31d0cc1dfb54c66a69e515bf624fa7b2224"
   integrity sha512-83yeghZ2xxin3Nj8z1NMd/NCuca+gsYXswywDy5bHvwlWL8tpTQmzGeUuHd9FC3E/SBEMvzJRwWEOz5gGes9Qg==
 
-"@storyblok/astro@^4.1.0":
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/@storyblok/astro/-/astro-4.1.1.tgz#82aae4ef6ed693a914b498648fc10281f6be4310"
-  integrity sha512-7S17JhbOT8AdaoYq1EaapnaVbqjokAue/ycUE1ewbS8Ni8wdZdIauxfWRLEFWbbRhJW4iOeoaRpRPDxYez9OtA==
+"@storyblok/astro@^6.0.1":
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/@storyblok/astro/-/astro-6.0.1.tgz#ee70967f8ec84b74a8b59f3efb72a0ad9fbaefe8"
+  integrity sha512-Z2t8CNzptSmADp/YAClQIyY+o43uaedm1Fhu+tzGRua8Xqdx2q6Toxx1DMKbfYOfoZTq3teM3jnapNQqLSSmPw==
   dependencies:
-    "@storyblok/js" "^3.0.8"
+    "@storyblok/js" "3.1.9"
     camelcase "^8.0.0"
-    lodash.mergewith "^4.6.2"
 
-"@storyblok/js@^3.0.8":
-  version "3.2.2"
-  resolved "https://registry.yarnpkg.com/@storyblok/js/-/js-3.2.2.tgz#0a5ab6d2107195b40272e81d6f493679fa5c18c0"
-  integrity sha512-JiBaHJRNl18vZdgf/aiv7DSMWW3pZNkEkAAxjIAXkrNDko1hn7L5YipJK8FpevNTPEIRiliNVxTMHTztlvEAbw==
+"@storyblok/js@3.1.9":
+  version "3.1.9"
+  resolved "https://registry.yarnpkg.com/@storyblok/js/-/js-3.1.9.tgz#01830a03814e053e65fccfa885f17fbcb16ab4f6"
+  integrity sha512-N8QB/yn8wQxM+G9kV/RHTsynuTyaMNwiAI2KFiwuT9QPo+Zea4EmikNJY1KxrA1Q8G8YiZEm7OBp1B3QDycA6g==
   dependencies:
-    "@storyblok/richtext" "3.0.2"
-    storyblok-js-client "6.10.7"
+    "@storyblok/richtext" "^3.0.0"
+    storyblok-js-client "^6.10.3"
 
-"@storyblok/richtext@3.0.2":
+"@storyblok/richtext@^3.0.0":
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/@storyblok/richtext/-/richtext-3.0.2.tgz#98b85029aa62a79ea0191708f7d924e25d37f176"
   integrity sha512-KBLx9ycNVMyVnNyPiwBH5g9uWmiJpMzp9YvpnnADXlPLoksusrwI56BusSM8HaIgJgcnB5RR0LvhySkPFdC8Zg==
@@ -2984,11 +2983,6 @@ locate-path@^5.0.0:
   dependencies:
     p-locate "^4.1.0"
 
-lodash.mergewith@^4.6.2:
-  version "4.6.2"
-  resolved "https://registry.yarnpkg.com/lodash.mergewith/-/lodash.mergewith-4.6.2.tgz#617121f89ac55f59047c7aec1ccd6654c6590f55"
-  integrity sha512-GK3g5RPZWTRSeLSpgP8Xhra+pnjBC56q9FZYe1d5RN3TJ35dbkGy3YqBSMbyCrlbi+CM9Z3Jk5yTL7RCsqboyQ==
-
 lodash@4.17.21, lodash@^4.17.21:
   version "4.17.21"
   resolved "https://registry.npmjs.org/lodash/-/lodash-4.17.21.tgz"
@@ -4395,7 +4389,7 @@ sprintf-js@~1.0.2:
   resolved "https://registry.npmjs.org/sprintf-js/-/sprintf-js-1.0.3.tgz"
   integrity sha512-D9cPgkvLlV3t3IzL0D0YLvGA9Ahk4PcvVwUbN0dSGr1aP0Nrt4AEnTUbuGvquEC0mA64Gqt1fzirlRs5ibXx8g==
 
-storyblok-js-client@6.10.7:
+storyblok-js-client@^6.10.3:
   version "6.10.7"
   resolved "https://registry.yarnpkg.com/storyblok-js-client/-/storyblok-js-client-6.10.7.tgz#b29e7e833f54d5f59e4579fcc85df6c0a14e3b5b"
   integrity sha512-4AdVrJxemKowvsCi+gPIZCo3/5k7JDZzOZ7HBY+GqnhhutcfqE9GvtIeg4INsOibz77XdwcJ8J6u2+Cn7bMeuw==

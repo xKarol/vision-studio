@@ -22,7 +22,7 @@
     "@astrolib/analytics": "^0.6.1",
     "@fontsource/montserrat": "^5.2.5",
     "@sendgrid/client": "^8.1.4",
-    "@storyblok/astro": "^4.1.0",
+    "@storyblok/astro": "^6.0.1",
     "@vitejs/plugin-basic-ssl": "^2.0.0",
     "astro": "5.4.1",
     "astro-seo": "^0.8.4",
