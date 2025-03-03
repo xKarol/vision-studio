@@ -3,7 +3,7 @@ import partytown from "@astrojs/partytown";
 import sitemap from "@astrojs/sitemap";
 import solidJs from "@astrojs/solid-js";
 import tailwind from "@astrojs/tailwind";
-import vercel from "@astrojs/vercel/serverless";
+import vercel from "@astrojs/vercel";
 import storyblok from "@storyblok/astro";
 import basicSsl from "@vitejs/plugin-basic-ssl";
 import { defineConfig } from "astro/config";
@@ -13,7 +13,7 @@ const env = loadEnv("", process.cwd(), "");
 
 // https://astro.build/config
 export default defineConfig({
-  output: "hybrid",
+  output: "static",
   adapter: vercel(),
   site: getSiteUrl(),
   integrations: [

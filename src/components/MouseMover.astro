@@ -5,12 +5,6 @@ const html = await Astro.slots.render("default");
 const { document } = parseHTML(html);
 const childrens = [...document.children];
 
-if (childrens.length !== 1) {
-  throw new Error(
-    "MouseMover: childrens need to be wrapped with some element.",
-  );
-}
-
 const wrapper = childrens[0];
 const moverElement = document.querySelector("[data-mover='true']");
 if (!moverElement) {
@@ -18,7 +12,7 @@ if (!moverElement) {
 }
 ---
 
-<Fragment set:html={wrapper} />
+<Fragment set:html={childrens} />
 
 <script>
   import gsap from "gsap";

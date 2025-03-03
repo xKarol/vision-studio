@@ -12,7 +12,7 @@ jobs:
         run: bun install
 
       - name: Type Check
-        run: bun run type-check
+        run: bun run typecheck
 
       - name: Format
         run: bun run format
